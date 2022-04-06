@@ -1,4 +1,4 @@
-package com.OOP2PG1.application.controllers.repository;
+package com.OOP2PG1.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
