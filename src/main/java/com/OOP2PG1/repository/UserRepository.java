@@ -1,5 +1,6 @@
 package com.OOP2PG1.repository;
 
+import com.OOP2PG1.models.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;

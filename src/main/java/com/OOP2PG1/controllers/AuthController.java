@@ -1,6 +1,20 @@
 package com.OOP2PG1.controllers;
 
+<<<<<<< HEAD
 import com.OOP2PG1.repository.UserRepository;
+=======
+import com.OOP2PG1.models.ERole;
+import com.OOP2PG1.models.Role;
+import com.OOP2PG1.models.User;
+import com.OOP2PG1.payload.request.LoginRequest;
+import com.OOP2PG1.payload.request.SignupRequest;
+import com.OOP2PG1.payload.response.JwtResponse;
+import com.OOP2PG1.payload.response.MessageResponse;
+import com.OOP2PG1.repository.RoleRepository;
+import com.OOP2PG1.repository.UserRepository;
+import com.OOP2PG1.security.jwt.JwtUtils;
+import com.OOP2PG1.security.services.UserDetailsImpl;
+>>>>>>> e611df9a25326755618a45a2fde16c67c8fc6d30
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,6 +24,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -91,7 +106,7 @@ public class AuthController {
 
                         break;
                     case "mod":
-                        Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
+                        Role modRole = roleRepository.findByName(ERole.ROLE_EDITOR)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(modRole);
 
