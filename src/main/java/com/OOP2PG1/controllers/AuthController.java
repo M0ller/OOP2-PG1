@@ -1,8 +1,8 @@
 package com.OOP2PG1.controllers;
 
-<<<<<<< HEAD
+
 import com.OOP2PG1.repository.UserRepository;
-=======
+
 import com.OOP2PG1.models.ERole;
 import com.OOP2PG1.models.Role;
 import com.OOP2PG1.models.User;
@@ -14,7 +14,6 @@ import com.OOP2PG1.repository.RoleRepository;
 import com.OOP2PG1.repository.UserRepository;
 import com.OOP2PG1.security.jwt.JwtUtils;
 import com.OOP2PG1.security.services.UserDetailsImpl;
->>>>>>> e611df9a25326755618a45a2fde16c67c8fc6d30
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -105,7 +104,7 @@ public class AuthController {
                         roles.add(adminRole);
 
                         break;
-                    case "mod":
+                    case "editor":
                         Role modRole = roleRepository.findByName(ERole.ROLE_EDITOR)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(modRole);
