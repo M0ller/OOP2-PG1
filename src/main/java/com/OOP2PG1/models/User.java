@@ -81,6 +81,8 @@ public class User {
         this.roles = roles;
     }
 
-    
-    
+    @Override
+    public String toString() {
+        return String.format("User[id:'%s', username:'%s', roles:'%s']", id, username, roles.toString());
+    }
 }

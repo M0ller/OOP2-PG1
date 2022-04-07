@@ -18,7 +18,7 @@ public class Oop2Pg1ApplicationTestDB implements CommandLineRunner {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(Oop2Pg1Application.class, args);
+		SpringApplication.run(Oop2Pg1ApplicationTestDB.class, args);
 	}
 
 	@Override
