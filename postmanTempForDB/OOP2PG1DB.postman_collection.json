@@ -1,0 +1,433 @@
+{
+	"info": {
+		"_postman_id": "2c445cde-1074-49b9-abe9-17904ef378ad",
+		"name": "OOP2PG1DB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "signup Simon \"roles\":[\"user\"]",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"Simon\",\n    \"email\": \"Simon@gmail.se\",\n    \"password\": \"abc123\",\n    \"roles\":[\"user\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{siteUrl}}/api/auth/signup",
+					"host": [
+						"{{siteUrl}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "signup Linus\"roles\":[\"user\", \"admin\"]",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"Linus\",\n    \"email\": \"Linus@gmail.se\",\n    \"password\": \"abc123\",\n    \"roles\":[\"user\", \"admin\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{siteUrl}}/api/auth/signup",
+					"host": [
+						"{{siteUrl}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login Simon\"roles\":[\"user\"]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"SaveJwtToken\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.accessToken).not.to.be.empty;   ",
+							"    pm.expect(jsonData.tokenType).to.equal(\"Bearer\")  ",
+							"    pm.environment.set(\"jwtToken\", jsonData.accessToken);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"Simon\",\n    \"password\": \"abc123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{siteUrl}}/api/auth/signin",
+					"host": [
+						"{{siteUrl}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login Linus\"roles\":[\"user\", \"admin\"]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"SaveJwtToken\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.accessToken).not.to.be.empty;   ",
+							"    pm.expect(jsonData.tokenType).to.equal(\"Bearer\")  ",
+							"    pm.environment.set(\"jwtToken\", jsonData.accessToken);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"Linus\",\n    \"password\": \"abc123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{siteUrl}}/api/auth/signin",
+					"host": [
+						"{{siteUrl}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/auth/signout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{siteUrl}}/api/auth/signout",
+					"host": [
+						"{{siteUrl}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"signout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get User",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwtToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{siteUrl}}/api/test/user",
+					"host": [
+						"{{siteUrl}}"
+					],
+					"path": [
+						"api",
+						"test",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get admin",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwtToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{siteUrl}}/api/test/admin",
+					"host": [
+						"{{siteUrl}}"
+					],
+					"path": [
+						"api",
+						"test",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get moderator",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwtToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{siteUrl}}/api/test/mod",
+					"host": [
+						"{{siteUrl}}"
+					],
+					"path": [
+						"api",
+						"test",
+						"mod"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{siteUrl}}/api/site(no token)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwtToken}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{siteUrl}}/api/site",
+					"host": [
+						"{{siteUrl}}"
+					],
+					"path": [
+						"api",
+						"site"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{siteUrl}}/api/site(w token)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwtToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Thingamalaki\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{siteUrl}}/api/site",
+					"host": [
+						"{{siteUrl}}"
+					],
+					"path": [
+						"api",
+						"site"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{siteUrl}}/api/site/:id (w token)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwtToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Thingamalaki\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{siteUrl}}/api/site/{{lastSiteId}}",
+					"host": [
+						"{{siteUrl}}"
+					],
+					"path": [
+						"api",
+						"site",
+						"{{lastSiteId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{siteUrl}}/api/site",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"SaveLastMalakiId\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).not.to.be.empty;   ",
+							"    pm.environment.set(\"lastMalakiId\", jsonData.id);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwtToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Books\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{siteUrl}}/api/site",
+					"host": [
+						"{{siteUrl}}"
+					],
+					"path": [
+						"api",
+						"site"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "JWT",
+			"value": "bubba=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJCZW4iLCJpYXQiOjE2NDg4MTc0MjIsImV4cCI6MTY0ODgxNzUyMn0.pQS0mIX2h33dTtecpFs1jGfBHKxB4Gg0lQCiJoLqJYSxab0UvYeIINk0HQHI8zk1QmuQC78azX12w-oqOjidQw; Path=/api; Max-Age=86400; Expires=Sat, 02 Apr 2022 12:50:22 GMT; HttpOnly"
+		}
+	]
+}
