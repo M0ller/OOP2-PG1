@@ -2,7 +2,9 @@ package com.OOP2PG1.application.controllers;
 
 import com.OOP2PG1.application.entities.Site;
 import com.OOP2PG1.application.repositories.SiteRepository;
+import com.OOP2PG1.application.services.SiteDetailsImpl;
 import com.OOP2PG1.payload.response.JwtResponse;
+import com.OOP2PG1.payload.response.MessageResponse;
 import com.OOP2PG1.security.jwt.JwtUtils;
 import com.OOP2PG1.security.services.UserDetailsImpl;
 import org.apache.coyote.Response;
@@ -22,10 +24,14 @@ import java.util.List;
 @RequestMapping("/site")
 public class SiteController {
 
-    JwtUtils jwtUtils;
+//    @Autowired
+//    JwtUtils jwtUtils;
 
     @Autowired
     SiteRepository siteRepository;
+
+    @Autowired
+    SiteDetailsImpl siteDetailsImpl;
 
     UserDetailsImpl currentUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -74,10 +80,11 @@ public class SiteController {
 
     @GetMapping("/{site_name}")
     @PreAuthorize("permitAll()")
-    public Site getSite_name(@PathVariable String site_name){
-       String result = siteRepository.findById(currentUser().getId()).get().getSite_name();
+    public ResponseEntity<?> getSite_name(String site_name){
+//       siteRepository.findBySiteName(currentUser().getId()).getSite_name();
+//       siteRepository.findById(currentUser().getId()).get();
 
-        return siteRepository.findById(currentUser().getId()).get();
+        return  ResponseEntity.ok(new MessageResponse("Found this Site: " + site_name));
     }
 
     //
