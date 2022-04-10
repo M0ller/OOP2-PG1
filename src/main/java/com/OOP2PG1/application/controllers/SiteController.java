@@ -2,8 +2,14 @@ package com.OOP2PG1.application.controllers;
 
 import com.OOP2PG1.application.entities.Site;
 import com.OOP2PG1.application.repositories.SiteRepository;
+import com.OOP2PG1.payload.response.JwtResponse;
+import com.OOP2PG1.security.jwt.JwtUtils;
 import com.OOP2PG1.security.services.UserDetailsImpl;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.repository.Query;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,8 +19,10 @@ import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/site")
+@RequestMapping("/site")
 public class SiteController {
+
+    JwtUtils jwtUtils;
 
     @Autowired
     SiteRepository siteRepository;
@@ -41,6 +49,7 @@ public class SiteController {
     @PreAuthorize("hasRole('ADMIN')")
     public Site create(@RequestBody Site site){
         site.setCreator(currentUser().getId());
+        site.setCreator_name(currentUser().getUsername());
         return siteRepository.save(site);
     }
 
@@ -61,5 +70,38 @@ public class SiteController {
     public String delete(){
         return "Site deleted";
     }
+
+
+    @GetMapping("/{site_name}")
+    @PreAuthorize("permitAll()")
+    public Site getSite_name(@PathVariable String site_name){
+       String result = siteRepository.findById(currentUser().getId()).get().getSite_name();
+
+        return siteRepository.findById(currentUser().getId()).get();
+    }
+
+    //
+//    @GetMapping("/all")
+//    public String allAccess() {
+//        return "Public Content.";
+//    }
+//
+//    @GetMapping("/user")
+//    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+//    public String userAccess() {
+//        return "User Content.";
+//    }
+//
+//    @GetMapping("/mod")
+//    @PreAuthorize("hasRole('MODERATOR')")
+//    public String moderatorAccess() {
+//        return "Moderator Board.";
+//    }
+//
+//    @GetMapping("/admin")
+//    @PreAuthorize("hasRole('ADMIN')")
+//    public String adminAccess() {
+//        return "Admin Board.";
+//    }
 
 }

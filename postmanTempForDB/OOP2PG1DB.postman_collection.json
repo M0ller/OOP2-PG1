@@ -6,153 +6,436 @@
 	},
 	"item": [
 		{
-			"name": "signup Simon \"roles\":[\"user\"]",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"username\": \"Simon\",\n    \"email\": \"Simon@gmail.se\",\n    \"password\": \"abc123\",\n    \"roles\":[\"user\"]\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{siteUrl}}/api/auth/signup",
-					"host": [
-						"{{siteUrl}}"
-					],
-					"path": [
-						"api",
-						"auth",
-						"signup"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "signup Linus\"roles\":[\"user\", \"admin\"]",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"username\": \"Linus\",\n    \"email\": \"Linus@gmail.se\",\n    \"password\": \"abc123\",\n    \"roles\":[\"user\", \"admin\"]\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{siteUrl}}/api/auth/signup",
-					"host": [
-						"{{siteUrl}}"
-					],
-					"path": [
-						"api",
-						"auth",
-						"signup"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "login Simon\"roles\":[\"user\"]",
-			"event": [
+			"name": "SignUp Users",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"SaveJwtToken\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.accessToken).not.to.be.empty;   ",
-							"    pm.expect(jsonData.tokenType).to.equal(\"Bearer\")  ",
-							"    pm.environment.set(\"jwtToken\", jsonData.accessToken);",
-							"});",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"username\": \"Simon\",\n    \"password\": \"abc123\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+					"name": "Simon [\"user\"]",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"Simon\",\n    \"email\": \"Simon@gmail.se\",\n    \"password\": \"abc123\",\n    \"roles\":[\"user\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{siteUrl}}/api/auth/signup",
+							"host": [
+								"{{siteUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "{{siteUrl}}/api/auth/signin",
-					"host": [
-						"{{siteUrl}}"
-					],
-					"path": [
-						"api",
-						"auth",
-						"signin"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "login Linus\"roles\":[\"user\", \"admin\"]",
-			"event": [
 				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"SaveJwtToken\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.accessToken).not.to.be.empty;   ",
-							"    pm.expect(jsonData.tokenType).to.equal(\"Bearer\")  ",
-							"    pm.environment.set(\"jwtToken\", jsonData.accessToken);",
-							"});",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"username\": \"Linus\",\n    \"password\": \"abc123\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+					"name": "Linus [\"user\", \"admin\"]",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"Linus\",\n    \"email\": \"Linus@gmail.se\",\n    \"password\": \"abc123\",\n    \"roles\":[\"user\", \"admin\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{siteUrl}}/api/auth/signup",
+							"host": [
+								"{{siteUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
 						}
-					}
-				},
-				"url": {
-					"raw": "{{siteUrl}}/api/auth/signin",
-					"host": [
-						"{{siteUrl}}"
-					],
-					"path": [
-						"api",
-						"auth",
-						"signin"
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "http://localhost:8080/api/auth/signout",
+			"name": "LogIn User",
+			"item": [
+				{
+					"name": "Simon [\"user\"]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"SaveJwtToken\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.accessToken).not.to.be.empty;   ",
+									"    pm.expect(jsonData.tokenType).to.equal(\"Bearer\")  ",
+									"    pm.environment.set(\"jwtToken\", jsonData.accessToken);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"Simon\",\n    \"password\": \"abc123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{siteUrl}}/api/auth/signin",
+							"host": [
+								"{{siteUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Linus [\"user\", \"admin\"]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"SaveJwtToken\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.accessToken).not.to.be.empty;   ",
+									"    pm.expect(jsonData.tokenType).to.equal(\"Bearer\")  ",
+									"    pm.environment.set(\"jwtToken\", jsonData.accessToken);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"Linus\",\n    \"password\": \"abc123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{siteUrl}}/api/auth/signin",
+							"host": [
+								"{{siteUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Check User Role",
+			"item": [
+				{
+					"name": "get User",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{siteUrl}}/api/test/user",
+							"host": [
+								"{{siteUrl}}"
+							],
+							"path": [
+								"api",
+								"test",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get admin",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{siteUrl}}/api/test/admin",
+							"host": [
+								"{{siteUrl}}"
+							],
+							"path": [
+								"api",
+								"test",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get moderator",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{siteUrl}}/api/test/mod",
+							"host": [
+								"{{siteUrl}}"
+							],
+							"path": [
+								"api",
+								"test",
+								"mod"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Site without Jwt",
+			"item": [
+				{
+					"name": "{{siteUrl}}/site(no token)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{siteUrl}}/site",
+							"host": [
+								"{{siteUrl}}"
+							],
+							"path": [
+								"site"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get site with JWT",
+			"item": [
+				{
+					"name": "{{siteUrl}}/site(w token)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{siteUrl}}/site",
+							"host": [
+								"{{siteUrl}}"
+							],
+							"path": [
+								"site"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get site by it's Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{siteUrl}}/site/{{lastSiteId}}",
+							"host": [
+								"{{siteUrl}}"
+							],
+							"path": [
+								"site",
+								"{{lastSiteId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get site by site_name",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{siteUrl}}/site/books",
+							"host": [
+								"{{siteUrl}}"
+							],
+							"path": [
+								"site",
+								"books"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Create New Site",
+			"item": [
+				{
+					"name": "{{siteUrl}}/site",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"SaveLastMalakiId\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).not.to.be.empty;   ",
+									"    pm.environment.set(\"lastMalakiId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"site_name\": \"books\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{siteUrl}}/site",
+							"host": [
+								"{{siteUrl}}"
+							],
+							"path": [
+								"site"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "LogOut User",
 			"event": [
 				{
 					"listen": "test",
@@ -185,239 +468,6 @@
 						"api",
 						"auth",
 						"signout"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get User",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{jwtToken}}",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "{{siteUrl}}/api/test/user",
-					"host": [
-						"{{siteUrl}}"
-					],
-					"path": [
-						"api",
-						"test",
-						"user"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get admin",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{jwtToken}}",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "{{siteUrl}}/api/test/admin",
-					"host": [
-						"{{siteUrl}}"
-					],
-					"path": [
-						"api",
-						"test",
-						"admin"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get moderator",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{jwtToken}}",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "{{siteUrl}}/api/test/mod",
-					"host": [
-						"{{siteUrl}}"
-					],
-					"path": [
-						"api",
-						"test",
-						"mod"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "{{siteUrl}}/api/site(no token)",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{jwtToken}}",
-						"type": "text",
-						"disabled": true
-					}
-				],
-				"url": {
-					"raw": "{{siteUrl}}/api/site",
-					"host": [
-						"{{siteUrl}}"
-					],
-					"path": [
-						"api",
-						"site"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "{{siteUrl}}/api/site(w token)",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{jwtToken}}",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\": \"Thingamalaki\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{siteUrl}}/api/site",
-					"host": [
-						"{{siteUrl}}"
-					],
-					"path": [
-						"api",
-						"site"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "{{siteUrl}}/api/site/:id (w token)",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{jwtToken}}",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\": \"Thingamalaki\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{siteUrl}}/api/site/{{lastSiteId}}",
-					"host": [
-						"{{siteUrl}}"
-					],
-					"path": [
-						"api",
-						"site",
-						"{{lastSiteId}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "{{siteUrl}}/api/site",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"SaveLastMalakiId\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.id).not.to.be.empty;   ",
-							"    pm.environment.set(\"lastMalakiId\", jsonData.id);",
-							"});",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{jwtToken}}",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\": \"Books\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{siteUrl}}/api/site",
-					"host": [
-						"{{siteUrl}}"
-					],
-					"path": [
-						"api",
-						"site"
 					]
 				}
 			},
