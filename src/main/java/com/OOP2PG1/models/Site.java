@@ -103,4 +103,11 @@ public class Site {
     public void setFont(String font) {
         this.font = font;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Site[id:'%s', title:'%s', description:'%s',log:'%s', icon:'%s', wallpaper:'%s', colorTheme:'%s', font:'%s']",
+                id, title, description, log, icon, wallpaper, colorTheme, font);
+
+    }
 }
