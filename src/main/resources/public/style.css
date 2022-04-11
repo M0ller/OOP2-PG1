@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto:wght@300&display=swap');
+
+
+body{
+    
+    background-color: #8ed2c9;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+}
+
+
+.signup-box{
+    width: 360px;
+    height: 620px;
+    margin: auto;
+    background: #00aaa0;
+    border-radius: 3px
+}
+.login-box{
+    width: 360px;
+    height: 280px;
+    margin: auto;
+    background: #00aaa0;
+    border-radius: 3px
+}
+h1{
+    text-align: center;
+    padding-top: 15px;
+    color: rgb(241, 241, 184);
+}
+h4{
+    text-align: center;
+}
+form{
+    width: 300px;
+    margin-left: 20px;
+}
+form label{
+    display: flex;
+    margin-top: 20px;
+    font-size: 18px;
+}
+form input{
+    width: 100%;
+    padding: 7px;
+    border: none;
+    border: 1px solid gray;
+    border-radius: 6px;
+    outline: none;
+}
+.Submit{
+    width: 320px;
+    height: 35px;
+    cursor: pointer;
+    margin-top: 20px;
+    border: none;
+    background-color: #ff7a5a;
+    color: white;
+    font-size: 18px;
+    box-shadow: inset 0 0 0 0 #912323;
+    transition: ease-out 0.3s;
+    font-size: 1rem;
+    outline: none;
+
+}
+.Submit:hover{
+    box-shadow: inset 320px 0 0 0 #823724;
+}
+p{
+    text-align: center;
+    padding-top: 20px;
+    font-size: 15px;
+}
+.para-2{
+    text-align: center;
+    color: white;
+    font-size: 15px;
+    margin-top: -10px;
+}
+.para-2 a{
+    color:#ce8588
+}
+/* .submit:hover{
+    background: #fffafa;
+} */

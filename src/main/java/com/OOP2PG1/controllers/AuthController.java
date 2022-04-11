@@ -1,5 +1,8 @@
 package com.OOP2PG1.controllers;
 
+
+import com.OOP2PG1.repository.UserRepository;
+
 import com.OOP2PG1.models.ERole;
 import com.OOP2PG1.models.Role;
 import com.OOP2PG1.models.User;
@@ -101,7 +104,7 @@ public class AuthController {
                         roles.add(adminRole);
 
                         break;
-                    case "mod":
+                    case "editor":
                         Role modRole = roleRepository.findByName(ERole.ROLE_EDITOR)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(modRole);
