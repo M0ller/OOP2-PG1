@@ -4,7 +4,7 @@ class mainAdminPage extends Component{
         $('body').on('submit', '#default', this.loadMain)
     }
 
-    /*async loadMain(){
+    async loadMain(){
         let result = await fetch(apiHost + '/api/default/main')    
         let data = await result.json()
         console.log(result, data);
@@ -13,7 +13,7 @@ class mainAdminPage extends Component{
         }
         this.data = data  
         //$('footer').html(this.data.join('<hr>'))      
-    }*/
+    }
     
 
     get template(){
