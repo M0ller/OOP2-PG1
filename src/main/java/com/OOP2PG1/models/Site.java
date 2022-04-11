@@ -28,9 +28,11 @@ public class Site {
 
     private String font;
 
+    private String adminId;
+
     public Site() {}
 
-    public Site(String title, String description, String log, String icon, String wallpaper, String colorTheme, String font) {
+    public Site(String title, String description, String log, String icon, String wallpaper, String colorTheme, String font, String adminId) {
         this.title = title;
         this.description = description;
         this.log = log;
@@ -38,6 +40,7 @@ public class Site {
         this.wallpaper = wallpaper;
         this.colorTheme = colorTheme;
         this.font = font;
+        this.adminId = adminId;
     }
 
     public String getId() {
@@ -102,5 +105,20 @@ public class Site {
 
     public void setFont(String font) {
         this.font = font;
+    }
+
+    public String getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(String adminId) {
+        this.adminId = adminId;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Site[id:'%s', title:'%s', description:'%s',log:'%s', icon:'%s', wallpaper:'%s', colorTheme:'%s', font:'%s', adminId:'%s']",
+                id, title, description, log, icon, wallpaper, colorTheme, font, adminId);
+
     }
 }
