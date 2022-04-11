@@ -11,7 +11,6 @@ import com.OOP2PG1.payload.request.SignupRequest;
 import com.OOP2PG1.payload.response.JwtResponse;
 import com.OOP2PG1.payload.response.MessageResponse;
 import com.OOP2PG1.repository.RoleRepository;
-import com.OOP2PG1.repository.UserRepository;
 import com.OOP2PG1.security.jwt.JwtUtils;
 import com.OOP2PG1.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
