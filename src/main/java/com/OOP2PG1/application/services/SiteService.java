@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public class SiteService {
-
+/*
     @Autowired
     SiteRepository siteRepository;
     public SiteService() {}
@@ -17,9 +17,7 @@ public class SiteService {
         this.siteRepository = siteRepository;
     }
 
-    List<Site> getAllSites() {
-        return siteRepository.findAll();
-    }
-
+    List<Site> getAllSites() {return siteRepository.findAll(); }
+*/
 
 }
