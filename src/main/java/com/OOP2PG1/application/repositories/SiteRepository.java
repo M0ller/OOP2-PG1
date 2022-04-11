@@ -10,6 +10,7 @@ import java.util.Optional;
 
 public interface SiteRepository extends MongoRepository<Site, String> {
 
+    public List<Site> getAllSites(String site_name);
 //   @Query("{Site:'?0'}")
 //   Site findBySiteName(String site_name);
 //    public List<Site> findByAllSiteId(String id);
