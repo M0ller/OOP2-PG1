@@ -3,14 +3,9 @@ package com.OOP2PG1.application.controllers;
 import com.OOP2PG1.application.entities.Site;
 import com.OOP2PG1.application.repositories.SiteRepository;
 import com.OOP2PG1.application.services.SiteDetailsImpl;
-import com.OOP2PG1.payload.response.JwtResponse;
 import com.OOP2PG1.payload.response.MessageResponse;
-import com.OOP2PG1.security.jwt.JwtUtils;
 import com.OOP2PG1.security.services.UserDetailsImpl;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.repository.Query;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -41,7 +36,7 @@ public class SiteController {
 
     @GetMapping()
     //@PreAuthorize("permitAll()")
-    public List<Site> get() {
+    public List<Site> getAllSites() {
         return siteRepository.findAll();
     }
 
@@ -85,6 +80,13 @@ public class SiteController {
 //       siteRepository.findById(currentUser().getId()).get();
 
         return  ResponseEntity.ok(new MessageResponse("Found this Site: " + site_name));
+    }
+
+    @GetMapping("/this")
+    //@PreAuthorize("permitAll()")
+    public String getThis() {
+//        siteRepository.findById(currentUser().getId()).get().getSite_name()
+        return "Found this" ;
     }
 
     //
