@@ -23,6 +23,19 @@ body{
     background: #00aaa0;
     border-radius: 3px
 }
+
+.createsite-block{
+    width: 50%;
+    margin: auto;
+    background: #00aaa0;
+    float: left;
+}
+.createsite-block2{
+    width: 50%;
+    margin: auto;
+    background: #00aaa0;
+    float: right;
+}
 h1{
     text-align: center;
     padding-top: 15px;
