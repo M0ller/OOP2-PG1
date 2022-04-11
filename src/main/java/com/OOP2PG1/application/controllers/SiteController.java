@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,8 +26,9 @@ public class SiteController {
     @Autowired
     SiteRepository siteRepository;
 
-    @Autowired
-    SiteDetailsImpl siteDetailsImpl;
+
+//    @Autowired
+//    SiteDetailsImpl siteDetailsImpl;
 
     UserDetailsImpl currentUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -82,12 +84,12 @@ public class SiteController {
         return  ResponseEntity.ok(new MessageResponse("Found this Site: " + site_name));
     }
 
-    @GetMapping("/this")
-    //@PreAuthorize("permitAll()")
-    public String getThis() {
-//        siteRepository.findById(currentUser().getId()).get().getSite_name()
-        return "Found this" ;
-    }
+//    @GetMapping("/{site_name}")
+//    //@PreAuthorize("permitAll()")
+//    public Site getSite(@PathVariable String site_name) {
+////        siteRepository.findById(currentUser().getId()).get().getSite_name()
+//        return (Site) siteRepository.findByString(site_name).getAllSites();
+//    }
 
     //
 //    @GetMapping("/all")
