@@ -3,6 +3,8 @@ class CreateSite extends Component{
     events(){
         $('body').on('submit', '#logout', this.logout)
         $('body').on('submit', '#createSite', this.createSite)
+        $('body').on('change', '#upload-image', (e)=>{this.preview(e)})
+        $('body').on('submit', '#upload', (e)=>{this.upload(e)}) 
     }
 
     async createSite(event){
@@ -14,13 +16,42 @@ class CreateSite extends Component{
              body: JSON.stringify({
                  "adminId": "Linus",
                  "title": document.querySelector('#title').value,
-                 "description": document.querySelector('#description').value
-                 
+                 "description": document.querySelector('#description').value,
+                 "log": document.querySelector('#upload-image'),
+                 "wallpaper": document.querySelector('#wallpaper'),
+                 "colorTheme": document.querySelector('#colorInputText').value,
+                 "font": document.querySelector('#fontInput').value
              })
          })
          let data = await result.json()
          console.log(result, data)
      }
+
+    async preview(e){
+        if(e.target.files.length > 0){
+            this.file = e.target.files[0]
+            let preview = document.getElementById("upload-preview")
+            preview.src = URL.createObjectURL(this.file)
+            preview.style.display = "block"       
+        }
+    }
+
+    async upload(e){
+        e.preventDefault()
+        const formData = new FormData()
+        formData.append('file', this.file)
+        formData.append('info', document.querySelector('#upload-info').value)
+        
+        let result = await fetch(apiHost + "/api/file/upload", {
+	 		// headers: { 
+            //     'Authorization': 'Bearer ' + user.accessToken
+            // },
+				method: 'POST',
+				body: formData
+		})
+		
+         console.log(result)
+    }
 
     async logout(event){
         event.preventDefault()
@@ -43,18 +74,42 @@ class CreateSite extends Component{
 
        <div class="createSite-block">
        <h1>Create Site</h1>
-                <form action= "">
-                    <Label>Title</Label>
+                <form id= "createsite">
+                    <label>Title</label>
                     <input type="text" id="title" placeholder="">
                     <label>Description</label>
-                    <textarea id="description" rows="3" cols="50" placeholder="">
-                    </textarea>
-                    <div style="text-align:center">  
+                    <input type="text id="description" placeholder="">
+                    <label>Logo</label>
+                    <input id="log" type="file" accept="image/*">
+                    <input type="submit" class="Upload" value="Upload">
+                    <label>Wallpaper</label>
+                    <input id="wallpaper" type="file" accept="image/*">
+                    <input type="submit" class="Upload" value="Upload">
+                    <div style="text-align:center"> 
+                    <label>Style color</label>
+                    <input type="text" id="colorInputText">
+                    <input type="color" id="colorInputColor">
+                    <input type="submit" id="colorTheme" Class="Upload" value="Submit"
+                    onclick="changeColor()">
+                    <label>Font</label>
+                    <font face="font" id="fontInput">
+                    <input type="submit" id="font" Class="Upload" value="Submit"> 
                        <input type="submit" class="Submit" value="Create">  
                        </div>  
                     </form>
-                    
                     </div>
+                    <script>
+                    function changeColor(){
+                        let color = document.getElementById('colorInputColor').value;
+                        document.body.style.color = color;
+                        document.getElementById('colorInputText').value = color;
+                    }
+
+                    function changeFont(){
+                        let font = document.getElementById('fontInput').value;
+                        document.body.style.font = font;
+                    }
+                    </script>
 
 
         `

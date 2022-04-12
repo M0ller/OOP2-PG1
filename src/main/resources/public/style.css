@@ -25,8 +25,8 @@ body{
 }
 
 .createSite-block{
-    width: 50%;
-    height: 500px;
+    width: 360px;
+    height: 800px;
     margin: auto;
     background: #00aaa0;
     border-radius: 3px
@@ -62,7 +62,6 @@ form input{
     width: 24%;
     float: right;
 }
-
 .Submit{
     text-align: center;
     width: 320px;
@@ -78,6 +77,13 @@ form input{
     font-size: 1rem;
     outline: none;
 
+}
+
+.Upload{
+    text-align: center;
+    width: 100px;
+    height: 28px;
+    font-size: 12px;
 }
 .Submit:hover{
     box-shadow: inset 320px 0 0 0 #823724;
