@@ -56,12 +56,15 @@ public class SiteController {
         return siteRepository.findById(id).get();
     }
 
-    @PostMapping("/create") // (/site)
+    @PostMapping("/create") // Add control's later
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> create(@RequestBody Site site){
         if(siteRepository.existsByTitle(site.getTitle())){
             return  ResponseEntity.badRequest().body(new MessageResponse("Error: Site Title is already taken!"));
         }
+//        if(siteRepository.findByTitle(site.getTitle().toLowerCase()).equals(site.getTitle().toLowerCase())){
+//            return  ResponseEntity.badRequest().body(new MessageResponse("Error: Site Title is already taken!"));
+//        }
 
         site.setAdminId(currentUser().getId());
         site.getTitle();
@@ -72,8 +75,8 @@ public class SiteController {
         site.getColorTheme();
         site.getFont();
         siteRepository.save(site);
-
-        return ResponseEntity.ok(new MessageResponse("Site Created successfully!"));
+//        return ResponseEntity.ok(new MessageResponse("Site Created successfully! " + siteRepository.existsByTitle(site.getTitle().toLowerCase()) + " this happend " + site.getTitle().toLowerCase()));
+        return ResponseEntity.ok(new MessageResponse("Site Created successfully! " ));
     }
 
 //    @PostMapping("/signup")
