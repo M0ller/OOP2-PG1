@@ -3,8 +3,6 @@ package com.OOP2PG1.application.entities;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -18,15 +16,7 @@ public class Site {
     @Size(max = 30)
     private String title;
 
-    public String getTitleCheck() {
-        return titleCheck;
-    }
-
-    public void setTitleCheck(String titleCheck) {
-        this.titleCheck = titleCheck;
-    }
-
-    private String titleCheck;
+    private String urlHeader;
 
     private String description;
 
@@ -42,9 +32,9 @@ public class Site {
 
     public Site() {}
 
-    public Site(String title, String titleCheck, String description, String log, String wallpaper, String colorTheme, String font, String adminId) {
+    public Site(String title, String urlHeader, String description, String log, String wallpaper, String colorTheme, String font, String adminId) {
         this.title = title;
-        this.titleCheck = titleCheck;
+        this.urlHeader = urlHeader;
         this.description = description;
         this.log = log;
         this.wallpaper = wallpaper;
@@ -52,7 +42,13 @@ public class Site {
         this.font = font;
         this.adminId = adminId;
     }
+    public String getUrlHeader() {
+        return urlHeader;
+    }
 
+    public void setUrlHeader(String urlHeader) {
+        this.urlHeader = urlHeader;
+    }
     public String getId() {
         return id;
     }
@@ -122,7 +118,7 @@ public class Site {
         return "Site{" +
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
-                ", titleCheck='" + titleCheck + '\'' +
+                ", titleCheck='" + urlHeader + '\'' +
                 ", description='" + description + '\'' +
                 ", log='" + log + '\'' +
                 ", wallpaper='" + wallpaper + '\'' +
