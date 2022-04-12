@@ -36,24 +36,25 @@ class CreateSite extends Component{
 
     get template(){
     return `
-
-       <h1>Create Site</h1>
        <form id="logout" method="delete">
        <input type="submit" class="Submit" value="Logout"/>
        <input type="submit" class="Submit" value="Main page"/>
        </form>
-            <div class="createSite-block">
 
-                <form id="createSite">
-                    <label>Title</label>
+       <div class="createSite-block">
+       <h1>Create Site</h1>
+                <form action= "">
+                    <Label>Title</Label>
                     <input type="text" id="title" placeholder="">
                     <label>Description</label>
-                    <input type="text" id="description" placeholder=""
-                    <label>Upload logo</label>
-                    <label>Upload wallpaper</label>
-                    <input type="submit" class="Submit" value="Create">
-                    </div>
+                    <textarea id="description" rows="3" cols="50" placeholder="">
+                    </textarea>
+                    <div style="text-align:center">  
+                       <input type="submit" class="Submit" value="Create">  
+                       </div>  
                     </form>
+                    
+                    </div>
 
 
         `

@@ -24,7 +24,7 @@ body{
     border-radius: 3px
 }
 
-.createsite-block{
+.createSite-block{
     width: 50%;
     height: 500px;
     margin: auto;
@@ -62,7 +62,9 @@ form input{
     width: 24%;
     float: right;
 }
+
 .Submit{
+    text-align: center;
     width: 320px;
     height: 35px;
     cursor: pointer;
