@@ -18,13 +18,7 @@ class Login extends Component{
         let data = await result.json()
         console.log(result, data)
         user = data;
-<<<<<<< HEAD
         location.hash = "mainAdminPage"
-=======
-        if(result.status === 200){ // goes to new site if login status is 200 (200 = successful login)
-            location.hash = "loginOk"
-        }
->>>>>>> uploadFile
     }
 
     get template(){

@@ -8,6 +8,7 @@ class Header extends Component{
                 <a href="#login">Login</a>
                 <a href="#createSite">Create your own Site</a>
                 <a href="#image-upload">Image upload</a>
+                <a href="#mainAdminPage">Main Page</a>
                 
             </nav>            
         `

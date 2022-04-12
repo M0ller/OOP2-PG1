@@ -21,12 +21,6 @@ public class JwtUtils {
     @Value("${OOP2PG1.app.jwtExpirationMs}")
     private int jwtExpirationMs;
 
-<<<<<<< HEAD
-
-
-=======
-    // Takes the authentication object. (that have the loginRequest username and password originally)
->>>>>>> uploadFile
     public String generateJwtToken(Authentication authentication) {
 
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
