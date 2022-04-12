@@ -19,7 +19,6 @@ class CreateSite extends Component{
          })
          let data = await result.json()
          console.log(result, data)
-         site = data;
      }
 
     async logout(event){
@@ -45,8 +44,6 @@ class CreateSite extends Component{
             <div class="createSite-block">
 
                 <form id="createSite">
-                    <label>Site name</label>
-                    <input type="text" id="site-name" placeholder="">
                     <label>Title</label>
                     <input type="text" id="title" placeholder="">
                     <label>Description</label>
