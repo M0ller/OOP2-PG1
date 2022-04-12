@@ -9,10 +9,10 @@ import javax.validation.constraints.Size;
 @Document(collection = "site")
 public class Site {
 
-    @Id
+    //@Id
     private String id;
 
-    @NotBlank
+    //@NotBlank
     @Size(max = 30)
     private String title;
 

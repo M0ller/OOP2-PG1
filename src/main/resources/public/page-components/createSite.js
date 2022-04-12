@@ -12,6 +12,7 @@ class CreateSite extends Component{
              method: 'post',
              headers: { 'Content-Type': 'application/json' },
              body: JSON.stringify({
+                 "adminId": "Linus",
                  "title": document.querySelector('#title').value,
                  "description": document.querySelector('#description').value
                  
