@@ -7,9 +7,9 @@ class Header extends Component{
                 <a href="#signup">Sign up</a>
                 <a href="#login">Login</a>
                 <a href="#createSite">Create your own Site</a>
-                
+                <a href="#sitefirstpage">Go to book</a>
             </nav>            
         `
-    }
+    } // <a href="site/"${site.title}>Go to book</a>
 
 }

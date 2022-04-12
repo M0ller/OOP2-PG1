@@ -13,8 +13,7 @@ class CreateSite extends Component{
              body: JSON.stringify({
                  "adminId": user.username,
                  "title": document.querySelector('#title').value,
-                 "description": document.querySelector('#description').value
-                 
+                 "description": document.querySelector('#description').value   
              })
          })
          let data = await result.json()
@@ -33,6 +32,7 @@ class CreateSite extends Component{
            location.hash = "login"
         }
     }
+    
 
     get template(){
     return `

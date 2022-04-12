@@ -32,4 +32,5 @@ public interface SiteRepository extends MongoRepository<Site, String> {
     Boolean existsByurlHeader(String urlHeader);
 
     Boolean existsByTitle(String title);
+
 }
