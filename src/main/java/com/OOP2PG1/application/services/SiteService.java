@@ -9,15 +9,21 @@ import java.util.List;
 
 @Service
 public class SiteService {
-/*
-    @Autowired
+
     SiteRepository siteRepository;
+
+    Site site;
+
     public SiteService() {}
+
+    @Autowired
     public SiteService(SiteRepository siteRepository) {
         this.siteRepository = siteRepository;
     }
 
-    List<Site> getAllSites() {return siteRepository.findAll(); }
-*/
+//    getOneSite(){}
+//
+//    List<Site> getAllSites() {return siteRepository.findAll(); }
+
 
 }

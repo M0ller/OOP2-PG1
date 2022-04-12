@@ -3,18 +3,14 @@ package com.OOP2PG1.application.controllers;
 import com.OOP2PG1.application.entities.Site;
 import com.OOP2PG1.application.repositories.SiteRepository;
 import com.OOP2PG1.application.services.SiteDetailsImpl;
-import com.OOP2PG1.payload.response.JwtResponse;
 import com.OOP2PG1.payload.response.MessageResponse;
-import com.OOP2PG1.security.jwt.JwtUtils;
 import com.OOP2PG1.security.services.UserDetailsImpl;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.repository.Query;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,8 +26,9 @@ public class SiteController {
     @Autowired
     SiteRepository siteRepository;
 
-    @Autowired
-    SiteDetailsImpl siteDetailsImpl;
+
+//    @Autowired
+//    SiteDetailsImpl siteDetailsImpl;
 
     UserDetailsImpl currentUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -41,7 +38,7 @@ public class SiteController {
 
     @GetMapping()
     //@PreAuthorize("permitAll()")
-    public List<Site> get() {
+    public List<Site> getAllSites() {
         return siteRepository.findAll();
     }
 
@@ -54,8 +51,15 @@ public class SiteController {
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     public Site create(@RequestBody Site site){
-        site.setCreator(currentUser().getId());
-        site.setCreator_name(currentUser().getUsername());
+        site.setAdminId(currentUser().getId());
+        site.getTitle();
+        site.getDescription();
+        site.getLog();
+        site.getIcon();
+        site.getWallpaper();
+        site.getColorTheme();
+        site.getFont();
+
         return siteRepository.save(site);
     }
 
@@ -86,6 +90,13 @@ public class SiteController {
 
         return  ResponseEntity.ok(new MessageResponse("Found this Site: " + site_name));
     }
+
+//    @GetMapping("/{site_name}")
+//    //@PreAuthorize("permitAll()")
+//    public Site getSite(@PathVariable String site_name) {
+////        siteRepository.findById(currentUser().getId()).get().getSite_name()
+//        return (Site) siteRepository.findByString(site_name).getAllSites();
+//    }
 
     //
 //    @GetMapping("/all")
