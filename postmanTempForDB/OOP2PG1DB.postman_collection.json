@@ -356,6 +356,42 @@
 					"response": []
 				},
 				{
+					"name": "Get specific site by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{siteUrl}}/site/62556925b6e8816a37538463",
+							"host": [
+								"{{siteUrl}}"
+							],
+							"path": [
+								"site",
+								"62556925b6e8816a37538463"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get site by site_name",
 					"request": {
 						"method": "GET",
@@ -367,13 +403,89 @@
 							}
 						],
 						"url": {
-							"raw": "{{siteUrl}}/site/books",
+							"raw": "{{siteUrl}}/site/get/Book",
 							"host": [
 								"{{siteUrl}}"
 							],
 							"path": [
 								"site",
-								"books"
+								"get",
+								"Book"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get site by site_name Test",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{siteUrl}}/site/test/book",
+							"host": [
+								"{{siteUrl}}"
+							],
+							"path": [
+								"site",
+								"test",
+								"book"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get site by AdminId Test",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{siteUrl}}/site/test/Linus",
+							"host": [
+								"{{siteUrl}}"
+							],
+							"path": [
+								"site",
+								"test",
+								"Linus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get site by Description Test",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{siteUrl}}/site/ny/blabla",
+							"host": [
+								"{{siteUrl}}"
+							],
+							"path": [
+								"site",
+								"ny",
+								"blabla"
 							]
 						}
 					},
@@ -413,7 +525,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"site_name\": \"books\"\n}",
+							"raw": "{\n    \"adminId\": \"Linus\",\n    \"title\": \"postman\",\n    \"description\": \"\",\n    \"log\": \"\",\n    \"icon\": \"\",\n    \"wallpaper\": \"\",\n    \"colorTheme\": \"\",\n    \"font\": \"\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -421,12 +533,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{siteUrl}}/site",
+							"raw": "{{siteUrl}}/site/create",
 							"host": [
 								"{{siteUrl}}"
 							],
 							"path": [
-								"site"
+								"site",
+								"create"
 							]
 						}
 					},
