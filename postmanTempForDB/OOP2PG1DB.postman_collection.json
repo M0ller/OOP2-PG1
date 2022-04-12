@@ -403,14 +403,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{siteUrl}}/site/get/Book",
+							"raw": "{{siteUrl}}/site/BOOK",
 							"host": [
 								"{{siteUrl}}"
 							],
 							"path": [
 								"site",
-								"get",
-								"Book"
+								"BOOK"
 							]
 						}
 					},
@@ -453,39 +452,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{siteUrl}}/site/test/Linus",
+							"raw": "{{siteUrl}}/site/get/Linus",
 							"host": [
 								"{{siteUrl}}"
 							],
 							"path": [
 								"site",
-								"test",
+								"get",
 								"Linus"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get site by Description Test",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{jwtToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{siteUrl}}/site/ny/blabla",
-							"host": [
-								"{{siteUrl}}"
-							],
-							"path": [
-								"site",
-								"ny",
-								"blabla"
 							]
 						}
 					},

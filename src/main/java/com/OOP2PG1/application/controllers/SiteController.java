@@ -41,11 +41,11 @@ public class SiteController {
         return siteRepository.findAll();
     }
 
-    @GetMapping("/{id}")
-    @PreAuthorize("permitAll()")
-    public Site get(@PathVariable String id) {
-        return siteRepository.findById(id).get();
-    }
+//    @GetMapping("/{id}")
+//    @PreAuthorize("permitAll()")
+//    public Site get(@PathVariable String id) {
+//        return siteRepository.findById(id).get();
+//    }
 
     // fix control checks
     // fix adminId in frontend
@@ -98,11 +98,17 @@ public class SiteController {
     }
 
 
-    @GetMapping("/get/{urlHeader}")
+    @GetMapping("/{urlHeader}") // takes this parameter
     @PreAuthorize("permitAll()")
-    public Site getSiteName(@PathVariable String urlHeader){
+    public Site getSiteName(@PathVariable String urlHeader){ // pass it into this method
         String temp = urlHeader.toLowerCase();
         return siteRepository.findByurlHeader(temp).get();
+    }
+
+    @GetMapping("/get/{urlHeader}") // takes this parameter
+    @PreAuthorize("permitAll()")
+    public List<Site> getAdminId(@PathVariable String urlHeader){ // pass it into this method
+        return siteRepository.findByAdminId(urlHeader);
     }
 
 
