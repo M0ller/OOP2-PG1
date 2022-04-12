@@ -11,11 +11,7 @@ import java.util.Optional;
 
 public interface SiteRepository extends MongoRepository<Site, String> {
 
-//    SiteController findByString(String site_name);
-//    Site findAll(String id);
+    Optional<Site> findByTitle(String title);
 
-//    List<Site> getAllSites(String site_name);
-//   @Query("{Site:'?0'}")
-//   Site findBySiteName(String site_name);
-//    public List<Site> findByAllSiteId(String id);
+    Boolean existsByTitle(String title);
 }
