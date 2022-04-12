@@ -26,16 +26,12 @@ body{
 
 .createsite-block{
     width: 50%;
+    height: 500px;
     margin: auto;
     background: #00aaa0;
-    float: left;
+    border-radius: 3px
 }
-.createsite-block2{
-    width: 50%;
-    margin: auto;
-    background: #00aaa0;
-    float: right;
-}
+
 h1{
     text-align: center;
     padding-top: 15px;
@@ -60,6 +56,11 @@ form input{
     border: 1px solid gray;
     border-radius: 6px;
     outline: none;
+}
+#logout{
+    padding-top: 15px;
+    width: 24%;
+    float: right;
 }
 .Submit{
     width: 320px;
