@@ -2,23 +2,25 @@ class CreateSite extends Component{
 
     events(){
         $('body').on('submit', '#logout', this.logout)
+        $('body').on('submit', '#create', this.create)
     }
 
-    // async createSite(event){
-    //     event.preventDefault()
-        
-    //     let result = await fetch(apiHost + '/api/auth/createSite', {
-    //         method: 'post',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify({
-    //             "site": document.querySelector('#site-name').value,
-    //             "title": document.querySelector('#title').value,
-    //         })
-    //     })
-    //     let data = await result.json()
-    //     console.log(result, data)
-    //     site = data;
-    // }
+    async createSite(event){
+         event.preventDefault()
+
+         let result = await fetch(apiHost + '/site', {
+             method: 'post',
+             headers: { 'Content-Type': 'application/json' },
+             body: JSON.stringify({
+                 "title": document.querySelector('#title').value,
+                 "description": document.querySelector('#description').value
+                 
+             })
+         })
+         let data = await result.json()
+         console.log(result, data)
+         site = data;
+     }
 
     async logout(event){
         event.preventDefault()
@@ -31,7 +33,7 @@ class CreateSite extends Component{
            location.hash = "login"
         }
     }
-    
+
     get template(){
     return `
 
@@ -54,8 +56,8 @@ class CreateSite extends Component{
                     <input type="submit" class="Submit" value="Create">
                     </div>
                     </form>
-                
-            
+
+
         `
 
     }
