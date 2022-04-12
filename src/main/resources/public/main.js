@@ -3,6 +3,7 @@ const apiHost = 'http://localhost:8080'
 
 // user obj
 let user = null;
+let site = null;
 
 // populate header
 const header = new Header()

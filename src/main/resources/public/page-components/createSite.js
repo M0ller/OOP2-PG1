@@ -1,5 +1,5 @@
 class CreateSite extends Component{
-
+// user.id/username/email/roles[]
     events(){
         $('body').on('submit', '#logout', this.logout)
         $('body').on('submit', '#createSite', this.createSite)
@@ -7,12 +7,11 @@ class CreateSite extends Component{
 
     async createSite(event){
          event.preventDefault()
-        // url/site/create
          let result = await fetch(apiHost + '/site/create', {
              method: 'post',
              headers: { 'Content-Type': 'application/json' },
              body: JSON.stringify({
-                 "adminId": "Linus",
+                 "adminId": user.username,
                  "title": document.querySelector('#title').value,
                  "description": document.querySelector('#description').value
                  
@@ -20,9 +19,9 @@ class CreateSite extends Component{
          })
          let data = await result.json()
          console.log(result, data)
-         //site = data;
+         site = data;
      }
-
+    
     async logout(event){
         event.preventDefault()
         let result = await fetch(apiHost + '/api/auth/signout', {
