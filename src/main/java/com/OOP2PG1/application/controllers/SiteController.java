@@ -57,16 +57,17 @@ public class SiteController {
     }
 
     @PostMapping("/create") // Add control's later
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("permitAll()") // @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> create(@RequestBody Site site){
-        if(siteRepository.existsByTitle(site.getTitle())){
-            return  ResponseEntity.badRequest().body(new MessageResponse("Error: Site Title is already taken!"));
-        }
+//        if(siteRepository.existsByTitle(site.getTitle())){
+//            return  ResponseEntity.badRequest().body(new MessageResponse("Error: Site Title is already taken!"));
+//        }
+
 //        if(siteRepository.findByTitle(site.getTitle().toLowerCase()).equals(site.getTitle().toLowerCase())){
 //            return  ResponseEntity.badRequest().body(new MessageResponse("Error: Site Title is already taken!"));
 //        }
 
-        site.setAdminId(currentUser().getId());
+        //site.setAdminId(currentUser().getId());
         site.getTitle();
         site.getDescription();
         site.getLog();

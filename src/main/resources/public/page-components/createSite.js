@@ -12,6 +12,7 @@ class CreateSite extends Component{
              method: 'post',
              headers: { 'Content-Type': 'application/json' },
              body: JSON.stringify({
+                 "adminId": "Linus",
                  "title": document.querySelector('#title').value,
                  "description": document.querySelector('#description').value
                  
@@ -19,7 +20,7 @@ class CreateSite extends Component{
          })
          let data = await result.json()
          console.log(result, data)
-         site = data;
+         //site = data;
      }
 
     async logout(event){
