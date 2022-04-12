@@ -5,6 +5,7 @@ class CreateSite extends Component{
         $('body').on('submit', '#createSite', this.createSite)
         $('body').on('change', '#upload-image', (e)=>{this.preview(e)})
         $('body').on('submit', '#upload', (e)=>{this.upload(e)}) 
+        $('body').on('submit', '#main', this.main)
     }
 
     async createSite(event){
@@ -34,6 +35,10 @@ class CreateSite extends Component{
             preview.src = URL.createObjectURL(this.file)
             preview.style.display = "block"       
         }
+    }
+
+    async main(e){
+        location.hash = "mainAdminPage"
     }
 
     async upload(e){
@@ -69,7 +74,9 @@ class CreateSite extends Component{
     return `
        <form id="logout" method="delete">
        <input type="submit" class="Submit" value="Logout"/>
-       <input type="submit" class="Submit" value="Main page"/>
+       </form>
+       <form id="main">
+       <input type="submit"class="Submit" value="Main page"/>
        </form>
 
        <div class="createSite-block">

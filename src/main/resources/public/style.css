@@ -87,6 +87,12 @@ form input{
     width: 24%;
     float: right;
 }
+#main{
+    display: flex;
+    padding-top: 15px;
+    width: 24%;
+    float: left;
+}
 .Submit{
     text-align: center;
     width: 320px;
