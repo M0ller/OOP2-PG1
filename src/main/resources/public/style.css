@@ -34,13 +34,20 @@ body{
     border-radius: 3px
 }
 
-.createSite-block{
+.createSite-box{
     width: 360px;
     height: 800px;
     margin: auto;
     background: #00aaa0;
     border-radius: 3px
 }
+
+.createsitediv{
+    position: relative;
+    bottom: 660px; left: 25px;
+    display: inline-block;
+}
+
 li{
     border-style: solid;
     border: 2px solid rgb(255, 72, 0);
@@ -82,17 +89,7 @@ form input{
     border-radius: 6px;
     outline: none;
 }
-#logout{
-    padding-top: 15px;
-    width: 24%;
-    float: right;
-}
-#main{
-    display: flex;
-    padding-top: 15px;
-    width: 24%;
-    float: left;
-}
+
 .Submit{
     text-align: center;
     width: 320px;
@@ -136,11 +133,11 @@ p{
 
 .Edit{
     width: 100px;
-    height: 20px;
+    height: 32px;
     cursor: pointer;
     text-align: center;
     margin-top: 10px;
-    margin-left:  350px;
+    margin-left:  380px;
     border: none;
     background-color: #ff7a5a;
     color: white;

@@ -43,7 +43,7 @@ class MainAdminPage extends Component{
         <input type="logout" class="Logout" value="Logout">
         <div class="dropdown">
             <span>Show list of sites</span>
-             <div class="dropdown-content">
+            <div class="dropdown-content">
             <p><a href="#">Link 1</a> </p>
             <p><a href="#">Link 2</a> </p>
             <p><a href="#">Link 3</a> </p>

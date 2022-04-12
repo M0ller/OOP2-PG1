@@ -72,39 +72,46 @@ class CreateSite extends Component{
 
     get template(){
     return `
-       <form id="logout" method="delete">
-       <input type="submit" class="Submit" value="Logout"/>
-       </form>
-       <form id="main">
-       <input type="submit"class="Submit" value="Main page"/>
-       </form>
+    <div class="admin-box">
+        <h1>Create Site</h1>
 
-       <div class="createSite-block">
-       <h1>Create Site</h1>
+        <form id="logout" method="delete">
+        <input type="submit" class="Edit" value="Logout"/>
+        </form>
+        <form id="main">
+        <input type="submit"class="Edit" value="Main page"/>
+        </form>
                 <form id= "createsite">
-                    <label>Title</label>
-                    <input type="text" id="title" placeholder="">
-                    <label>Description</label>
-                    <input type="text id="description" placeholder="">
-                    <label>Logo</label>
-                    <input id="log" type="file" accept="image/*">
-                    <input type="submit" class="Upload" value="Upload">
-                    <label>Wallpaper</label>
-                    <input id="wallpaper" type="file" accept="image/*">
-                    <input type="submit" class="Upload" value="Upload">
-                    <div style="text-align:center"> 
-                    <label>Style color</label>
-                    <input type="text" id="colorInputText">
-                    <input type="color" id="colorInputColor">
-                    <input type="submit" id="colorTheme" Class="Upload" value="Submit"
-                    onclick="changeColor()">
-                    <label>Font</label>
-                    <font face="font" id="fontInput">
-                    <input type="submit" id="font" Class="Upload" value="Submit"> 
-                       <input type="submit" class="Submit" value="Create">  
-                       </div>  
-                    </form>
-                    </div>
+                <input type="logout" class="Logout" value="Logout">
+                <div class="createsitediv">
+
+                <span>Title</span>
+                <input type="text" id="title" placeholder="">
+
+                <label>Description</label>
+                <input type="text id="description" placeholder="">
+
+                <label>Logo</label>
+                <input id="log" type="file" accept="image/*">
+                <input type="submit" class="Upload" value="Upload">
+
+                <label>Wallpaper</label>
+                <input id="wallpaper" type="file" accept="image/*">
+                <input type="submit" class="Upload" value="Upload">
+                <div style="text-align:center"> 
+
+                <label>Style color</label>
+                <input type="text" id="colorInputText">
+                <input type="color" id="colorInputColor">
+                <input type="submit" id="colorTheme" Class="Upload" value="Submit"
+                onclick="changeColor()">
+
+                <label>Font</label>
+                <font face="font" id="fontInput">
+                <input type="submit" id="font" Class="Upload" value="Submit"> 
+                <input type="submit" class="Submit" value="Create">  
+                </div>  
+                </form>
                     <script>
                     function changeColor(){
                         let color = document.getElementById('colorInputColor').value;
