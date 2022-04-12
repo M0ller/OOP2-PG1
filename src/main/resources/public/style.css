@@ -11,14 +11,14 @@ body{
 
 .signup-box{
     width: 360px;
-    height: 620px;
+    height: 380px;
     margin: auto;
     background: #00aaa0;
     border-radius: 3px
 }
 .login-box{
     width: 360px;
-    height: 280px;
+    height: 300px;
     margin: auto;
     background: #00aaa0;
     border-radius: 3px
