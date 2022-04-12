@@ -14,7 +14,13 @@ let pages = {
     firstpage: Firstpage,
     signup: Signup, 
     login: Login,
+<<<<<<< HEAD
     mainAdminPage: MainAdminPage
+=======
+    createSite: CreateSite,
+    loginOk: LoginOk,
+    "image-upload": ImageUpload
+>>>>>>> uploadFile
 }
 
 // router

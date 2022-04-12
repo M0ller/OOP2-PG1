@@ -18,7 +18,13 @@ class Login extends Component{
         let data = await result.json()
         console.log(result, data)
         user = data;
+<<<<<<< HEAD
         location.hash = "mainAdminPage"
+=======
+        if(result.status === 200){ // goes to new site if login status is 200 (200 = successful login)
+            location.hash = "loginOk"
+        }
+>>>>>>> uploadFile
     }
 
     get template(){
@@ -33,7 +39,7 @@ class Login extends Component{
             <input type="password" id="login-password" placeholder="">
             <input type="submit" class="Submit" value="Submit">
         </form>
-        <p class="para-2">Don't have an account? <a href="register.js">Sign up</p>
+        <p class="para-2">Don't have an account? <a href="signup.js">Sign up</p>
     </div>
     
 

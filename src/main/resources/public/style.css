@@ -20,20 +20,26 @@ body{
 
 .login-box{
     width: 360px;
-    height: 280px;
+    height: 290px;
     margin: auto;
     background: #00aaa0;
     border-radius: 3px
 }
 
+<<<<<<< HEAD
 .admin-box{
     width: 520px;
+=======
+.createSite-block{
+    width: 360px;
+>>>>>>> uploadFile
     height: 800px;
     margin: auto;
     background: #00aaa0;
     border-radius: 3px
 }
 
+<<<<<<< HEAD
 .block,
 li{
     border-style: solid;
@@ -51,6 +57,8 @@ ul {
     display: block;
   }      
       
+=======
+>>>>>>> uploadFile
 h1{
     text-align: center;
     padding-top: 15px;
@@ -76,7 +84,13 @@ form input{
     border-radius: 6px;
     outline: none;
 }
+#logout{
+    padding-top: 15px;
+    width: 24%;
+    float: right;
+}
 .Submit{
+    text-align: center;
     width: 320px;
     height: 35px;
     cursor: pointer;
@@ -92,6 +106,15 @@ form input{
     
 }
 
+<<<<<<< HEAD
+=======
+.Upload{
+    text-align: center;
+    width: 100px;
+    height: 28px;
+    font-size: 12px;
+}
+>>>>>>> uploadFile
 .Submit:hover{
     box-shadow: inset 320px 0 0 0 #823724;
 }

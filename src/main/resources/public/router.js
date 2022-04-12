@@ -4,6 +4,7 @@ function changeRoute(){
         page = 'firstpage'
     }
     // vi kollar först om det finns en registrerad page (annars, 404)
+    console.log("page", page, pages[page])
     if(!pages[page]){
         console.log('would render a 404')
         return
