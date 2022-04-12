@@ -9,11 +9,6 @@
 //
 //@SpringBootApplication
 //public class Oop2Pg1ApplicationTestDB implements CommandLineRunner {
-<<<<<<< HEAD
-
-=======
-//
->>>>>>> benjaminHelpedWithLogin
 //	private final UserRepository userRepository;
 //
 //	@Autowired

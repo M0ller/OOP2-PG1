@@ -14,12 +14,8 @@ let pages = {
     firstpage: Firstpage,
     signup: Signup, 
     login: Login,
-<<<<<<< HEAD
-    loginok: Loginok,
-    createSite: CreateSite
-=======
+    createSite: CreateSite,
     loginOk: LoginOk
->>>>>>> benjaminHelpedWithLogin
 }
 
 // router
