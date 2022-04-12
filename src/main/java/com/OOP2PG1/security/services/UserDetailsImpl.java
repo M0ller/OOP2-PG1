@@ -34,11 +34,13 @@ public class UserDetailsImpl implements UserDetails {
 		this.authorities = authorities;
 	}
 
+
 	public static UserDetailsImpl build(User user) {
+		// The build method takes in an existing user object. And gets that users roles and places them into a authorities list variable.
 		List<GrantedAuthority> authorities = user.getRoles().stream()
 				.map(role -> new SimpleGrantedAuthority(role.getName().name()))
 				.collect(Collectors.toList());
-
+		// return a new object of UserDetailsImpl with the users id, username, email, password and roles (authorities)
 		return new UserDetailsImpl(
 				user.getId(), 
 				user.getUsername(), 

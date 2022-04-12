@@ -22,8 +22,11 @@ public class JwtUtils {
     // Takes the authentication object. (that have the loginRequest username and password originally)
     public String generateJwtToken(Authentication authentication) {
 
+        // creating an object from UserDetailsImpl class called userPrincipal. In it, we pass the authentication object username and password
+        // into a new object of the UserDetailsImpl type. (In UserDetailsImpl there is additional variables, id, email and a collection of authorities.
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
 
+        // Creating a Jwt based on the users username, current date, sets an expiration date and an encrypted signatur, lastly (compact) it into one String variable and return it.
         return Jwts.builder()
                 .setSubject((userPrincipal.getUsername()))
                 .setIssuedAt(new Date())

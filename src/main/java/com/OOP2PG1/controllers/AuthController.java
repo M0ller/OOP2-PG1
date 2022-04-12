@@ -55,14 +55,19 @@ public class AuthController {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
         //runs the authentication object through the SecurityContextHolder.getContext() method.
+        // (?)
         SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        // sends the authentication object with loginRequest.username and password to the generateJwtToken method in JwtUtils class. (that only accept objects of the Authentication type. That class will return a String, (compacted with users username, current date, expiration date and an encrypted signatur)
         String jwt = jwtUtils.generateJwtToken(authentication);
 
+        // create UserDetailsImpl object called userDetails. Pass the variables retrieved from authentication (as if it was a UserDetailsImpl object) into userDetails.
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        //Creates a list of roles based on the roles that exist from the user that was retrieved.
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
-
+        //Send a response ok and also send the jwt string token, the users id, username, email and the users roles.
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getId(),
                 userDetails.getUsername(),
