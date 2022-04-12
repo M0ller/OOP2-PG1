@@ -2,13 +2,13 @@ class CreateSite extends Component{
 
     events(){
         $('body').on('submit', '#logout', this.logout)
-        $('body').on('submit', '#create', this.create)
+        $('body').on('submit', '#createSite', this.createSite)
     }
 
     async createSite(event){
          event.preventDefault()
-
-         let result = await fetch(apiHost + '/site', {
+        // url/site/create
+         let result = await fetch(apiHost + '/site/create', {
              method: 'post',
              headers: { 'Content-Type': 'application/json' },
              body: JSON.stringify({
@@ -42,13 +42,13 @@ class CreateSite extends Component{
        <input type="submit" class="Submit" value="Logout"/>
        <input type="submit" class="Submit" value="Main page"/>
        </form>
-            <div class="createsite-block">
+            <div class="createSite-block">
 
-                <form id="createsite">
+                <form id="createSite">
                     <label>Site name</label>
                     <input type="text" id="site-name" placeholder="">
                     <label>Title</label>
-                    <input type="email" id="title" placeholder="">
+                    <input type="text" id="title" placeholder="">
                     <label>Description</label>
                     <input type="text" id="description" placeholder=""
                     <label>Upload logo</label>
