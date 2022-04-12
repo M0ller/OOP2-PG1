@@ -51,8 +51,15 @@ public class SiteController {
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     public Site create(@RequestBody Site site){
-        site.setCreator(currentUser().getId());
-        site.setCreator_name(currentUser().getUsername());
+        site.setAdminId(currentUser().getId());
+        //site.setTitle();
+        //site.setDescription();
+        //site.setLog();
+        //site.setIcon();
+        //site.setWallpaper();
+        //site.setColorTheme();
+        //site.setFont();
+
         return siteRepository.save(site);
     }
 
