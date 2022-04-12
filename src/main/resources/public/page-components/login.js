@@ -18,6 +18,7 @@ class Login extends Component{
         let data = await result.json()
         console.log(result, data)
         user = data;
+        location.hash = "mainAdminPage"
     }
 
     get template(){
