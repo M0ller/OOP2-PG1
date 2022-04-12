@@ -56,7 +56,7 @@ public class SiteController {
         return siteRepository.findById(id).get();
     }
 
-    @PostMapping("/create") // (/site)
+    @PostMapping("/create") // Add control's later
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> create(@RequestBody Site site){
         if(siteRepository.existsByTitle(site.getTitle())){
