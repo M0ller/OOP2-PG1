@@ -14,6 +14,10 @@ let pages = {
     firstpage: Firstpage,
     signup: Signup, 
     login: Login,
+<<<<<<< HEAD
+=======
+    createSite: CreateSite,
+>>>>>>> tempTestApplication
     loginOk: LoginOk
 }
 

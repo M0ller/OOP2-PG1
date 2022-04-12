@@ -24,18 +24,14 @@ body{
     border-radius: 3px
 }
 
-.createsite-block{
+.createSite-block{
     width: 50%;
+    height: 500px;
     margin: auto;
     background: #00aaa0;
-    float: left;
+    border-radius: 3px
 }
-.createsite-block2{
-    width: 50%;
-    margin: auto;
-    background: #00aaa0;
-    float: right;
-}
+
 h1{
     text-align: center;
     padding-top: 15px;
@@ -61,7 +57,14 @@ form input{
     border-radius: 6px;
     outline: none;
 }
+#logout{
+    padding-top: 15px;
+    width: 24%;
+    float: right;
+}
+
 .Submit{
+    text-align: center;
     width: 320px;
     height: 35px;
     cursor: pointer;
