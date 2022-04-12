@@ -51,23 +51,24 @@ public class AuthController {
     @PostMapping("/signin") // pass the username and password into a loginRequest object.
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         // Authentication is enabled from the WebSecurityConfig class that extends WebSecurityConfigurerAdapter
-        // Creates an authentication object that the username and password is passed into
+        // Creates an authentication object that the username and password is passed into.
+        // the authenticate method in authenticationManager class have the loginRequest username and password passed into it that is then placed in a Authentication class object.
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
         //runs the authentication object through the SecurityContextHolder.getContext() method.
-        // (?)
+        // (?) It probably checks existing users towards the loginRequest username and password and retrieved that data and place it into authentication.
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         // sends the authentication object with loginRequest.username and password to the generateJwtToken method in JwtUtils class. (that only accept objects of the Authentication type. That class will return a String, (compacted with users username, current date, expiration date and an encrypted signatur)
         String jwt = jwtUtils.generateJwtToken(authentication);
 
-        // create UserDetailsImpl object called userDetails. Pass the variables retrieved from authentication (as if it was a UserDetailsImpl object) into userDetails.
+        // create UserDetailsImpl object called userDetails. Pass the variable retrieved from authentication (as if it was a UserDetailsImpl object) into userDetails. The authentication.getPrincipal() retrieves the Username which is the one that get passed into userDetails.
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         //Creates a list of roles based on the roles that exist from the user that was retrieved.
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
-        //Send a response ok and also send the jwt string token, the users id, username, email and the users roles.
+        //Send a response ok and also send the jwt string token, the user id, username, email and the users roles.
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getId(),
                 userDetails.getUsername(),

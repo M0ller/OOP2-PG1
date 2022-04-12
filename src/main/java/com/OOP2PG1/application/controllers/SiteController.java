@@ -33,9 +33,13 @@ public class SiteController {
     @Autowired
     SiteDetailsImpl siteDetailsImpl;
 
+    // This method returns a UserDetailsImpl object.
     UserDetailsImpl currentUser(){
+        //retrieve the authentication from the current logged-in user ( its id, username, password, email and roles.) and places it into a new Authentication object called authentication.
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        // pass the authenticated user object as a UserDetailsImpl object into a UserDetailsImpl object called userDetails.
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        // returns the userDetails object of that user (which contains id, email, password and that users roles.)
         return userDetails;
     }
 
