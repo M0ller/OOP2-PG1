@@ -3,6 +3,10 @@ package com.OOP2PG1.application.controllers;
 import com.OOP2PG1.application.entities.Site;
 import com.OOP2PG1.application.repositories.SiteRepository;
 import com.OOP2PG1.application.services.SiteDetailsImpl;
+import com.OOP2PG1.models.ERole;
+import com.OOP2PG1.models.Role;
+import com.OOP2PG1.models.User;
+import com.OOP2PG1.payload.request.SignupRequest;
 import com.OOP2PG1.payload.response.MessageResponse;
 import com.OOP2PG1.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +17,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -26,6 +33,7 @@ public class SiteController {
     @Autowired
     SiteRepository siteRepository;
 
+    MessageResponse messageResponse;
 
 //    @Autowired
 //    SiteDetailsImpl siteDetailsImpl;
@@ -48,9 +56,13 @@ public class SiteController {
         return siteRepository.findById(id).get();
     }
 
-    @PostMapping
+    @PostMapping("/create") // (/site)
     @PreAuthorize("hasRole('ADMIN')")
-    public Site create(@RequestBody Site site){
+    public ResponseEntity<?> create(@RequestBody Site site){
+        if(siteRepository.existsByTitle(site.getTitle())){
+            return  ResponseEntity.badRequest().body(new MessageResponse("Error: Site Title is already taken!"));
+        }
+
         site.setAdminId(currentUser().getId());
         site.getTitle();
         site.getDescription();
@@ -59,9 +71,41 @@ public class SiteController {
         site.getWallpaper();
         site.getColorTheme();
         site.getFont();
+        siteRepository.save(site);
 
-        return siteRepository.save(site);
+        return ResponseEntity.ok(new MessageResponse("Site Created successfully!"));
     }
+
+//    @PostMapping("/signup")
+//    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+//        // compare userRepository username to signUpRequest username. If true then the user already exist
+//        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+//            return ResponseEntity
+//                    .badRequest()
+//                    .body(new MessageResponse("Error: Username is already taken!"));
+//        }
+//        // compare userRepository email to signUpRequest email. If true then the email already exist
+//        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+//            return ResponseEntity
+//                    .badRequest()
+//                    .body(new MessageResponse("Error: Email is already in use!"));
+//        }
+//        // signUpRequest passed both if statements.
+//        // Create new user's account
+//        // passing signUpRequest data to a user object.
+//        // Create new user's account
+//        User user = new User(signUpRequest.getUsername(),
+//                signUpRequest.getEmail(),
+//                encoder.encode(signUpRequest.getPassword())); // passing the signUpRequest password into encoder method before passing it to the user object.
+//
+//        Set<String> strRoles = signUpRequest.getRoles();// passing signUpRequest roles to strRoles
+//        Set<Role> roles = new HashSet<>(); // creating a new HasSet as a Role object
+//
+//        user.setRoles(roles); // pass the roles that exist into the user object
+//        userRepository.save(user); // save the user object into the database
+//
+//        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+//    }
 
     @PutMapping
     @PreAuthorize("hasRole('ADMIN')")
