@@ -1,6 +1,7 @@
 package com.OOP2PG1.application.controllers;
 
 import com.OOP2PG1.application.entities.Site;
+import com.OOP2PG1.application.entities.SiteRequest;
 import com.OOP2PG1.application.repositories.SiteRepository;
 import com.OOP2PG1.application.services.SiteDetailsImpl;
 import com.OOP2PG1.models.ERole;
@@ -15,11 +16,13 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -61,60 +64,58 @@ public class SiteController {
     //
     @PostMapping("/create") // Add control's later
     @PreAuthorize("permitAll()") // @PreAuthorize("hasRole('user')")
-    public ResponseEntity<?> create(@RequestBody Site site){
-        if(siteRepository.existsByTitle(site.getTitle())){
-            return  ResponseEntity.badRequest().body(new MessageResponse("Error: Site Title is already taken!"));
-        }
+    public ResponseEntity<?> create(@RequestBody Site site ){ //SiteRequest siteRequest
 
-//        if(siteRepository.findByTitle(site.getTitle().toLowerCase()).equals(site.getTitle().toLowerCase())){
-//            return  ResponseEntity.badRequest().body(new MessageResponse("Error: Site Title is already taken!"));
+//        System.out.println("\n"+"FOUND THIS:" +siteRepository.findSiteByTitle(site.getTitle())+"\n");
+
+//        if(siteRepository.existsByTitle(site.getTitleCheck())){
+//            return ResponseEntity.badRequest().body(new MessageResponse("Error: Title " + site.getTitle() + " Already Exist"));
 //        }
+//        System.out.println();
+
+//        siteRepository.findSiteByName(site.getTitle());
+
+//        System.out.println("\n" + "HEREEEEEEEEEEEEEEEEEEEEEEEEE: "+ siteRepository.findSiteByName(site.getTitle()).toString() + "\n");
+
+
+//        if(siteRepository.findAll().contains(site.getTitle())){
+//            return ResponseEntity.badRequest().body(new MessageResponse("Error: Site Title"));
+//        }
+
+//        System.out.println(siteRepository.findAll());
+
+//        if(siteRepository.findAll().equals(site.getTitle())){
+//            System.out.println("Found Something");
+//        }
+
+//        if(siteRequest.getTitle().equalsIgnoreCase(temp) ){
+//            return  ResponseEntity.badRequest().body(new MessageResponse("Error: Site Title"));
+//        }
+//        if( siteRepository.existsByTitle(site.getTitle().equalsIgnoreCase(site.getTitle()))){
+//
+//            return  ResponseEntity.badRequest().body(new MessageResponse("Error: Site Title"+ site.getTitle() +" is already taken!"));
+//        }
+
         //for postman use: site.setAdminId(currentUser().getId());
         //site.setAdminId(currentUser().getId());
         //for front end: site.getAdminId();  // gets the current user in the browser in the createSite.js user.username
-        site.getAdminId();
         site.getTitle();
+        site.setTitleCheck(site.getTitle().toLowerCase());
         site.getDescription();
         site.getLog();
-        site.getIcon();
         site.getWallpaper();
         site.getColorTheme();
         site.getFont();
-        siteRepository.save(site);
-//        return ResponseEntity.ok(new MessageResponse("Site Created successfully! " + siteRepository.existsByTitle(site.getTitle().toLowerCase()) + " this happend " + site.getTitle().toLowerCase()));
-        return ResponseEntity.ok(new MessageResponse("Site Created successfully! " ));
-    }
+        site.getAdminId();
 
-//    @PostMapping("/signup")
-//    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-//        // compare userRepository username to signUpRequest username. If true then the user already exist
-//        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-//            return ResponseEntity
-//                    .badRequest()
-//                    .body(new MessageResponse("Error: Username is already taken!"));
-//        }
-//        // compare userRepository email to signUpRequest email. If true then the email already exist
-//        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-//            return ResponseEntity
-//                    .badRequest()
-//                    .body(new MessageResponse("Error: Email is already in use!"));
-//        }
-//        // signUpRequest passed both if statements.
-//        // Create new user's account
-//        // passing signUpRequest data to a user object.
-//        // Create new user's account
-//        User user = new User(signUpRequest.getUsername(),
-//                signUpRequest.getEmail(),
-//                encoder.encode(signUpRequest.getPassword())); // passing the signUpRequest password into encoder method before passing it to the user object.
-//
-//        Set<String> strRoles = signUpRequest.getRoles();// passing signUpRequest roles to strRoles
-//        Set<Role> roles = new HashSet<>(); // creating a new HasSet as a Role object
-//
-//        user.setRoles(roles); // pass the roles that exist into the user object
-//        userRepository.save(user); // save the user object into the database
-//
-//        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
-//    }
+//        Site site = new Site(siteRequest.getTitle(), siteRequest.getDescription(), siteRequest.getLog(), siteRequest.getWallpaper(), siteRequest.getColorTheme(), siteRequest.getFont(), siteRequest.getAdminId());
+
+        siteRepository.save(site);
+        return ResponseEntity.ok(new MessageResponse("Site Created successfully! Site input is: "
+//                + site.getTitle()
+//                + " Site in database: " + siteRepository.findByTitle(site.getTitle())
+        ));
+    }
 
     @PutMapping
     @PreAuthorize("hasRole('ADMIN')")
@@ -135,21 +136,18 @@ public class SiteController {
     }
 
 
-    @GetMapping("/{site_name}")
+    @GetMapping("/get/{title}")
     @PreAuthorize("permitAll()")
-    public ResponseEntity<?> getSite_name(String site_name){
-//       siteRepository.findBySiteName(currentUser().getId()).getSite_name();
-//       siteRepository.findById(currentUser().getId()).get();
-
-        return  ResponseEntity.ok(new MessageResponse("Found this Site: " + site_name));
+    public Site getSiteName(@PathVariable String title){
+        return siteRepository.findByTitle(title).get();
     }
 
-//    @GetMapping("/{site_name}")
-//    //@PreAuthorize("permitAll()")
-//    public Site getSite(@PathVariable String site_name) {
-////        siteRepository.findById(currentUser().getId()).get().getSite_name()
-//        return (Site) siteRepository.findByString(site_name).getAllSites();
-//    }
+    @GetMapping("/test/{title}")
+    @PreAuthorize("permitAll()")
+    public List<Site> gettest(@PathVariable String title){
+        return siteRepository.findByadminId(title);
+    }
+
 
     //
 //    @GetMapping("/all")

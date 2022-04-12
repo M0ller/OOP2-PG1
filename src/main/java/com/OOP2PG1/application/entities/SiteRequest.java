@@ -3,13 +3,11 @@ package com.OOP2PG1.application.entities;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-@Document(collection = "site")
-public class Site {
+public class SiteRequest {
 
     @Id
     private String id;
@@ -17,16 +15,6 @@ public class Site {
     @NotBlank
     @Size(max = 30)
     private String title;
-
-    public String getTitleCheck() {
-        return titleCheck;
-    }
-
-    public void setTitleCheck(String titleCheck) {
-        this.titleCheck = titleCheck;
-    }
-
-    private String titleCheck;
 
     private String description;
 
@@ -40,11 +28,10 @@ public class Site {
 
     private String adminId;
 
-    public Site() {}
+    public SiteRequest() {}
 
-    public Site(String title, String titleCheck, String description, String log, String wallpaper, String colorTheme, String font, String adminId) {
+    public SiteRequest(String title, String description, String log, String wallpaper, String colorTheme, String font, String adminId) {
         this.title = title;
-        this.titleCheck = titleCheck;
         this.description = description;
         this.log = log;
         this.wallpaper = wallpaper;
@@ -117,18 +104,4 @@ public class Site {
         this.adminId = adminId;
     }
 
-    @Override
-    public String toString() {
-        return "Site{" +
-                "id='" + id + '\'' +
-                ", title='" + title + '\'' +
-                ", titleCheck='" + titleCheck + '\'' +
-                ", description='" + description + '\'' +
-                ", log='" + log + '\'' +
-                ", wallpaper='" + wallpaper + '\'' +
-                ", colorTheme='" + colorTheme + '\'' +
-                ", font='" + font + '\'' +
-                ", adminId='" + adminId + '\'' +
-                '}';
-    }
 }
