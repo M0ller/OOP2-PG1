@@ -52,13 +52,13 @@ public class SiteController {
     @PreAuthorize("hasRole('ADMIN')")
     public Site create(@RequestBody Site site){
         site.setAdminId(currentUser().getId());
-        //site.setTitle();
-        //site.setDescription();
-        //site.setLog();
-        //site.setIcon();
-        //site.setWallpaper();
-        //site.setColorTheme();
-        //site.setFont();
+        site.getTitle();
+        site.getDescription();
+        site.getLog();
+        site.getIcon();
+        site.getWallpaper();
+        site.getColorTheme();
+        site.getFont();
 
         return siteRepository.save(site);
     }
