@@ -158,6 +158,9 @@ public class AuthController {
                     .body(new MessageResponse("Error: Can't find site " + roleRequest.getUrlHeader() + "!"));
         }
 
+        User user = new User();
+        user.setRoles(userRepository.);
+
         return ResponseEntity.ok( new MessageResponse("It worked"));
 
     }
