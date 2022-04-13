@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -157,11 +158,17 @@ public class AuthController {
                     .badRequest()
                     .body(new MessageResponse("Error: Can't find site " + roleRequest.getUrlHeader() + "!"));
         }
+        Set<Role> roles = new HashSet<>();
+        User temp = new User();
+        temp = userRepository.findUserByUsername(roleRequest.getUsername());
+        Set<String> strRoles;
+        roles = ERole.ROLE_USER;
+//        temp.setRoles("ROLE_USER");
 
         User user = new User();
         user.setRoles(userRepository.);
 
-        return ResponseEntity.ok( new MessageResponse("It worked"));
+        return ResponseEntity.ok( new MessageResponse("It worked" + temp));
 
     }
 
