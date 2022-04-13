@@ -12,6 +12,7 @@ class Header extends Component{
                 <a href="#mainAdminPage">Main Page</a>
                 <a href="#editSite">Edit Site</a>
                 <a href="#createArticle">Create Article</a>
+                <a href="#editPage">Edit Page</a>
             </nav>            
         `
     } // <a href="site/"${site.title}>Go to book</a>
