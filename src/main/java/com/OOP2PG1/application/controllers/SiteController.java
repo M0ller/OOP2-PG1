@@ -2,15 +2,9 @@ package com.OOP2PG1.application.controllers;
 
 import com.OOP2PG1.application.entities.Site;
 import com.OOP2PG1.application.repositories.SiteRepository;
-import com.OOP2PG1.application.services.SiteDetailsImpl;
-import com.OOP2PG1.payload.response.JwtResponse;
 import com.OOP2PG1.payload.response.MessageResponse;
-import com.OOP2PG1.security.jwt.JwtUtils;
 import com.OOP2PG1.security.services.UserDetailsImpl;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.repository.Query;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -30,8 +24,10 @@ public class SiteController {
     @Autowired
     SiteRepository siteRepository;
 
-    @Autowired
-    SiteDetailsImpl siteDetailsImpl;
+    MessageResponse messageResponse;
+
+//    @Autowired
+//    SiteDetailsImpl siteDetailsImpl;
 
     UserDetailsImpl currentUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -41,23 +37,47 @@ public class SiteController {
 
     @GetMapping()
     //@PreAuthorize("permitAll()")
-    public List<Site> get() {
+    public List<Site> getAllSites() {
         return siteRepository.findAll();
     }
 
-    @GetMapping("/{id}")
-    @PreAuthorize("permitAll()")
-    public Site get(@PathVariable String id) {
-        return siteRepository.findById(id).get();
+//    @GetMapping("/{id}")
+//    @PreAuthorize("permitAll()")
+//    public Site get(@PathVariable String id) {
+//        return siteRepository.findById(id).get();
+//    }
+
+    // fix control checks
+    // fix adminId in frontend
+    //
+    @PostMapping("/create") // Add control's later
+    @PreAuthorize("permitAll()") // @PreAuthorize("hasRole('user')")
+    public ResponseEntity<?> create(@RequestBody Site site){ //SiteRequest siteRequest
+
+        if(siteRepository.existsByurlHeader(site.getTitle().toLowerCase())){
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Site Already Exist!"));
+        }
+
+        //for postman use: site.setAdminId(currentUser().getId());
+        //site.setAdminId(currentUser().getId());
+        //for front end: site.getAdminId();  // gets the current user in the browser in the createSite.js user.username
+        site.getTitle();
+        site.setUrlHeader(site.getTitle().toLowerCase());
+        site.getDescription();
+        site.getLog();
+        site.getWallpaper();
+        site.getColorTheme();
+        site.getFont();
+        site.getAdminId();
+
+        siteRepository.save(site);
+        return ResponseEntity.ok(new MessageResponse("Site Created successfully! You Created "+ site.getTitle()
+        ));
     }
 
-    @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public Site create(@RequestBody Site site){
-        site.setCreator(currentUser().getId());
-        site.setCreator_name(currentUser().getUsername());
-        return siteRepository.save(site);
-    }
+
 
     @PutMapping
     @PreAuthorize("hasRole('ADMIN')")
@@ -78,14 +98,20 @@ public class SiteController {
     }
 
 
-    @GetMapping("/{site_name}")
+    @GetMapping("/{urlHeader}") // takes this parameter
     @PreAuthorize("permitAll()")
-    public ResponseEntity<?> getSite_name(String site_name){
-//       siteRepository.findBySiteName(currentUser().getId()).getSite_name();
-//       siteRepository.findById(currentUser().getId()).get();
-
-        return  ResponseEntity.ok(new MessageResponse("Found this Site: " + site_name));
+    public Site getSiteName(@PathVariable String urlHeader){ // pass it into this method
+        String temp = urlHeader.toLowerCase();
+        return siteRepository.findByurlHeader(temp).get();
     }
+
+    @GetMapping("/get/{urlHeader}") // takes this parameter
+    @PreAuthorize("permitAll()")
+    public List<Site> getAdminId(@PathVariable String urlHeader){ // pass it into this method
+        return siteRepository.findByAdminId(urlHeader);
+    }
+
+
 
     //
 //    @GetMapping("/all")
