@@ -1,6 +1,8 @@
 package com.OOP2PG1.controllers;
 
 
+import com.OOP2PG1.application.repositories.SiteRepository;
+import com.OOP2PG1.payload.request.RoleRequest;
 import com.OOP2PG1.repository.UserRepository;
 
 import com.OOP2PG1.models.ERole;
@@ -14,8 +16,6 @@ import com.OOP2PG1.repository.RoleRepository;
 import com.OOP2PG1.security.jwt.JwtUtils;
 import com.OOP2PG1.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -42,6 +42,9 @@ public class AuthController {
 
     @Autowired
     RoleRepository roleRepository;
+
+    @Autowired
+    SiteRepository siteRepository;
 
     @Autowired
     PasswordEncoder encoder;
@@ -137,6 +140,24 @@ public class AuthController {
         return ResponseEntity.ok(new MessageResponse("logout NOT REALLY successful"));
     }
 
+
+    @PutMapping("/addeditor")
+    public ResponseEntity<?> addEditor(@Valid @RequestBody RoleRequest roleRequest){
+        if(userRepository.existsByUsername(roleRequest.getUsername())){
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Can't find user " + roleRequest.getUsername() + "!"));
+        }
+
+        if (siteRepository.existsByurlHeader(roleRequest.getUrlHeader())){
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Can't find site " + roleRequest.getUrlHeader() + "!"));
+        }
+
+        return
+
+    }
 
 }
 
