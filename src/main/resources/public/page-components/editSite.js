@@ -65,7 +65,7 @@ class EditSite extends Component{
                 </form>
                 <form id="addEditor" method="post">
                 <input type="text" id="editor" class="resizedTextBox">
-                <input type="submit" class="Edit" value="Add Editor"
+                <input type="submit" class="Edit" value="Add editor"
                 </form>
                 <form id="deleteSite" method="delete">
                 <input type="submit" class="Edit" value="Delete site"/>

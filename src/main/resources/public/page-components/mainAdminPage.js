@@ -52,7 +52,7 @@ class MainAdminPage extends Component{
         <input type="submit" class="Edit" value="Logout"/>
         </form>
         <form id="createSite">
-        <input type="submit"class="Edit" value="Create Site"/>
+        <input type="submit"class="Edit" value="Create site"/>
         </form>
 
         <form id ="mainAdminPage">    
