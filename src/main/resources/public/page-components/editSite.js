@@ -3,6 +3,7 @@ class EditSite extends Component{
     events(){
         $('body').on('submit', '#logout', this.logout)
         $('body').on('submit', '#main', this.main)
+        $('body').on('submit', '#editSite"', this.loadSite)
     }
 
     siteTitle = []
@@ -14,6 +15,11 @@ class EditSite extends Component{
 
         this.data = data
 
+
+    }
+
+    async loadSite(event){
+        
 
     }
 
@@ -71,7 +77,7 @@ class EditSite extends Component{
                 <input type="submit" class="Edit" value="Delete site"/>
                 </form>
 
-                    <form id ="editSite">  
+                    <form id ="editSite" method="put">  
                     <div class="editing">
                     <span>Title</span>
                     <input type="text" id="title" placeholder="">
