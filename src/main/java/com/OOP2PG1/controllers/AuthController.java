@@ -14,6 +14,8 @@ import com.OOP2PG1.repository.RoleRepository;
 import com.OOP2PG1.security.jwt.JwtUtils;
 import com.OOP2PG1.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -129,12 +131,15 @@ public class AuthController {
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
-    @DeleteMapping("/signout")
+     @DeleteMapping("/signout")
     public ResponseEntity logoutUser() {
         SecurityContextHolder.getContext().setAuthentication(null);
         return ResponseEntity.ok(new MessageResponse("logout NOT REALLY successful"));
     }
 
+
 }
+
+
 
 
