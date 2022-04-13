@@ -1,5 +1,6 @@
 function changeRoute(){    
     let page =  location.hash.replace('#','')
+    page = page.split('/')[0]
     if(!page){
         page = 'firstpage'
     }

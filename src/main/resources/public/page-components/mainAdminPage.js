@@ -7,19 +7,22 @@ class MainAdminPage extends Component{
 
     siteTitle = []
 
-  async load(){
-        console.log(user.username)
+  
+  
+    async load(){
         let result = await fetch(apiHost + '/site/get/' + user.username)    
         let data = await result.json()
-
+        console.log(result,data);
         for(let i = 0; i<data.length; i++){
-            data[i] = new this.siteTitle ( data[i] ).render()
-            //this.siteTitle.push(data[i].title)
+            //data[i] = this.siteTitle( data[i] ).render()
+            this.siteTitle.push(data[i].title)
         }
-        this.data = data  
+        this.data = data
+        
         //$('footer').html(this.data.join('<hr>')) 
 
     }
+    
 
     async logout(event){
         event.preventDefault()
@@ -30,6 +33,18 @@ class MainAdminPage extends Component{
         console.log(result, data)
         location.hash = "login"
     }
+
+    siteLinks(sites) {
+        let html = ""
+        for (const site of sites) {
+         html += `<a href="#mainAdminPage/${site.title}/edit">${site.title}</a>`
+        }
+        return html
+
+
+    }
+
+
     
     
     get template(){
@@ -43,17 +58,16 @@ class MainAdminPage extends Component{
         <input type="edit" class="CreateSite" value="Create Site">
         <input type="edit" class="CreateSite" value="Logout">
         <ul id="siteTitle"></ul>
-        <section>
-                ${this.data.join('')}
-            </section>
+     
 
         
         <div class="dropdown">
             <span>Show list of sites</span>
              <div class="dropdown-content">
-            <p><a href="#">Barcat master</a> </p>
-            <p><a href="#">D.Book</a> </p>
-           
+            <p>${this.siteLinks(this.data)}</p>
+            </div>
+        </div>
+            
            
             
 
