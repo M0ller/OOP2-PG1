@@ -1,5 +1,6 @@
 package com.OOP2PG1.application.controllers;
 
+import com.OOP2PG1.application.entities.Page;
 import com.OOP2PG1.application.entities.Site;
 import com.OOP2PG1.application.repositories.SiteRepository;
 import com.OOP2PG1.payload.response.MessageResponse;
@@ -101,8 +102,13 @@ public class SiteController {
     @GetMapping("/{urlHeader}") // takes this parameter
     @PreAuthorize("permitAll()")
     public Site getSiteName(@PathVariable String urlHeader){ // pass it into this method
-        String temp = urlHeader.toLowerCase();
-        return siteRepository.findByurlHeader(temp).get();
+        Site temp = new Site();
+        if(siteRepository.findByurlHeader(urlHeader.toLowerCase()).get() == null){
+            temp.setTitle("");
+            temp.setTitle("This Site dosen't exist!");
+            return temp;
+        }
+        return siteRepository.findByurlHeader(urlHeader.toLowerCase()).get();
     }
 
     @GetMapping("/get/{userPages}") // takes this parameter

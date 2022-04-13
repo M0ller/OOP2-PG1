@@ -11,9 +11,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -52,14 +54,15 @@ public class PageController {
         if(pageRepository.existsByUrlTitlePage(page.getTitlePage().toLowerCase())){
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Page Already Exist!" + currentUser().getUsername()));
+                    .body(new MessageResponse("Page Already Exist! " )); // siteRepository.findById(siteRepository.findById( ))
         }
         //siteRepository.findByTitle()
 
         page.getTitlePage();
         page.setUrlTitlePage(page.getTitlePage().toLowerCase());
-        page.setAdminId("Linus"); //site.getAdminId()
-        page.setSiteId("6255a6ab22c88a744f5c6c9e"); // site.getId()
+        page.setAdminId(currentUser().getUsername()); //site.getAdminId()
+        page.getSiteId();
+        //page.setSiteId(site.getId()); //
 
         pageRepository.save(page);
 
@@ -89,8 +92,13 @@ public class PageController {
     @GetMapping("/{pageTitle}")
     @PreAuthorize("permitAll()")
     public Page getPageTitle(@PathVariable String pageTitle){
-        System.out.println("\n METHOD DID RUN \n");
-        return pageRepository.findByTitlePage(pageTitle.toLowerCase()).get();
+        Page temp = new Page();
+        if(pageRepository.findByUrlTitlePage(pageTitle.toLowerCase()).get() == null){
+            temp.setTitlePage("");
+            temp.setTitlePage("This page dosen't exist!");
+            return temp;
+        }
+        return pageRepository.findByUrlTitlePage(pageTitle.toLowerCase()).get();
     }
 
     @GetMapping("/get/{userPages}") // takes this parameter

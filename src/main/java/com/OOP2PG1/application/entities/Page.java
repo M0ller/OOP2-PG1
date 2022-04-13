@@ -46,6 +46,7 @@ public class Page {
     public void setTitlePage(String titlePage) {
         this.titlePage = titlePage;
     }
+
     public String getUrlTitlePage() {
         return urlTitlePage;
     }
