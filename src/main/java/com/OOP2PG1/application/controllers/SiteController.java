@@ -19,16 +19,10 @@ import java.util.List;
 @RequestMapping("/site")
 public class SiteController {
 
-//    @Autowired
-//    JwtUtils jwtUtils;
-
     @Autowired
     SiteRepository siteRepository;
 
     MessageResponse messageResponse;
-
-//    @Autowired
-//    SiteDetailsImpl siteDetailsImpl;
 
     UserDetailsImpl currentUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -36,35 +30,58 @@ public class SiteController {
         return userDetails;
     }
 
-
-
-//    @GetMapping("/{id}")
-//    @PreAuthorize("permitAll()")
-//    public Site get(@PathVariable String id) {
-//        return siteRepository.findById(id).get();
+//    @PutMapping
+//    @PreAuthorize("hasRole('ADMIN')")
+//    public String update(){
+//        return "Site updated";
 //    }
-
-    // fix control checks
-    // fix adminId in frontend
-    //
-//    @PatchMapping("site/edit")
-//    @PreAuthorize("permitAll()") //("hasRole('ADMIN')")
-//    public ResponseEntity<?> editSite(@RequestBody Site site) {
 //
-//
+//    @PatchMapping
+//    @PreAuthorize("hasRole('ADMIN')")
+//    public String updateProperty(){
 //        return "Single Site property updated";
 //    }
+
+
+    @PutMapping("/edit")
+    @PreAuthorize("permitAll()") //("hasRole('ADMIN')")
+    public ResponseEntity<?> editSite(@RequestBody Site site) {
+        Site temp = new Site();
+        if(!siteRepository.existsByurlHeader(site.getTitle().toLowerCase() )){ // add adminId check
+            return ResponseEntity.badRequest().body(site.getTitle() + " Dosen't Exist " );
+        }
+
+//        siteRepository.findByurlHeader(site.getTitle().toLowerCase()).getId();
+//        System.out.println("\n \n " + siteRepository.findAllByurlHeader(site.getTitle().toLowerCase()). );
+//        System.out.println("\n \n Found: " + siteRepository.findAllIdByurlHeader(site.getTitle().toLowerCase() ));
+
+        System.out.println(" FOUND: \n" + siteRepository.findAllByurlHeader("mysite"));
+        System.out.println(" \n And: \n" + siteRepository.findByurlHeader("mysite"));
+
+        temp.setTitle(site.getTitle());
+        temp.setUrlHeader(site.getTitle().toLowerCase() );
+        temp.setDescription(site.getDescription());
+        temp.setColorTheme(site.getColorTheme());
+        temp.setFont(site.getFont());
+        temp.setLog(site.getLog());
+        temp.setWallpaper(site.getWallpaper());
+//        temp.setId( siteRepository.findAllByurlHeader( site.getTitle().toLowerCase() ));
+        temp.setAdminId(currentUser().getUsername());
+
+        siteRepository.save(temp);
+
+        System.out.println(" \nAfter Edit Site:\n " +temp);
+        return ResponseEntity.ok(new MessageResponse("You Updated your Site "+ site.getTitle() + "\n" ));
+    }
 
     @PostMapping("/create") // Add control's later
     @PreAuthorize("permitAll()") // @PreAuthorize("hasRole('user')")
     public ResponseEntity<?> create(@RequestBody Site site){ //SiteRequest siteRequest
-
         if(siteRepository.existsByurlHeader(site.getTitle().toLowerCase())){
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Site Already Exist!"));
         }
-
         //for postman use: site.setAdminId(currentUser().getId());
         //site.setAdminId(currentUser().getId());
         //for front end: site.getAdminId();  // gets the current user in the browser in the createSite.js user.username
@@ -107,7 +124,7 @@ public class SiteController {
         if(!siteRepository.existsByurlHeader(body.toLowerCase() )){
             return ResponseEntity.badRequest().body("This Site dosen't exist!");
         }
-        return ResponseEntity.ok("This Site Exist! \n"+ siteRepository.findByurlHeader(body.toLowerCase()).toString());
+        return ResponseEntity.ok( "This Site Exist! \n"+ siteRepository.findByurlHeader(body.toLowerCase()).toString());
     }
 
     @DeleteMapping("/{body}") // Delete a Site

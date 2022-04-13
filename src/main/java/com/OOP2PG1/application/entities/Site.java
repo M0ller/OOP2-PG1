@@ -1,5 +1,6 @@
 package com.OOP2PG1.application.entities;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
