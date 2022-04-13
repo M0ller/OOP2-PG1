@@ -49,7 +49,9 @@ public class SiteController {
     //
 //    @PatchMapping("site/edit")
 //    @PreAuthorize("permitAll()") //("hasRole('ADMIN')")
-//    public String updateProperty(@RequestBody ){
+//    public ResponseEntity<?> editSite(@RequestBody Site site) {
+//
+//
 //        return "Single Site property updated";
 //    }
 
