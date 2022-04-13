@@ -3,8 +3,6 @@ class CreateSite extends Component{
     events(){
         $('body').on('submit', '#logout', this.logout)
         $('body').on('submit', '#createSite', this.createSite)
-        $('body').on('change', '#upload-image', (e)=>{this.preview(e)})
-        $('body').on('submit', '#upload', this.upload) 
         $('body').on('submit', '#main', this.main)
     }
 
@@ -17,8 +15,6 @@ class CreateSite extends Component{
              body: JSON.stringify({
                  "title": document.querySelector('#title').value,
                  "description": document.querySelector('#description').value,
-                //  "log": document.querySelector('#upload-image'),
-                //  "wallpaper": document.querySelector('#wallpaper'),
                 //  "colorTheme": document.querySelector('#colorInputText').value,
                 //  "font": document.querySelector('#fontInput').value
              })
@@ -42,22 +38,6 @@ class CreateSite extends Component{
 
     async main(e){
         location.hash = "mainAdminPage"
-    }
-
-    async upload(e){
-        e.preventDefault()
-        const formData = new FormData()
-        formData.append('file', this.file)
-        
-        let result = await fetch(apiHost + "/api/file/upload", {
-	 		// headers: { 
-            //     'Authorization': 'Bearer ' + user.accessToken
-            // },
-				method: 'POST',
-				body: formData
-		})
-		
-         console.log(result)
     }
 
     async logout(event){
@@ -93,15 +73,6 @@ class CreateSite extends Component{
                 <label>Description</label>
                 <input type="text id="description" placeholder="">
                 </form>
-                <form id="upload">
-                <label>Logo</label>
-                <input id="log" type="file" accept="image/*">   
-                <input type="submit" class="Upload" value="Upload">
-                </form>
-
-                <label>Wallpaper</label>
-                <input id="wallpaper" type="file" accept="image/*">
-                <input type="submit" class="Upload" value="Upload">
 
                 <label>Style color</label>
                 <input type="text" id="colorInputText">
