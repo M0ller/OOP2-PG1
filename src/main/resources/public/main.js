@@ -21,7 +21,8 @@ let pages = {
     createSite: CreateSite,
     sitefirstpage: Sitefirstpage,
     editSite: EditSite,
-    "image-upload": ImageUpload
+    "image-upload": ImageUpload,
+    createArticle: CreateArticle
 }
 
 // router
