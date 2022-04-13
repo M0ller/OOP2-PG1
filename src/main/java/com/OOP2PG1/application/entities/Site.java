@@ -116,15 +116,15 @@ public class Site {
     @Override
     public String toString() {
         return "Site{" +
-                "id='" + id + '\'' +
-                ", title='" + title + '\'' +
-                ", titleCheck='" + urlHeader + '\'' +
-                ", description='" + description + '\'' +
-                ", log='" + log + '\'' +
-                ", wallpaper='" + wallpaper + '\'' +
-                ", colorTheme='" + colorTheme + '\'' +
-                ", font='" + font + '\'' +
-                ", adminId='" + adminId + '\'' +
-                '}';
+                "\nid='" + id + '\'' +
+                ", \ntitle='" + title + '\'' +
+                ", \nurlHeader='" + urlHeader + '\'' +
+                ", \ndescription='" + description + '\'' +
+                ", \nlog='" + log + '\'' +
+                ", \nwallpaper='" + wallpaper + '\'' +
+                ", \ncolorTheme='" + colorTheme + '\'' +
+                ", \nfont='" + font + '\'' +
+                ", \nadminId='" + adminId + '\'' +
+                "\n}";
     }
 }

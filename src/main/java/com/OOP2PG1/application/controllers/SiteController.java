@@ -99,16 +99,35 @@ public class SiteController {
     }
 
 
-    @GetMapping("/{urlHeader}") // takes this parameter
+//    @GetMapping("/{body}")
+//    @PreAuthorize("permitAll()")
+//    public ResponseEntity<?> getArticleTitle(@PathVariable String body){
+//        if(!articleRepository.existsByurlArticleTitle(body.toLowerCase() )){
+//            return ResponseEntity.badRequest().body("This Article dosen't exist!");
+//        }
+//        return ResponseEntity.ok("This Article Exist! \n"+ articleRepository.findByurlArticleTitle(body.toLowerCase()).toString());
+//    }
+
+    @GetMapping("/{body}") // takes this parameter
     @PreAuthorize("permitAll()")
-    public Site getSiteName(@PathVariable String urlHeader){ // pass it into this method
-        Site temp = new Site();
-        if(siteRepository.findByurlHeader(urlHeader.toLowerCase()).get() == null){
-            temp.setTitle("");
-            temp.setTitle("This Site dosen't exist!");
-            return temp;
+    public ResponseEntity<?> getSiteName(@PathVariable String body){ // pass it into this method
+        if(!siteRepository.existsByurlHeader(body.toLowerCase() )){
+            return ResponseEntity.badRequest().body("This Site dosen't exist!");
         }
-        return siteRepository.findByurlHeader(urlHeader.toLowerCase()).get();
+        return ResponseEntity.ok("This Site Exist! \n"+ siteRepository.findByurlHeader(body.toLowerCase()).toString());
+    }
+
+    @DeleteMapping("/{body}")
+    @PreAuthorize("permitAll()")
+    public ResponseEntity<?> deleteSiteByTitle(@PathVariable String body){
+
+        if(siteRepository.existsByurlHeader(body.toLowerCase() ) ){
+            siteRepository.deleteByurlHeader(body.toLowerCase());
+            return ResponseEntity.ok(body + " Got Deleted!");
+        }else if(!siteRepository.existsByurlHeader(body.toLowerCase() )){
+            return ResponseEntity.badRequest().body(" Site dosen't Exist!");
+        }
+        return ResponseEntity.badRequest().body(" Site didn't get deleted!");
     }
 
     @GetMapping("/get/{userPages}") // takes this parameter

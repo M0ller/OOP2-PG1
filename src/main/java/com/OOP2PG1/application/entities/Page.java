@@ -75,4 +75,15 @@ public class Page {
         this.adminId = adminId;
     }
 
+    @Override
+    public String toString() {
+        return "Page{" +
+                "\nid='" + id + '\'' +
+                ", \ntitlePage='" + titlePage + '\'' +
+                ", \nurlTitlePage='" + urlTitlePage + '\'' +
+                ", \nurlSite='" + urlSite + '\'' +
+                ", \nsiteId='" + siteId + '\'' +
+                ", \nadminId='" + adminId + '\'' +
+                "\n}";
+    }
 }

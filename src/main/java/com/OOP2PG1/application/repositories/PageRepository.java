@@ -19,4 +19,6 @@ public interface PageRepository extends MongoRepository<Page, String> {
 //    Optional<Page> find<?>By<?><?>(String <?>);
 
     List<Page> findByAdminId(String urlHeader);
+
+    Optional<Page> deleteByurlTitlePage(String pageTitle);
 }

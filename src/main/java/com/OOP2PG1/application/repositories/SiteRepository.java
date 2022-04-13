@@ -29,4 +29,5 @@ public interface SiteRepository extends MongoRepository<Site, String> {
 
     Boolean existsByTitle(String title);
 
+    Optional<Site> deleteByurlHeader(String siteName);
 }
