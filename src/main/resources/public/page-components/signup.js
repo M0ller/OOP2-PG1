@@ -35,7 +35,7 @@ class Signup extends Component{
                     <input type="password" id="register-password" placeholder="">
                     <input type="submit" class="Submit" value="Submit">
                 </form>
-                <p class="para-2">Already have an account? <a href="login.js">Login Here</a></p>
+                <p class="para-2">Already have an account? <a href="#login">Login Here</a></p>
             </div>
             
         `

@@ -23,7 +23,7 @@ let pages = {
     sitefirstpage: Sitefirstpage,
     editSite: EditSite,
     "image-upload": ImageUpload,
-    createPage: CreatePage
+
 }
 
 // router
