@@ -19,11 +19,9 @@ let pages = {
     login: Login,
     mainAdminPage: MainAdminPage,
     createSite: CreateSite,
-    loginok: Loginok,
+    sitefirstpage: Sitefirstpage,
     editSite: EditSite,
     "image-upload": ImageUpload,
-    createPage: CreatePage,
-    createArticle: CreateArticle
 }
 
 // router
