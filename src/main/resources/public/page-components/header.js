@@ -10,7 +10,7 @@ class Header extends Component{
                 <a href="#image-upload">Image upload</a>
                 <a href="#mainAdminPage">Main Page</a>
                 <a href="#editSite">Edit Site</a>
-                <a href="#createSide">Create Side</a>
+                <a href="#createPage">Create Page</a>
                 
             </nav>            
         `

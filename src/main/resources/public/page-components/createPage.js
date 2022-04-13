@@ -1,15 +1,15 @@
-class CreateSide extends Component {
+class CreatePage extends Component {
 
 events(){
     $('body').on('submit', '#logout', this.logout)
-    $('body').on('submit', '#createSide', this.createSite)
+    $('body').on('submit', '#createPage', this.createPage)
     $('body').on('submit', '#main', this.main)
 }
 
-async createSite(event){
+async createPage(event){
      event.preventDefault()
     // url/site/create
-     let result = await fetch(apiHost + '/site/createSide', {
+     let result = await fetch(apiHost + '/site/createPage', {
          method: 'post',
          headers: { 'Content-Type': 'application/json' },
          body: JSON.stringify({
@@ -19,7 +19,7 @@ async createSite(event){
      let data = await result.json()
      console.log(result, data)
      if(result.status === 200){ // goes to new site if login status is 200 (200 = successful login)
-        location.hash = "editSide"
+        location.hash = "editSite"
     }
 
  }
@@ -52,7 +52,7 @@ async logout(event){
 get template(){
 return `
 <div class="admin-box">
-    <h1>Create new Side</h1>
+    <h1>Create new page</h1>
 
     <form id="logout" method="delete">
     <input type="submit" class="Edit" value="Logout"/>
@@ -61,12 +61,8 @@ return `
     <input type="submit"class="Edit" value="Main page"/>
     <span>Title</span>
             <input type="text" id="title" placeholder="">
-            <input type="submit" class="Submit" value="Create side">
+            <input type="submit" class="Submit" value="Create page">
     </form>
-           
-              
-            </div>  
-            </form>
                 
                 </script>
 
