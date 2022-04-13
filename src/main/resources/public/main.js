@@ -7,7 +7,6 @@ let site = null
 let title = null
 
 /* let testFont = site.urlHeader; */
-let testFont = "Teeeeeeeeeeeeest"
 // populate header
 const header = new Header()
 header.render('header')
@@ -18,9 +17,12 @@ let pages = {
     firstpage: Firstpage,
     signup: Signup, 
     login: Login,
+    mainAdminPage: MainAdminPage,
     createSite: CreateSite,
     sitefirstpage: Sitefirstpage,
-    loginOk: LoginOk
+    loginOk: LoginOk,
+    editSite: EditSite,
+    "image-upload": ImageUpload
 }
 
 // router
