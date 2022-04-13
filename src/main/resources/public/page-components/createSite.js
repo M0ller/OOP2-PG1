@@ -15,8 +15,8 @@ class CreateSite extends Component{
              body: JSON.stringify({
                  "title": document.querySelector('#title').value,
                  "description": document.querySelector('#description').value,
-                //  "colorTheme": document.querySelector('#colorInputText').value,
-                //  "font": document.querySelector('#fontInput').value
+                 "colorTheme": document.querySelector('#colorInputText').value,
+                 "font": document.querySelector('#fontInput').value
              })
          })
          let data = await result.json()
@@ -81,8 +81,7 @@ class CreateSite extends Component{
                 onclick="changeColor()">
 
                 <label>Font</label>
-                <font face="font" id="fontInput">
-                <input type="submit" id="font" Class="Upload" value="Submit"> 
+                <input type="text" id="fontInput">
                 <input type="submit" class="Submit" value="Create">  
                 </div>  
                 </form>
