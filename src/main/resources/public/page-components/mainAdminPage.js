@@ -3,26 +3,20 @@ class MainAdminPage extends Component{
     events(){
         $('body').on('submit', '#mainAdminPage', this.load)
         $('body').on('submit', '#logout', this.logout)
+        $('body').on('submit', '#createSite', this.createSite)
     }
 
     siteTitle = []
 
-  
-  
     async load(){
         let result = await fetch(apiHost + '/site/get/' + user.username)    
         let data = await result.json()
         console.log(result,data);
-        for(let i = 0; i<data.length; i++){
-            //data[i] = this.siteTitle( data[i] ).render()
-            this.siteTitle.push(data[i].title)
-        }
+
         this.data = data
-        
-        //$('footer').html(this.data.join('<hr>')) 
+
 
     }
-    
 
     async logout(event){
         event.preventDefault()
@@ -41,6 +35,8 @@ class MainAdminPage extends Component{
         }
         return html
 
+    async createSite(e){
+        location.hash = "createSite"
     }
 
 
@@ -50,14 +46,20 @@ class MainAdminPage extends Component{
         return `
 
     <div class="admin-box">
-    
         <h1>My list of sites</h1>
+        <form id="logout" method="delete">
+        <input type="submit" class="Edit" value="Logout"/>
+        </form>
+        <form id="createSite">
+        <input type="submit"class="Edit" value="Create Site"/>
+        </form>
+
         <form id ="mainAdminPage">    
-        
+
         <input type="edit" class="CreateSite" value="Create Site">
         <input type="edit" class="CreateSite" value="Logout">
         <ul id="siteTitle"></ul>
-        
+
         <div class="dropdown">
             <span>Show list of sites</span>
              <div class="dropdown-content">

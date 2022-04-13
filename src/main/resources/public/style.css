@@ -194,6 +194,24 @@ p{
     
 }
 
+.Logout2{
+    width: 0px;
+    height: 0px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 550px;
+    margin-left:  350px;
+    border: none;
+    background-color: #8ed2c9;
+    color: white;
+    font-size: 18px;
+    box-shadow: inset 0 0 0 0 #8ed2c9;
+    transition: ease-out 0.3s;
+    font-size: 1rem;
+    outline: none;
+
+}
+
 .Logout:hover{
     box-shadow: inset 115px 0 0 0 #912323;
 }
