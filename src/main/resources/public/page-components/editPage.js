@@ -69,7 +69,7 @@ class EditPage extends Component{
                 </form>
                    <form id= "pages">
                    <div class="page-dropdown">
-                      <span>List of articles</span>
+                      <span>List of pages</span>
                       <div class="page-dropdown-content">
                       <p>${this.siteLinks(this.data)}</p>
                     </div>

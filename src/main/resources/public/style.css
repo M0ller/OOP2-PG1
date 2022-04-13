@@ -240,6 +240,7 @@ p{
 }
 
 .dropdown-right-content{
+    display:none;
     position: absolute;
     min-width: 100%;
     background-color: #ff7a5a;
@@ -302,7 +303,7 @@ p{
       display: block;
   }
 
-  .dropdown-right .dropdown-right-content{
+  .dropdown-right:hover .dropdown-right-content{
       display: block;
   }
 

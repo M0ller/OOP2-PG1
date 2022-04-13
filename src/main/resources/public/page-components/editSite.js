@@ -22,6 +22,11 @@ class EditSite extends Component{
 
     }
 
+    async loadSite(event){
+        
+
+    }
+
     async main(e){
         location.hash = "mainAdminPage"
     }
@@ -76,7 +81,7 @@ class EditSite extends Component{
                 <input type="submit" class="Edit" value="Delete site"/>
                 </form>
 
-                    <form id ="editSite">  
+                    <form id ="editSite" method="put">  
                     <div class="editing">
                     <span>Title</span>
                     <input type="text" id="title" placeholder="">
