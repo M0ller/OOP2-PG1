@@ -3,6 +3,7 @@ class EditSite extends Component{
     events(){
         $('body').on('submit', '#logout', this.logout)
         $('body').on('submit', '#main', this.main)
+        $('body').on('button', '#editSite', this.loadSite)
     }
 
     siteTitle = []
@@ -14,6 +15,10 @@ class EditSite extends Component{
 
         this.data = data
 
+    }
+
+    async loadSite(e){
+        let result = await fetch(apiHost + '/site/get')
 
     }
 

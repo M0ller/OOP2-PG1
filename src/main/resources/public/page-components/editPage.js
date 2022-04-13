@@ -6,7 +6,7 @@ class EditPage extends Component{
     }
 
     async load(){
-        let result = await fetch(apiHost + '/site/get/' + user.username)    
+        let result = await fetch(apiHost + '/page/get/' + user.username)    
         let data = await result.json()
         console.log(result,data);
 
@@ -31,13 +31,13 @@ class EditPage extends Component{
         }
     }
 
-    siteLinks(sites) {
-        let html = ""
-        for (const site of sites) {
-           html += `<a href="#editSite/${site.title}/edit">${site.title}</a>`
-        }
-        return html
-    }
+     siteLinks(sites) {
+         let html = ""
+         for (const site of sites) {
+            html += `<a href="#editSite/${site.title}/edit">${site.title}</a>`
+         }
+         return html
+     }
 
     get template(){
         return `
