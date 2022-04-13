@@ -46,32 +46,26 @@ public class SiteController {
     @PutMapping("/edit")
     @PreAuthorize("permitAll()") //("hasRole('ADMIN')")
     public ResponseEntity<?> editSite(@RequestBody Site site) {
-        Site temp = new Site();
+
         if(!siteRepository.existsByurlHeader(site.getTitle().toLowerCase() )){ // add adminId check
             return ResponseEntity.badRequest().body(site.getTitle() + " Dosen't Exist " );
         }
 
-//        siteRepository.findByurlHeader(site.getTitle().toLowerCase()).getId();
-//        System.out.println("\n \n " + siteRepository.findAllByurlHeader(site.getTitle().toLowerCase()). );
-//        System.out.println("\n \n Found: " + siteRepository.findAllIdByurlHeader(site.getTitle().toLowerCase() ));
-
-        System.out.println(" FOUND: \n" + siteRepository.findAllByurlHeader("mysite"));
-        System.out.println(" \n And: \n" + siteRepository.findByurlHeader("mysite"));
-
-        temp.setTitle(site.getTitle());
-        temp.setUrlHeader(site.getTitle().toLowerCase() );
-        temp.setDescription(site.getDescription());
-        temp.setColorTheme(site.getColorTheme());
-        temp.setFont(site.getFont());
-        temp.setLog(site.getLog());
-        temp.setWallpaper(site.getWallpaper());
-//        temp.setId( siteRepository.findAllByurlHeader( site.getTitle().toLowerCase() ));
-        temp.setAdminId(currentUser().getUsername());
-
-        siteRepository.save(temp);
-
-        System.out.println(" \nAfter Edit Site:\n " +temp);
-        return ResponseEntity.ok(new MessageResponse("You Updated your Site "+ site.getTitle() + "\n" ));
+        if(siteRepository.existsByurlHeader(site.getTitle().toLowerCase())){
+            Site temp = new Site();
+            temp.setTitle(site.getTitle());
+            temp.setUrlHeader(site.getTitle().toLowerCase() );
+            temp.setDescription(site.getDescription());
+            temp.setColorTheme(site.getColorTheme());
+            temp.setFont(site.getFont());
+            temp.setLog(site.getLog());
+            temp.setWallpaper(site.getWallpaper());
+            temp.setAdminId(currentUser().getUsername());
+            temp.setId( siteRepository.findByurlHeader( site.getTitle().toLowerCase() ).getId() );
+            siteRepository.save(temp);
+            return ResponseEntity.ok(new MessageResponse("You Updated your Site "+ site.getTitle() + "!" ));
+        }
+        return ResponseEntity.badRequest().body("Error Something went wrong. Sorry!");
     }
 
     @PostMapping("/create") // Add control's later
