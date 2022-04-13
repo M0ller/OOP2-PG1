@@ -20,7 +20,6 @@ let pages = {
     mainAdminPage: MainAdminPage,
     createSite: CreateSite,
     sitefirstpage: Sitefirstpage,
-    loginOk: LoginOk,
     editSite: EditSite,
     "image-upload": ImageUpload
 }
