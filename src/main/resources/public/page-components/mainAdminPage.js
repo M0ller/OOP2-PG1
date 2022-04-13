@@ -29,12 +29,11 @@ class MainAdminPage extends Component{
         <input type="edit" class="CreateSite" value="Create Site">
         <input type="edit" class="CreateSite" value="Logout">
 
-        <input type="logout" class="Logout" value="Logout">
         <div class="dropdown">
             <span>Show list of sites</span>
              <div class="dropdown-content">
-            <p><a href="#">Link 1</a> </p>
-            <p><a href="#">Link 2</a> </p>
+            <p><a href="#">Barcat master</a> </p>
+            <p><a href="#">D.Book</a> </p>
             <p><a href="#">Link 3</a> </p>
             
             

@@ -11,7 +11,7 @@ body{
 
 .signup-box{
     width: 360px;
-    height: 620px;
+    height: 380px;
     margin: auto;
     background: #00aaa0;
     border-radius: 3px
@@ -20,7 +20,7 @@ body{
 
 .login-box{
     width: 360px;
-    height: 280px;
+    height: 300px;
     margin: auto;
     background: #00aaa0;
     border-radius: 3px
@@ -28,7 +28,7 @@ body{
 
 .admin-box{
     width: 520px;
-    height: 800px;
+    height: 500px;
     margin: auto;
     background: #00aaa0;
     border-radius: 3px
@@ -180,8 +180,9 @@ p{
 .dropdown {
     
     position: relative;
-    bottom: 660px; left: 25px;
+    bottom: 80px; left: 25px;
     display: inline-block;
+    color: white;
     
   }
   
