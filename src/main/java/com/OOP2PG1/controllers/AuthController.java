@@ -1,6 +1,7 @@
 package com.OOP2PG1.controllers;
 
 
+import com.OOP2PG1.application.entities.Site;
 import com.OOP2PG1.application.repositories.SiteRepository;
 import com.OOP2PG1.payload.request.RoleRequest;
 import com.OOP2PG1.repository.UserRepository;
@@ -142,20 +143,21 @@ public class AuthController {
 
 
     @PutMapping("/addeditor")
-    public ResponseEntity<?> addEditor(@Valid @RequestBody RoleRequest roleRequest){
-        if(userRepository.existsByUsername(roleRequest.getUsername())){
+    public ResponseEntity<?> addEditor(@RequestBody RoleRequest roleRequest){
+
+        if(!userRepository.existsByUsername(roleRequest.getUsername())){
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Can't find user " + roleRequest.getUsername() + "!"));
         }
 
-        if (siteRepository.existsByurlHeader(roleRequest.getUrlHeader())){
+        if (!siteRepository.existsByurlHeader(roleRequest.getUrlHeader())){
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Can't find site " + roleRequest.getUrlHeader() + "!"));
         }
 
-        return
+        return ResponseEntity.ok( new MessageResponse("It worked"));
 
     }
 
