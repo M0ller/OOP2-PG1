@@ -52,7 +52,7 @@ class EditSite extends Component{
         </div>
 
             <div class="admin-box">
-                <h1>Edit Site</h1>
+                <h1>Edit site</h1>
 
                 <form id="logout" method="delete">
                 <input type="submit" class="Edit" value="Logout"/>
@@ -60,12 +60,12 @@ class EditSite extends Component{
                 <form id="main">
                 <input type="submit"class="Edit" value="Main page"/>
                 </form>
+                <form id="pages">
+                <input type="submit" class="Edit" value="Pages"/>
+                </form>
                 <form id="addEditor" method="post">
                 <input type="text" id="editor" class="resizedTextBox">
                 <input type="submit" class="Edit" value="Add Editor"
-                </form>
-                <form id="pages">
-                <input type="submit" class="Edit" value="Pages"/>
                 </form>
                 <form id="deleteSite" method="delete">
                 <input type="submit" class="Edit" value="Delete site"/>
