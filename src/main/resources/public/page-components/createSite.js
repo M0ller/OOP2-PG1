@@ -21,10 +21,11 @@ class CreateSite extends Component{
          })
          let data = await result.json()
          console.log(result, data)
+         site = data
 
-         if(result.status === 200){ // goes to new site if login status is 200 (200 = successful login)
+/*          if(result.status === 200){ // goes to new site if login status is 200 (200 = successful login)
             location.hash = "editSite"
-        }
+        } */
 
      }
 
@@ -51,57 +52,46 @@ class CreateSite extends Component{
         if(result.status === 200){
            location.hash = "login"
         }
-    }
-    
+    }    
 
     get template(){
     return `
     <div class="admin-box">
-        <h1>Create Site</h1>
-
-        <form id="logout" method="delete">
-        <input type="submit" class="Edit" value="Logout"/>
-        </form>
-        <form id="main">
-        <input type="submit"class="Edit" value="Main page"/>
-        </form>
-                <form id= "createsite">
-                <input type="logout" class="Logout" value="Logout">
-                <div class="createsitediv">
-
-                <span>Title</span>
-                <input type="text" id="title" placeholder="">
-
-                <label>Description</label>
-                <input type="text id="description" placeholder="">
-                </form>
-
-                <label>Style color</label>
-                <input type="text" id="colorInputText">
-                <input type="color" id="colorInputColor">
-                <input type="submit" id="colorTheme" Class="Upload" value="Submit"
-                onclick="changeColor()">
-
-                <label>Font</label>
-                <input type="text" id="fontInput">
-                <input type="submit" class="Submit" value="Create">  
-                </div>  
-                </form>
-                    <script>
-                    function changeColor(){
-                        let color = document.getElementById('colorInputColor').value;
-                        document.getElementById('colorInputText').value = color;
-                    }
-
-                    function changeFont(){
-                        let font = document.getElementById('fontInput').value;
-                        document.body.style.font = font;
-                    }
-                    </script>
-
-
+    <h1>Create Site</h1>
+    <form id="logout" method="delete">
+       <input type="submit" class="Edit" value="Logout"/>
+    </form>
+    <form id="main">
+       <input type="submit"class="Edit" value="Main page"/>
+    </form>
+    <form id= "createSite">
+       <input type="logout" class="Logout" value="Logout">
+       <div class="createsitediv">
+          <span>Title</span>
+          <input type="text" id="title" placeholder="">
+          <label>Description</label>
+          <input type="text" id="description" placeholder="">
+          <label>Style color</label>
+          <input type="text" id="colorInputText">
+          <input type="color" id="colorInputColor">
+          <input type="submit" id="colorTheme" Class="Upload" value="Submit"
+             onclick="changeColor()">
+          <label>Font</label>
+          <input type="text" id="fontInput">
+          <input type="submit" class="Submit" value="Create">  
+       </div>
+    </form>
+ <script>
+    function changeColor(){
+    let color = document.getElementById('colorInputColor').value;
+        document.getElementById('colorInputText').value = color;
+    }
+    
+     function changeFont(){
+    let font = document.getElementById('fontInput').value;
+    document.body.style.font = font;
+    }
+ </script>
         `
 
-    }
-
-}
+    } }
