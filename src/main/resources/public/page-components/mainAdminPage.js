@@ -57,8 +57,6 @@ class MainAdminPage extends Component{
         <input type="edit" class="CreateSite" value="Create Site">
         <input type="edit" class="CreateSite" value="Logout">
         <ul id="siteTitle"></ul>
-     
-
         
         <div class="dropdown">
             <span>Show list of sites</span>
