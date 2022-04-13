@@ -3,6 +3,7 @@ class MainAdminPage extends Component{
     events(){
         $('body').on('submit', '#mainAdminPage', this.loadMain)
         $('body').on('submit', '#logout', this.logout)
+        $('body').on('submit', '#createSite', this.createSite)
     }
 
   async loadMain(){
@@ -16,7 +17,7 @@ class MainAdminPage extends Component{
         //$('footer').html(this.data.join('<hr>')) 
         */
        return "SSS"     
-    }
+    } 
 
     async logout(event){
         event.preventDefault()
@@ -27,18 +28,28 @@ class MainAdminPage extends Component{
         console.log(result, data)
         location.hash = "login"
     }
+
+    async createSite(e){
+        location.hash = "createSite"
+    }
+
+
     
     
     get template(){
         return `
 
     <div class="admin-box">
-    
         <h1>My list of sites</h1>
+        <form id="logout" method="delete">
+        <input type="submit" class="Edit" value="Logout"/>
+        </form>
+        <form id="createSite">
+        <input type="submit"class="Edit" value="Create Site"/>
+        </form>
+
         <form id ="mainAdminPage">    
         
-        <input type="edit" class="CreateSite" value="Create Site">
-        <input type="edit" class="CreateSite" value="Logout">
 
         <div class="dropdown">
             <span>Show list of sites</span>
