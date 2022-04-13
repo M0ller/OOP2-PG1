@@ -45,11 +45,7 @@ class MainAdminPage extends Component{
              <div class="dropdown-content">
             <p><a href="#">Barcat master</a> </p>
             <p><a href="#">D.Book</a> </p>
-            <div class="dropdown-content">
-            <p><a href="#">Link 1</a> </p>
-            <p><a href="#">Link 2</a> </p>
-            <p><a href="#">Link 3</a> </p>
-            
+           
             
 
 
