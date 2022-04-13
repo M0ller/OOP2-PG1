@@ -19,10 +19,12 @@ let pages = {
     login: Login,
     mainAdminPage: MainAdminPage,
     createSite: CreateSite,
-    loginok: Loginok,
     sitefirstpage: Sitefirstpage,
     editSite: EditSite,
+    editPage: EditPage,
     "image-upload": ImageUpload,
+
+    createArticle: CreateArticle
 
 }
 

@@ -138,7 +138,7 @@ p{
 }
 
 .Edit{
-    width: 100px;
+    width: 110px;
     height: 32px;
     cursor: pointer;
     text-align: center;
@@ -250,9 +250,29 @@ p{
     z-index: 1;
 }
 
+.page-dropdown{
+    position: relative;
+    bottom: 200px; left: 80px;
+    display: inline-block;
+    color: white;
+
+}
+
+.page-dropdown-content{
+    display: none;
+    position: absolute;
+    background-color: #ff7a5a;
+    min-width: 190%;
+    
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+
+}
+
 .dropdown {   
     position: relative;
-    bottom: 80px; left: 25px;
+    bottom: 75px; left: 70px;
     display: inline-block;
     color: white;
     
@@ -262,7 +282,7 @@ p{
     display: none;
     position: absolute;
     background-color: #ff7a5a;
-    min-width: 100%;
+    min-width: 190%;
     
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     padding: 12px 16px;
@@ -278,11 +298,19 @@ p{
       display: block;
   }
 
+  .page-dropdown-content a{
+      display: block;
+  }
+
   .dropdown-right .dropdown-right-content{
       display: block;
   }
+
+  .page-dropdown .page-dropdown-content{
+      display: block;
+  }
   
-  .dropdown:hover .dropdown-content {
+  .dropdown .dropdown-content {
     display: block;
   }
 

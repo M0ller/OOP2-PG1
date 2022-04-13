@@ -47,7 +47,7 @@ class CreateSite extends Component{
     get template(){
         return `
         <div class="admin-box">
-            <h1>Create Site</h1>
+            <h1>Create site</h1>
     
             <form id="logout" method="delete">
             <input type="submit" class="Edit" value="Logout"/>
