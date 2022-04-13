@@ -15,7 +15,6 @@ class CreateSite extends Component{
              method: 'post',
              headers: { 'Content-Type': 'application/json' },
              body: JSON.stringify({
-                 "adminId": "Linus",
                  "title": document.querySelector('#title').value,
                  "description": document.querySelector('#description').value,
                  "log": document.querySelector('#upload-image'),
@@ -26,6 +25,10 @@ class CreateSite extends Component{
          })
          let data = await result.json()
          console.log(result, data)
+         if(result.status === 200){ // goes to new site if login status is 200 (200 = successful login)
+            location.hash = "editSite"
+        }
+
      }
 
     async preview(e){
@@ -115,7 +118,6 @@ class CreateSite extends Component{
                     <script>
                     function changeColor(){
                         let color = document.getElementById('colorInputColor').value;
-                        document.body.style.color = color;
                         document.getElementById('colorInputText').value = color;
                     }
 
