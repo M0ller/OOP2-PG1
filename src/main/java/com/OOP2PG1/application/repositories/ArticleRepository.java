@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface SiteRepository extends MongoRepository<Site, String> {
+public interface ArticleRepository extends MongoRepository<Site, String> {
 
     Optional<Site> findByTitle(String title);
 

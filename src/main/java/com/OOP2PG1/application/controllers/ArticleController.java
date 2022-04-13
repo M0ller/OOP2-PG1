@@ -1,6 +1,7 @@
 package com.OOP2PG1.application.controllers;
 
 import com.OOP2PG1.application.entities.Site;
+import com.OOP2PG1.application.repositories.ArticleRepository;
 import com.OOP2PG1.application.repositories.SiteRepository;
 import com.OOP2PG1.payload.response.MessageResponse;
 import com.OOP2PG1.security.services.UserDetailsImpl;
@@ -15,14 +16,14 @@ import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/site")
-public class SiteController {
+@RequestMapping("/article")
+public class ArticleController {
 
 //    @Autowired
 //    JwtUtils jwtUtils;
 
     @Autowired
-    SiteRepository siteRepository;
+    ArticleRepository articleRepository;
 
     MessageResponse messageResponse;
 
@@ -38,7 +39,7 @@ public class SiteController {
     @GetMapping()
     //@PreAuthorize("permitAll()")
     public List<Site> getAllSites() {
-        return siteRepository.findAll();
+        return articleRepository.findAll();
     }
 
 //    @GetMapping("/{id}")
@@ -54,7 +55,7 @@ public class SiteController {
     @PreAuthorize("permitAll()") // @PreAuthorize("hasRole('user')")
     public ResponseEntity<?> create(@RequestBody Site site){ //SiteRequest siteRequest
 
-        if(siteRepository.existsByurlHeader(site.getTitle().toLowerCase())){
+        if(articleRepository.existsByurlHeader(site.getTitle().toLowerCase())){
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Site Already Exist!"));
@@ -72,7 +73,7 @@ public class SiteController {
         site.getFont();
         site.getAdminId();
 
-        siteRepository.save(site);
+        articleRepository.save(site);
         return ResponseEntity.ok(new MessageResponse("Site Created successfully! You Created "+ site.getTitle()
         ));
     }
@@ -102,14 +103,13 @@ public class SiteController {
     @PreAuthorize("permitAll()")
     public Site getSiteName(@PathVariable String urlHeader){ // pass it into this method
         String temp = urlHeader.toLowerCase();
-        return siteRepository.findByurlHeader(temp).get();
+        return articleRepository.findByurlHeader(temp).get();
     }
 
-    @GetMapping("/get/{userPages}") // takes this parameter
+    @GetMapping("/get/{urlHeader}") // takes this parameter
     @PreAuthorize("permitAll()")
-    public List<Site> getAdminId(@PathVariable String userPages){ // pass it into this method
-
-        return siteRepository.findByAdminId(userPages);
+    public List<Site> getAdminId(@PathVariable String urlHeader){ // pass it into this method
+        return articleRepository.findByAdminId(urlHeader);
     }
 
 

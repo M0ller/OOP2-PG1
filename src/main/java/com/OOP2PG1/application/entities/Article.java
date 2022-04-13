@@ -3,11 +3,11 @@ package com.OOP2PG1.application.entities;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-public class SiteRequest {
+@Document(collection = "articles")
+public class Article {
 
     @Id
     private String id;
@@ -15,6 +15,8 @@ public class SiteRequest {
     @NotBlank
     @Size(max = 30)
     private String title;
+
+    private String urlHeader;
 
     private String description;
 
@@ -28,10 +30,11 @@ public class SiteRequest {
 
     private String adminId;
 
-    public SiteRequest() {}
+    public Article() {}
 
-    public SiteRequest(String title, String description, String log, String wallpaper, String colorTheme, String font, String adminId) {
+    public Article(String title, String urlHeader, String description, String log, String wallpaper, String colorTheme, String font, String adminId) {
         this.title = title;
+        this.urlHeader = urlHeader;
         this.description = description;
         this.log = log;
         this.wallpaper = wallpaper;
@@ -39,7 +42,13 @@ public class SiteRequest {
         this.font = font;
         this.adminId = adminId;
     }
+    public String getUrlHeader() {
+        return urlHeader;
+    }
 
+    public void setUrlHeader(String urlHeader) {
+        this.urlHeader = urlHeader;
+    }
     public String getId() {
         return id;
     }
@@ -104,4 +113,18 @@ public class SiteRequest {
         this.adminId = adminId;
     }
 
+    @Override
+    public String toString() {
+        return "Site{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", titleCheck='" + urlHeader + '\'' +
+                ", description='" + description + '\'' +
+                ", log='" + log + '\'' +
+                ", wallpaper='" + wallpaper + '\'' +
+                ", colorTheme='" + colorTheme + '\'' +
+                ", font='" + font + '\'' +
+                ", adminId='" + adminId + '\'' +
+                '}';
+    }
 }

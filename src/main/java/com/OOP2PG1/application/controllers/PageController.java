@@ -1,6 +1,8 @@
 package com.OOP2PG1.application.controllers;
 
+import com.OOP2PG1.application.entities.Page;
 import com.OOP2PG1.application.entities.Site;
+import com.OOP2PG1.application.repositories.PageRepository;
 import com.OOP2PG1.application.repositories.SiteRepository;
 import com.OOP2PG1.payload.response.MessageResponse;
 import com.OOP2PG1.security.services.UserDetailsImpl;
@@ -15,19 +17,16 @@ import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/site")
-public class SiteController {
+@RequestMapping("/page")
+public class PageController {
 
-//    @Autowired
-//    JwtUtils jwtUtils;
+    Site site;
 
     @Autowired
-    SiteRepository siteRepository;
-
+    PageRepository pageRepository;
     MessageResponse messageResponse;
 
-//    @Autowired
-//    SiteDetailsImpl siteDetailsImpl;
+    SiteRepository siteRepository;
 
     UserDetailsImpl currentUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -37,8 +36,8 @@ public class SiteController {
 
     @GetMapping()
     //@PreAuthorize("permitAll()")
-    public List<Site> getAllSites() {
-        return siteRepository.findAll();
+    public List<Page> getAllPages() {
+        return pageRepository.findAll();
     }
 
 //    @GetMapping("/{id}")
@@ -46,38 +45,27 @@ public class SiteController {
 //    public Site get(@PathVariable String id) {
 //        return siteRepository.findById(id).get();
 //    }
-
-    // fix control checks
-    // fix adminId in frontend
-    //
-    @PostMapping("/create") // Add control's later
+    @PostMapping("/create")
     @PreAuthorize("permitAll()") // @PreAuthorize("hasRole('user')")
-    public ResponseEntity<?> create(@RequestBody Site site){ //SiteRequest siteRequest
+    public ResponseEntity<?> create(@RequestBody Page page){
 
-        if(siteRepository.existsByurlHeader(site.getTitle().toLowerCase())){
+        if(pageRepository.existsByUrlTitlePage(page.getTitlePage().toLowerCase())){
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Site Already Exist!"));
+                    .body(new MessageResponse("Page Already Exist!" + currentUser().getUsername()));
         }
+        //siteRepository.findByTitle()
 
-        //for postman use: site.setAdminId(currentUser().getId());
-        //site.setAdminId(currentUser().getId());
-        //for front end: site.getAdminId();  // gets the current user in the browser in the createSite.js user.username
-        site.getTitle();
-        site.setUrlHeader(site.getTitle().toLowerCase());
-        site.getDescription();
-        site.getLog();
-        site.getWallpaper();
-        site.getColorTheme();
-        site.getFont();
-        site.getAdminId();
+        page.getTitlePage();
+        page.setUrlTitlePage(page.getTitlePage().toLowerCase());
+        page.setAdminId("Linus"); //site.getAdminId()
+        page.setSiteId("6255a6ab22c88a744f5c6c9e"); // site.getId()
 
-        siteRepository.save(site);
-        return ResponseEntity.ok(new MessageResponse("Site Created successfully! You Created "+ site.getTitle()
+        pageRepository.save(page);
+
+        return ResponseEntity.ok(new MessageResponse("Page Created successfully! You Created "+ page.getTitlePage()
         ));
     }
-
-
 
     @PutMapping
     @PreAuthorize("hasRole('ADMIN')")
@@ -98,18 +86,17 @@ public class SiteController {
     }
 
 
-    @GetMapping("/{urlHeader}") // takes this parameter
+    @GetMapping("/{pageTitle}")
     @PreAuthorize("permitAll()")
-    public Site getSiteName(@PathVariable String urlHeader){ // pass it into this method
-        String temp = urlHeader.toLowerCase();
-        return siteRepository.findByurlHeader(temp).get();
+    public Page getPageTitle(@PathVariable String pageTitle){
+        System.out.println("\n METHOD DID RUN \n");
+        return pageRepository.findByTitlePage(pageTitle.toLowerCase()).get();
     }
 
     @GetMapping("/get/{userPages}") // takes this parameter
     @PreAuthorize("permitAll()")
-    public List<Site> getAdminId(@PathVariable String userPages){ // pass it into this method
-
-        return siteRepository.findByAdminId(userPages);
+    public List<Page> getAdminId(@PathVariable String userPages){ // pass it into this method
+        return pageRepository.findByAdminId(userPages);
     }
 
 
