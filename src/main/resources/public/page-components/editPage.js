@@ -3,10 +3,11 @@ class EditPage extends Component{
     events(){
         $('body').on('submit', '#logout', this.logout)
         $('body').on('submit', '#main', this.main)
+        $('body').on('submit', '#image-upload', this.uploadImage)
     }
 
     async load(){
-        let result = await fetch(apiHost + '/page/get/' + user.username)    
+        let result = await fetch(apiHost + '/site/get/' + user.username)    
         let data = await result.json()
         console.log(result,data);
 
@@ -17,6 +18,10 @@ class EditPage extends Component{
 
     async main(e){
         location.hash = "mainAdminPage"
+    }
+
+    async uploadImage(e){
+        location.hash = "image-upload"
     }
 
     async logout(event){
