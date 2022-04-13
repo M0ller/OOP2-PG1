@@ -57,10 +57,6 @@ class MainAdminPage extends Component{
 
         <form id ="mainAdminPage">    
 
-        <input type="edit" class="CreateSite" value="Create Site">
-        <input type="edit" class="CreateSite" value="Logout">
-        <ul id="siteTitle"></ul>
-
         <div class="dropdown">
             <span>Show list of sites</span>
              <div class="dropdown-content">
