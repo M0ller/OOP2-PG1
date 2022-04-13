@@ -5,6 +5,18 @@ class EditSite extends Component{
         $('body').on('submit', '#main', this.main)
     }
 
+    siteTitle = []
+
+    async load(){
+        let result = await fetch(apiHost + '/site/get/' + user.username)    
+        let data = await result.json()
+        console.log(result,data);
+
+        this.data = data
+
+
+    }
+
     async main(e){
         location.hash = "mainAdminPage"
     }
@@ -20,28 +32,80 @@ class EditSite extends Component{
            location.hash = "login"
         }
     }
+
+    siteLinks(sites) {
+        let html = ""
+        for (const site of sites) {
+           html += `<a href="#editSite/${site.title}/edit">${site.title}</a>`
+        }
+        return html
+    }
     
     get template(){
         return `
 
-    <div class="admin-box">
-        <h1>Edit Site</h1>
+        <div class="dropdown-right">
+            <span>List of editors</span>
+             <div class="dropdown-right-content">
+            <p>${this.siteLinks(this.data)}</p>
+            </div>
+        </div>
 
-        <form id="logout" method="delete">
-            <input type="submit" class="Edit" value="Logout"/>
-            </form>
-            <form id="main">
-            <input type="submit"class="Edit" value="Main page"/>
-            </form>
-                <form id ="mainAdminPage">    
+            <div class="admin-box">
+                <h1>Edit Site</h1>
 
-                 <input type="logout" class="Logout2" value="">
+                <form id="logout" method="delete">
+                <input type="submit" class="Edit" value="Logout"/>
+                </form>
+                <form id="main">
+                <input type="submit"class="Edit" value="Main page"/>
+                </form>
+                <form id="addEditor" method="post">
+                <input type="text" id="editor" class="resizedTextBox">
+                <input type="submit" class="Edit" value="Add Editor"
+                </form>
+                <form id="pages">
+                <input type="submit" class="Edit" value="Pages"/>
+                </form>
+                <form id="deleteSite" method="delete">
+                <input type="submit" class="Edit" value="Delete site"/>
+                </form>
 
-                <div class="createsitediv">
-                <span>Title</span>
+                    <form id ="editSite">  
+                    <div class="editing">
+                    <span>Title</span>
+                    <input type="text" id="title" placeholder="">
+    
+                    <label>Description</label>
+                    <input type="text" id="description" placeholder="">
+    
+                    <label>Style color</label>
+                    <input type="text" id="colorInputText">
+                    <input type="color" id="colorInputColor">
+                    <input type="button" Class="Upload" value="Submit"
+                    onclick="changeColor()">
+    
+                    <label>Font</label>
+                    <input type="text" id="fontInput">
+                    <input type="submit" class="Submit" value="Update">
+                    </form>  
+                    </div>
+
+                        <script>
+                        function changeColor(){
+                            let color = document.getElementById('colorInputColor').value;
+                            document.getElementById('colorInputText').value = color;
+                        }
+    
+                        function changeFont(){
+                            let font = document.getElementById('fontInput').value;
+                            document.body.style.font = font;
+                        }
+                        </script>
+           
             
+
 
         `
     }
-
 }

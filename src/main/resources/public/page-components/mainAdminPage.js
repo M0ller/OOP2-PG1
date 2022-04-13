@@ -6,7 +6,7 @@ class MainAdminPage extends Component{
         $('body').on('submit', '#createSite', this.createSite)
     }
 
-    siteTitle = []
+    //siteTitle = []
 
     async load(){
         let result = await fetch(apiHost + '/site/get/' + user.username)    

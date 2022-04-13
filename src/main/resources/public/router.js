@@ -2,7 +2,7 @@ function changeRoute(){
     let page =  location.hash.replace('#','')
     page = page.split('/')[0]
     if(!page){
-        page = 'firstpage'
+        page = 'login'
     }
     // vi kollar först om det finns en registrerad page (annars, 404)
     console.log("page", page, pages[page])
