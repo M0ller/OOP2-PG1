@@ -4,7 +4,7 @@ class CreateSite extends Component{
         $('body').on('submit', '#logout', this.logout)
         $('body').on('submit', '#createSite', this.createSite)
         $('body').on('change', '#upload-image', (e)=>{this.preview(e)})
-        $('body').on('submit', '#upload', (e)=>{this.upload(e)}) 
+        $('body').on('submit', '#upload', this.upload) 
         $('body').on('submit', '#main', this.main)
     }
 
@@ -17,10 +17,10 @@ class CreateSite extends Component{
              body: JSON.stringify({
                  "title": document.querySelector('#title').value,
                  "description": document.querySelector('#description').value,
-                 "log": document.querySelector('#upload-image'),
-                 "wallpaper": document.querySelector('#wallpaper'),
-                 "colorTheme": document.querySelector('#colorInputText').value,
-                 "font": document.querySelector('#fontInput').value
+                //  "log": document.querySelector('#upload-image'),
+                //  "wallpaper": document.querySelector('#wallpaper'),
+                //  "colorTheme": document.querySelector('#colorInputText').value,
+                //  "font": document.querySelector('#fontInput').value
              })
          })
          let data = await result.json()
@@ -48,7 +48,6 @@ class CreateSite extends Component{
         e.preventDefault()
         const formData = new FormData()
         formData.append('file', this.file)
-        formData.append('info', document.querySelector('#upload-info').value)
         
         let result = await fetch(apiHost + "/api/file/upload", {
 	 		// headers: { 
@@ -93,15 +92,16 @@ class CreateSite extends Component{
 
                 <label>Description</label>
                 <input type="text id="description" placeholder="">
-
+                </form>
+                <form id="upload">
                 <label>Logo</label>
-                <input id="log" type="file" accept="image/*">
+                <input id="log" type="file" accept="image/*">   
                 <input type="submit" class="Upload" value="Upload">
+                </form>
 
                 <label>Wallpaper</label>
                 <input id="wallpaper" type="file" accept="image/*">
                 <input type="submit" class="Upload" value="Upload">
-                <div style="text-align:center"> 
 
                 <label>Style color</label>
                 <input type="text" id="colorInputText">
