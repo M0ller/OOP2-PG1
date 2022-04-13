@@ -143,13 +143,13 @@ public class AuthController {
 
     @PutMapping("/addeditor")
     public ResponseEntity<?> addEditor(@Valid @RequestBody RoleRequest roleRequest){
-        if(userRepository.existsByUsername(roleRequest.getUsername())){
+        if(!userRepository.existsByUsername(roleRequest.getUsername())){
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Can't find user " + roleRequest.getUsername() + "!"));
         }
 
-        if (siteRepository.existsByurlHeader(roleRequest.getUrlHeader())){
+        if (!siteRepository.existsByurlHeader(roleRequest.getUrlHeader())){
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Can't find site " + roleRequest.getUrlHeader() + "!"));
