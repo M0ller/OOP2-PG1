@@ -36,11 +36,7 @@ public class SiteController {
         return userDetails;
     }
 
-    @GetMapping()
-    //@PreAuthorize("permitAll()")
-    public List<Site> getAllSites() {
-        return siteRepository.findAll();
-    }
+
 
 //    @GetMapping("/{id}")
 //    @PreAuthorize("permitAll()")
@@ -51,6 +47,12 @@ public class SiteController {
     // fix control checks
     // fix adminId in frontend
     //
+//    @PatchMapping("site/edit")
+//    @PreAuthorize("permitAll()") //("hasRole('ADMIN')")
+//    public String updateProperty(@RequestBody ){
+//        return "Single Site property updated";
+//    }
+
     @PostMapping("/create") // Add control's later
     @PreAuthorize("permitAll()") // @PreAuthorize("hasRole('user')")
     public ResponseEntity<?> create(@RequestBody Site site){ //SiteRequest siteRequest
@@ -80,35 +82,24 @@ public class SiteController {
 
 
 
-    @PutMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public String update(){
-        return "Site updated";
-    }
-
-    @PatchMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public String updateProperty(){
-        return "Single Site property updated";
-    }
-
-    @DeleteMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public String delete(){
-        return "Site deleted";
-    }
-
-
-//    @GetMapping("/{body}")
-//    @PreAuthorize("permitAll()")
-//    public ResponseEntity<?> getArticleTitle(@PathVariable String body){
-//        if(!articleRepository.existsByurlArticleTitle(body.toLowerCase() )){
-//            return ResponseEntity.badRequest().body("This Article dosen't exist!");
-//        }
-//        return ResponseEntity.ok("This Article Exist! \n"+ articleRepository.findByurlArticleTitle(body.toLowerCase()).toString());
+//    @PutMapping
+//    @PreAuthorize("hasRole('ADMIN')")
+//    public String update(){
+//        return "Site updated";
+//    }
+//    @DeleteMapping
+//    @PreAuthorize("hasRole('ADMIN')")
+//    public String delete(){
+//        return "Site deleted";
 //    }
 
-    @GetMapping("/{body}") // takes this parameter
+    @GetMapping()
+    //@PreAuthorize("permitAll()")
+    public List<Site> getAllSites() {
+        return siteRepository.findAll();
+    }
+
+    @GetMapping("/{body}") // Get Specific
     @PreAuthorize("permitAll()")
     public ResponseEntity<?> getSiteName(@PathVariable String body){ // pass it into this method
         if(!siteRepository.existsByurlHeader(body.toLowerCase() )){
@@ -117,7 +108,7 @@ public class SiteController {
         return ResponseEntity.ok("This Site Exist! \n"+ siteRepository.findByurlHeader(body.toLowerCase()).toString());
     }
 
-    @DeleteMapping("/{body}")
+    @DeleteMapping("/{body}") // Delete a Site
     @PreAuthorize("permitAll()")
     public ResponseEntity<?> deleteSiteByTitle(@PathVariable String body){
 
@@ -130,37 +121,11 @@ public class SiteController {
         return ResponseEntity.badRequest().body(" Site didn't get deleted!");
     }
 
-    @GetMapping("/get/{userPages}") // takes this parameter
+    @GetMapping("/get/{userPages}") // Get All sites this user have
     @PreAuthorize("permitAll()")
     public List<Site> getAdminId(@PathVariable String userPages){ // pass it into this method
-
         return siteRepository.findByAdminId(userPages);
     }
 
-
-
-    //
-//    @GetMapping("/all")
-//    public String allAccess() {
-//        return "Public Content.";
-//    }
-//
-//    @GetMapping("/user")
-//    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-//    public String userAccess() {
-//        return "User Content.";
-//    }
-//
-//    @GetMapping("/mod")
-//    @PreAuthorize("hasRole('MODERATOR')")
-//    public String moderatorAccess() {
-//        return "Moderator Board.";
-//    }
-//
-//    @GetMapping("/admin")
-//    @PreAuthorize("hasRole('ADMIN')")
-//    public String adminAccess() {
-//        return "Admin Board.";
-//    }
 
 }
