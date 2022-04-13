@@ -34,6 +34,7 @@ class MainAdminPage extends Component{
          html += `<a href="#mainAdminPage/${site.title}/edit">${site.title}</a>`
         }
         return html
+    }
 
     async createSite(e){
         location.hash = "createSite"
@@ -76,5 +77,3 @@ class MainAdminPage extends Component{
     
     
 }//${this.data.join('')}
-
-
