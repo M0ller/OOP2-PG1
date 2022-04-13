@@ -2,7 +2,7 @@ package com.OOP2PG1.payload.request;
 
 import javax.validation.constraints.NotBlank;
 
-public class RoleRequest {
+public class SiteRoleRequest {
 
     @NotBlank
     private String username;
