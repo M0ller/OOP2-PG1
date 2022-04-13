@@ -1,5 +1,7 @@
 class Login extends Component{
 
+    
+
     events(){
         $('body').on('submit', '#login', this.login)
     }
@@ -18,7 +20,9 @@ class Login extends Component{
         let data = await result.json()
         console.log(result, data)
         user = data;
-        location.hash = "mainAdminPage"
+        if(result.status === 200){ // goes to new site if login status is 200 (200 = successful login)
+            location.hash = "mainAdminPage"
+        }
     }
 
     get template(){

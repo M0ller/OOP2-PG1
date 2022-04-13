@@ -1,30 +1,31 @@
 class CreateSite extends Component{
-
+// user.id/username/email/roles[]
     events(){
         $('body').on('submit', '#logout', this.logout)
         $('body').on('submit', '#createSite', this.createSite)
-        $('body').on('change', '#upload-image', (e)=>{this.preview(e)})
-        $('body').on('submit', '#upload', (e)=>{this.upload(e)}) 
+        $('body').on('submit', '#main', this.main)
     }
 
     async createSite(event){
          event.preventDefault()
-        // url/site/create
          let result = await fetch(apiHost + '/site/create', {
              method: 'post',
              headers: { 'Content-Type': 'application/json' },
              body: JSON.stringify({
-                 "adminId": "Linus",
+                 "adminId": user.username,
                  "title": document.querySelector('#title').value,
                  "description": document.querySelector('#description').value,
-                 "log": document.querySelector('#upload-image'),
-                 "wallpaper": document.querySelector('#wallpaper'),
                  "colorTheme": document.querySelector('#colorInputText').value,
                  "font": document.querySelector('#fontInput').value
              })
          })
          let data = await result.json()
          console.log(result, data)
+
+         if(result.status === 200){ // goes to new site if login status is 200 (200 = successful login)
+            location.hash = "editSite"
+        }
+
      }
 
     async preview(e){
@@ -36,21 +37,8 @@ class CreateSite extends Component{
         }
     }
 
-    async upload(e){
-        e.preventDefault()
-        const formData = new FormData()
-        formData.append('file', this.file)
-        formData.append('info', document.querySelector('#upload-info').value)
-        
-        let result = await fetch(apiHost + "/api/file/upload", {
-	 		// headers: { 
-            //     'Authorization': 'Bearer ' + user.accessToken
-            // },
-				method: 'POST',
-				body: formData
-		})
-		
-         console.log(result)
+    async main(e){
+        location.hash = "mainAdminPage"
     }
 
     async logout(event){
@@ -64,44 +52,44 @@ class CreateSite extends Component{
            location.hash = "login"
         }
     }
+    
 
     get template(){
     return `
-       <form id="logout" method="delete">
-       <input type="submit" class="Submit" value="Logout"/>
-       <input type="submit" class="Submit" value="Main page"/>
-       </form>
+    <div class="admin-box">
+        <h1>Create Site</h1>
 
-       <div class="createSite-block">
-       <h1>Create Site</h1>
+        <form id="logout" method="delete">
+        <input type="submit" class="Edit" value="Logout"/>
+        </form>
+        <form id="main">
+        <input type="submit"class="Edit" value="Main page"/>
+        </form>
                 <form id= "createsite">
-                    <label>Title</label>
-                    <input type="text" id="title" placeholder="">
-                    <label>Description</label>
-                    <input type="text id="description" placeholder="">
-                    <label>Logo</label>
-                    <input id="log" type="file" accept="image/*">
-                    <input type="submit" class="Upload" value="Upload">
-                    <label>Wallpaper</label>
-                    <input id="wallpaper" type="file" accept="image/*">
-                    <input type="submit" class="Upload" value="Upload">
-                    <div style="text-align:center"> 
-                    <label>Style color</label>
-                    <input type="text" id="colorInputText">
-                    <input type="color" id="colorInputColor">
-                    <input type="submit" id="colorTheme" Class="Upload" value="Submit"
-                    onclick="changeColor()">
-                    <label>Font</label>
-                    <font face="font" id="fontInput">
-                    <input type="submit" id="font" Class="Upload" value="Submit"> 
-                       <input type="submit" class="Submit" value="Create">  
-                       </div>  
-                    </form>
-                    </div>
+                <input type="logout" class="Logout" value="Logout">
+                <div class="createsitediv">
+
+                <span>Title</span>
+                <input type="text" id="title" placeholder="">
+
+                <label>Description</label>
+                <input type="text id="description" placeholder="">
+                </form>
+
+                <label>Style color</label>
+                <input type="text" id="colorInputText">
+                <input type="color" id="colorInputColor">
+                <input type="submit" id="colorTheme" Class="Upload" value="Submit"
+                onclick="changeColor()">
+
+                <label>Font</label>
+                <input type="text" id="fontInput">
+                <input type="submit" class="Submit" value="Create">  
+                </div>  
+                </form>
                     <script>
                     function changeColor(){
                         let color = document.getElementById('colorInputColor').value;
-                        document.body.style.color = color;
                         document.getElementById('colorInputText').value = color;
                     }
 
