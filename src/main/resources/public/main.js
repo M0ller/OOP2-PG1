@@ -18,7 +18,8 @@ let pages = {
     createSite: CreateSite,
     lsoginOk: LoginOk,
     editSite: EditSite,
-    "image-upload": ImageUpload
+    "image-upload": ImageUpload,
+    createSide: CreateSide
 }
 
 // router
