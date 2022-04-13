@@ -1,5 +1,6 @@
 package com.OOP2PG1.application.controllers;
 
+import com.OOP2PG1.application.entities.Page;
 import com.OOP2PG1.application.entities.Site;
 import com.OOP2PG1.application.repositories.SiteRepository;
 import com.OOP2PG1.payload.response.MessageResponse;
@@ -35,11 +36,7 @@ public class SiteController {
         return userDetails;
     }
 
-    @GetMapping()
-    //@PreAuthorize("permitAll()")
-    public List<Site> getAllSites() {
-        return siteRepository.findAll();
-    }
+
 
 //    @GetMapping("/{id}")
 //    @PreAuthorize("permitAll()")
@@ -50,6 +47,12 @@ public class SiteController {
     // fix control checks
     // fix adminId in frontend
     //
+//    @PatchMapping("site/edit")
+//    @PreAuthorize("permitAll()") //("hasRole('ADMIN')")
+//    public String updateProperty(@RequestBody ){
+//        return "Single Site property updated";
+//    }
+
     @PostMapping("/create") // Add control's later
     @PreAuthorize("permitAll()") // @PreAuthorize("hasRole('user')")
     public ResponseEntity<?> create(@RequestBody Site site){ //SiteRequest siteRequest
@@ -79,62 +82,49 @@ public class SiteController {
 
 
 
-    @PutMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public String update(){
-        return "Site updated";
-    }
-
-    @PatchMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public String updateProperty(){
-        return "Single Site property updated";
-    }
-
-    @DeleteMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public String delete(){
-        return "Site deleted";
-    }
-
-
-    @GetMapping("/{urlHeader}") // takes this parameter
-    @PreAuthorize("permitAll()")
-    public Site getSiteName(@PathVariable String urlHeader){ // pass it into this method
-        String temp = urlHeader.toLowerCase();
-        return siteRepository.findByurlHeader(temp).get();
-    }
-
-    @GetMapping("/get/{urlHeader}") // takes this parameter
-    @PreAuthorize("permitAll()")
-    public List<Site> getAdminId(@PathVariable String urlHeader){ // pass it into this method
-        return siteRepository.findByAdminId(urlHeader);
-    }
-
-
-
-    //
-//    @GetMapping("/all")
-//    public String allAccess() {
-//        return "Public Content.";
-//    }
-//
-//    @GetMapping("/user")
-//    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-//    public String userAccess() {
-//        return "User Content.";
-//    }
-//
-//    @GetMapping("/mod")
-//    @PreAuthorize("hasRole('MODERATOR')")
-//    public String moderatorAccess() {
-//        return "Moderator Board.";
-//    }
-//
-//    @GetMapping("/admin")
+//    @PutMapping
 //    @PreAuthorize("hasRole('ADMIN')")
-//    public String adminAccess() {
-//        return "Admin Board.";
+//    public String update(){
+//        return "Site updated";
 //    }
+//    @DeleteMapping
+//    @PreAuthorize("hasRole('ADMIN')")
+//    public String delete(){
+//        return "Site deleted";
+//    }
+
+    @GetMapping()
+    //@PreAuthorize("permitAll()")
+    public List<Site> getAllSites() {
+        return siteRepository.findAll();
+    }
+
+    @GetMapping("/{body}") // Get Specific
+    @PreAuthorize("permitAll()")
+    public ResponseEntity<?> getSiteName(@PathVariable String body){ // pass it into this method
+        if(!siteRepository.existsByurlHeader(body.toLowerCase() )){
+            return ResponseEntity.badRequest().body("This Site dosen't exist!");
+        }
+        return ResponseEntity.ok("This Site Exist! \n"+ siteRepository.findByurlHeader(body.toLowerCase()).toString());
+    }
+
+    @DeleteMapping("/{body}") // Delete a Site
+    @PreAuthorize("permitAll()")
+    public ResponseEntity<?> deleteSiteByTitle(@PathVariable String body){
+
+        if(siteRepository.existsByurlHeader(body.toLowerCase() ) ){
+            siteRepository.deleteByurlHeader(body.toLowerCase());
+            return ResponseEntity.ok(body + " Got Deleted!");
+        }else if(!siteRepository.existsByurlHeader(body.toLowerCase() )){
+            return ResponseEntity.badRequest().body(" Site dosen't Exist!");
+        }
+        return ResponseEntity.badRequest().body(" Site didn't get deleted!");
+    }
+
+    @GetMapping("/get/{userPages}") // Get All sites this user have
+    @PreAuthorize("permitAll()")
+    public List<Site> getAdminId(@PathVariable String userPages){ // pass it into this method
+        return siteRepository.findByAdminId(userPages);
+    }
 
 }
