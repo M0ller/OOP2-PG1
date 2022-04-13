@@ -2,6 +2,7 @@ class MainAdminPage extends Component{
 
     events(){
         $('body').on('submit', '#mainAdminPage', this.loadMain)
+        $('body').on('submit', '#logout', this.logout)
     }
 
   async loadMain(){
@@ -15,6 +16,16 @@ class MainAdminPage extends Component{
         //$('footer').html(this.data.join('<hr>')) 
         */
        return "SSS"     
+    }
+
+    async logout(event){
+        event.preventDefault()
+        let result = await fetch(apiHost + '/api/auth/signout', {
+            method: 'delete',
+        })
+        let data = await result.json()
+        console.log(result, data)
+        location.hash = "login"
     }
     
     
