@@ -28,15 +28,6 @@ class CreateSite extends Component{
 
      }
 
-    async preview(e){
-        if(e.target.files.length > 0){
-            this.file = e.target.files[0]
-            let preview = document.getElementById("upload-preview")
-            preview.src = URL.createObjectURL(this.file)
-            preview.style.display = "block"       
-        }
-    }
-
     async main(e){
         location.hash = "mainAdminPage"
     }
@@ -65,7 +56,7 @@ class CreateSite extends Component{
             <input type="submit"class="Edit" value="Main page"/>
             </form>
                     <form id= "createSite">
-                    <input type="logout" class="Logout" value="Logout">
+                    <input type="submit" class="Logout2" value="">
                     <div class="createsitediv">
     
                     <span>Title</span>
