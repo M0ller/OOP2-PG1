@@ -47,7 +47,7 @@ class MainAdminPage extends Component{
         return `
 
     <div class="admin-box">
-        <h1>My list of sites</h1>
+        <h1>List of sites</h1>
         <form id="logout" method="delete">
         <input type="submit" class="Edit" value="Logout"/>
         </form>

@@ -21,6 +21,7 @@ let pages = {
     createSite: CreateSite,
     sitefirstpage: Sitefirstpage,
     editSite: EditSite,
+    editPage: EditPage,
     "image-upload": ImageUpload,
 }
 

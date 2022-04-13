@@ -11,8 +11,7 @@ class Header extends Component{
                 <a href="#image-upload">Image upload</a>
                 <a href="#mainAdminPage">Main Page</a>
                 <a href="#editSite">Edit Site</a>
-                <a href="#createPage">Create Page</a>
-                <a href="#createArticle">Create Article</a>
+                <a href="#editPage">Edit Page</a>
             </nav>            
         `
     } // <a href="site/"${site.title}>Go to book</a>
