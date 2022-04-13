@@ -236,6 +236,9 @@ p{
     z-index: 1;
    
   }
+  .dropdown-content a {
+      display: block;
+  }
   
   .dropdown:hover .dropdown-content {
     display: block;

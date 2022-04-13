@@ -1,32 +1,39 @@
 class MainAdminPage extends Component{
 
     events(){
-        $('body').on('submit', '#mainAdminPage', this.loadMain)
+        $('body').on('submit', '#mainAdminPage', this.load)
         $('body').on('submit', '#logout', this.logout)
         $('body').on('submit', '#createSite', this.createSite)
     }
 
-  async loadMain(){
-        /*let result = await fetch(apiHost + '/api/default/main')    
+    siteTitle = []
+
+    async load(){
+        let result = await fetch(apiHost + '/site/get/' + user.username)    
         let data = await result.json()
-        console.log(result, data);
-        for(let i = 0; i<data.length; i++){
-            data[i] = new Sitesdata( data[i] ).render()
-        }
-        this.data = data  
-        //$('footer').html(this.data.join('<hr>')) 
-        */
-       return "SSS"     
-    } 
+        console.log(result,data);
+
+        this.data = data
+
+
+    }
 
     async logout(event){
         event.preventDefault()
-        let result = await fetch(apiHost + '/api/auth/signout', {
+        let result = await fetch(apiHost + '/site/auth/signout', {
             method: 'delete',
         })
         let data = await result.json()
         console.log(result, data)
         location.hash = "login"
+    }
+
+    siteLinks(sites) {
+        let html = ""
+        for (const site of sites) {
+         html += `<a href="#mainAdminPage/${site.title}/edit">${site.title}</a>`
+        }
+        return html
     }
 
     async createSite(e){
@@ -49,13 +56,14 @@ class MainAdminPage extends Component{
         </form>
 
         <form id ="mainAdminPage">    
-        
 
         <div class="dropdown">
             <span>Show list of sites</span>
              <div class="dropdown-content">
-            <p><a href="#">Barcat master</a> </p>
-            <p><a href="#">D.Book</a> </p>
+            <p>${this.siteLinks(this.data)}</p>
+            </div>
+        </div>
+            
            
             
 
@@ -65,5 +73,3 @@ class MainAdminPage extends Component{
     
     
 }//${this.data.join('')}
-
-
