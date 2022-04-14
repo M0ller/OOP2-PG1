@@ -6,6 +6,7 @@ import com.OOP2PG1.security.services.UserDetailsImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import io.jsonwebtoken.*;
@@ -35,6 +36,8 @@ public class JwtUtils {
                 .compact();
     }
 
+
+
     public String getUserNameFromJwtToken(String token) {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
@@ -57,4 +60,7 @@ public class JwtUtils {
 
         return false;
     }
+
+
+
 }

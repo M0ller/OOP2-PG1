@@ -11,18 +11,65 @@ body{
 
 .signup-box{
     width: 360px;
-    height: 620px;
+    height: 380px;
     margin: auto;
     background: #00aaa0;
     border-radius: 3px
 }
+
+
 .login-box{
     width: 360px;
-    height: 280px;
+    height: 290px;
     margin: auto;
     background: #00aaa0;
     border-radius: 3px
 }
+
+.admin-box{
+    width: 520px;
+    height: 500px;
+    margin: auto;
+    background: #00aaa0;
+    border-radius: 3px
+}
+
+.createSite-box{
+    width: 360px;
+    height: 800px;
+    margin: auto;
+    background: #00aaa0;
+    border-radius: 3px
+}
+
+.createsitediv{
+    position: relative;
+    bottom: 660px; left: 25px;
+    display: inline-block;
+}
+
+.editing{
+    position: relative;
+    bottom: 245px; left: 25px;
+    display: inline-block;
+}
+
+li{
+    border-style: solid;
+    border: 2px solid rgb(255, 72, 0);
+    background: #00aaa0;
+    padding: .5em;
+    word-wrap: break-word;
+}
+ul {
+    display:flex;
+    list-style: none;
+  }
+  
+.block {
+    display: block;
+}      
+      
 h1{
     text-align: center;
     padding-top: 15px;
@@ -48,7 +95,9 @@ form input{
     border-radius: 6px;
     outline: none;
 }
+
 .Submit{
+    text-align: center;
     width: 320px;
     height: 35px;
     cursor: pointer;
@@ -61,7 +110,14 @@ form input{
     transition: ease-out 0.3s;
     font-size: 1rem;
     outline: none;
+    
+}
 
+.Upload{
+    text-align: center;
+    width: 100px;
+    height: 28px;
+    font-size: 12px;
 }
 .Submit:hover{
     box-shadow: inset 320px 0 0 0 #823724;
@@ -80,6 +136,187 @@ p{
 .para-2 a{
     color:#ce8588
 }
+
+.Edit{
+    width: 110px;
+    height: 32px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 10px;
+    margin-left: 380px;
+    border: none;
+    background-color: #ff7a5a;
+    color: white;
+    font-size: 18px;
+    box-shadow: inset 0 0 0 0 #912323;
+    transition: ease-out 0.3s;
+    font-size: 1rem;
+    outline: none;
+    
+}
+
+.Edit:hover{
+    box-shadow: inset 115px 0 0 0 #823724;
+}
+
+.resizedTextBox{
+    width: 85px;
+    height: 12px;
+    margin-top: 10px;
+    margin-left: 380px;
+    border: none;
+    outline: none;
+
+
+}
+
+.CreateSite{
+    width: 100px;
+    height: 20px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 10px;
+    margin-left:  350px;
+    border: none;
+    background-color: #ff7a5a;
+    color: white;
+    font-size: 18px;
+    box-shadow: inset 0 0 0 0 #912323;
+    transition: ease-out 0.3s;
+    font-size: 1rem;
+    outline: none;
+    
+}
+
+.CreateSite:hover{
+    box-shadow: inset 115px 0 0 0 #912323;
+}
+
+
+.Logout{
+    width: 100px;
+    height: 20px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 550px;
+    margin-left:  350px;
+    border: none;
+    background-color: #ff7a5a;
+    color: white;
+    font-size: 18px;
+    box-shadow: inset 0 0 0 0 #912370;
+    transition: ease-out 0.3s;
+    font-size: 1rem;
+    outline: none;
+    
+}
+
+.Logout2{
+    width: 0px;
+    height: 0px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 550px;
+    margin-left:  350px;
+    border: none;
+    background-color: #8ed2c9;
+    color: white;
+    font-size: 18px;
+    box-shadow: inset 0 0 0 0 #8ed2c9;
+    transition: ease-out 0.3s;
+    font-size: 1rem;
+    outline: none;
+
+}
+
+.Logout:hover{
+    box-shadow: inset 115px 0 0 0 #912323;
+}
+
+.dropdown-right{
+    color: white;
+    margin-left: 1000px;
+
+}
+
+.dropdown-right-content{
+    display:none;
+    position: absolute;
+    min-width: 100%;
+    background-color: #ff7a5a;
+    min-width: 10%;
+    
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+}
+
+.page-dropdown{
+    position: relative;
+    bottom: 200px; left: 80px;
+    display: inline-block;
+    color: white;
+
+}
+
+.page-dropdown-content{
+    display: none;
+    position: absolute;
+    background-color: #ff7a5a;
+    min-width: 190%;
+    
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+
+}
+
+.dropdown {   
+    position: relative;
+    bottom: 75px; left: 70px;
+    display: inline-block;
+    color: white;
+    
+}
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ff7a5a;
+    min-width: 190%;
+    
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+
+   
+  }
+  .dropdown-content a {
+      display: block;
+  }
+
+  .dropdown-right-content a{
+      display: block;
+  }
+
+  .page-dropdown-content a{
+      display: block;
+  }
+
+  .dropdown-right:hover .dropdown-right-content{
+      display: block;
+  }
+
+  .page-dropdown .page-dropdown-content{
+      display: block;
+  }
+  
+  .dropdown .dropdown-content {
+    display: block;
+  }
+
+  
+
 /* .submit:hover{
     background: #fffafa;
 } */

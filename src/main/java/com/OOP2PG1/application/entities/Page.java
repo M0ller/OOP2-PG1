@@ -1,22 +1,23 @@
 package com.OOP2PG1.application.entities;
 
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-@Document(collection = "site")
-public class Site {
+@Document(collection = "pages")
+public class Page {
 
     @Id
     private String id;
 
     @NotBlank
     @Size(max = 30)
-    private String title;
-    private String urlHeader;
+    private String titlePage;
+    private String urlTitlePage;
+    private String parentSiteTitle;
+    private String siteId;
     private String adminId;
 
     private String description;
@@ -25,39 +26,21 @@ public class Site {
     private String colorTheme;
     private String font;
 
-    public Site() {}
 
-    public Site(String title, String urlHeader, String description, String log, String wallpaper, String colorTheme, String font, String adminId) {
-        this.title = title;
-        this.urlHeader = urlHeader;
+    public Page() {}
+
+    public Page(String titlePage, String urlTitlePage, String parentSiteTitle, String siteId, String adminId, String description, String log, String wallpaper, String colorTheme, String font) {
+        this.titlePage = titlePage;
+        this.urlTitlePage = urlTitlePage;
+        this.parentSiteTitle = parentSiteTitle;
+        this.siteId = siteId;
+        this.adminId = adminId;
+
         this.description = description;
         this.log = log;
         this.wallpaper = wallpaper;
         this.colorTheme = colorTheme;
         this.font = font;
-        this.adminId = adminId;
-    }
-    public String getUrlHeader() {
-        return urlHeader;
-    }
-
-    public void setUrlHeader(String urlHeader) {
-        this.urlHeader = urlHeader;
-    }
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getDescription() {
@@ -100,26 +83,62 @@ public class Site {
         this.font = font;
     }
 
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getTitlePage() {
+        return titlePage;
+    }
+    public void setTitlePage(String titlePage) {
+        this.titlePage = titlePage;
+    }
+
+    public String getUrlTitlePage() {
+        return urlTitlePage;
+    }
+    public void setUrlTitlePage(String urlTitlePage) {
+        this.urlTitlePage = urlTitlePage;
+    }
+
+    public String getSiteId() {
+        return siteId;
+    }
+    public void setSiteId(String siteId) {
+        this.siteId = siteId;
+    }
+
+    public String getParentSiteTitle() {
+        return parentSiteTitle;
+    }
+    public void setParentSiteTitle(String parentSiteTitle) {
+        this.parentSiteTitle = parentSiteTitle;
+    }
+
     public String getAdminId() {
         return adminId;
     }
-
     public void setAdminId(String adminId) {
         this.adminId = adminId;
     }
 
     @Override
     public String toString() {
-        return "Site{" +
+        return "Page{" +
                 "\nid='" + id + '\'' +
-                ", \ntitle='" + title + '\'' +
-                ", \nurlHeader='" + urlHeader + '\'' +
+                ", \ntitlePage='" + titlePage + '\'' +
+                ", \nurlTitlePage='" + urlTitlePage + '\'' +
+                ", \nurlSite='" + parentSiteTitle + '\'' +
+                ", \nsiteId='" + siteId + '\'' +
+                ", \nadminId='" + adminId + '\'' +
                 ", \ndescription='" + description + '\'' +
                 ", \nlog='" + log + '\'' +
                 ", \nwallpaper='" + wallpaper + '\'' +
                 ", \ncolorTheme='" + colorTheme + '\'' +
                 ", \nfont='" + font + '\'' +
-                ", \nadminId='" + adminId + '\'' +
                 "\n}";
     }
 }

@@ -1,6 +1,10 @@
 package com.OOP2PG1.controllers;
 
 
+import com.OOP2PG1.application.repositories.SiteRepository;
+import com.OOP2PG1.models.SiteRoles;
+import com.OOP2PG1.payload.request.SiteRoleRequest;
+import com.OOP2PG1.repository.SiteRoleRepository;
 import com.OOP2PG1.repository.UserRepository;
 
 import com.OOP2PG1.models.ERole;
@@ -11,11 +15,11 @@ import com.OOP2PG1.payload.request.SignupRequest;
 import com.OOP2PG1.payload.response.JwtResponse;
 import com.OOP2PG1.payload.response.MessageResponse;
 import com.OOP2PG1.repository.RoleRepository;
-import com.OOP2PG1.repository.UserRepository;
 import com.OOP2PG1.security.jwt.JwtUtils;
 import com.OOP2PG1.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -24,9 +28,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -40,7 +42,12 @@ public class AuthController {
     UserRepository userRepository;
 
     @Autowired
+    SiteRoleRepository siteRoleRepository;
+    @Autowired
     RoleRepository roleRepository;
+
+    @Autowired
+    SiteRepository siteRepository;
 
     @Autowired
     PasswordEncoder encoder;
@@ -75,6 +82,7 @@ public class AuthController {
                 userDetails.getEmail(),
                 roles));
     }
+
     /* signUpRequest: takes the data from the json file (in postman, or the data of the input fields for username, email, password and roles)
     and create an object of it. (the signUpRequest will be a temporary place to hold the object before creating a new user.)
     */
@@ -95,15 +103,17 @@ public class AuthController {
         // signUpRequest passed both if statements.
         // Create new user's account
         // passing signUpRequest data to a user object.
-        // Create new user's account
         User user = new User(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword())); // passing the signUpRequest password into encoder method before passing it to the user object.
 
-        Set<String> strRoles = signUpRequest.getRoles();// passing signUpRequest roles to strRoles
-        Set<Role> roles = new HashSet<>(); // creating a new HasSet as a Role object
+//(old code)        Set<String> strRoles = signUpRequest.getRoles();// passing signUpRequest roles to strRoles
+//(old code)        Set<Role> roles = new HashSet<>(); // creating a new HasSet as a Role object
 
-        if (strRoles == null) { // if the strRoles is empty
+        ArrayList<String> strRoles = signUpRequest.getRoles(); // passing signUpRequest roles to strRoles
+        ArrayList<Role> roles = new ArrayList<>(); // creating a new ArrayList as a Role object
+
+        if (strRoles == null) {  // if the strRoles is empty
             Role userRole = roleRepository.findByName(ERole.ROLE_USER) // creating a role object and pass the ROLE_USER and id into it.
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             roles.add(userRole); // Store the userRole object into the roles set
@@ -136,12 +146,193 @@ public class AuthController {
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
-    @DeleteMapping("/signout")
+     @DeleteMapping("/signout")
     public ResponseEntity logoutUser() {
         SecurityContextHolder.getContext().setAuthentication(null);
         return ResponseEntity.ok(new MessageResponse("logout NOT REALLY successful"));
     }
 
+
+    @PutMapping("/addeditor")
+    @PreAuthorize("permitAll()")
+    public ResponseEntity<?> addEditor(@RequestBody SiteRoleRequest roleRequest){
+
+        if(!userRepository.existsByUsername(roleRequest.getUsername())){
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Can't find user " + roleRequest.getUsername() + "!"));
+        }
+
+        if (!siteRepository.existsByurlHeader(roleRequest.getUrlHeader())){
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Can't find site " + roleRequest.getUrlHeader() + "!"));
+        }
+
+        User temp = userRepository.findUserByUsername(roleRequest.getUsername());
+
+        for (int i = 0; i < temp.getSiteRoles().size(); i++) {
+            if(temp.getSiteRoles().get(i).getUrlHeader().equals(roleRequest.getUrlHeader())){
+                if(temp.getSiteRoles().get(i).getName().equals(ERole.ROLE_EDITOR)) {
+                    return ResponseEntity
+                            .badRequest()
+                            .body(new MessageResponse("Error: Already a editor for this site!"));
+                }
+            }
+        }
+
+        temp.getSiteRoles().add(new SiteRoles(ERole.ROLE_EDITOR, roleRequest.getUrlHeader()));
+        userRepository.save(temp);
+
+        return ResponseEntity.ok( new MessageResponse("It worked" + temp.getSiteRoles().get(temp.getSiteRoles().size() - 1).toString()));
+
+    }
+
+    @DeleteMapping("/deleteeditor")
+    @PreAuthorize("permitAll()")
+    public ResponseEntity<?> deleteEditor(@RequestBody SiteRoleRequest roleRequest){
+
+        if(!userRepository.existsByUsername(roleRequest.getUsername())){
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Can't find user " + roleRequest.getUsername() + "!"));
+        }
+
+        if (!siteRepository.existsByurlHeader(roleRequest.getUrlHeader())){
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Can't find site " + roleRequest.getUrlHeader() + "!"));
+        }
+
+        User temp = userRepository.findUserByUsername(roleRequest.getUsername());
+
+        for (int i = 0; i < temp.getSiteRoles().size(); i++) {
+
+            if(temp.getSiteRoles().get(i).getUrlHeader().equals(roleRequest.getUrlHeader()) &&
+                    temp.getSiteRoles().get(i).getName().equals(ERole.ROLE_EDITOR)) {
+
+                temp.getSiteRoles().remove(i);
+                userRepository.save(temp);
+                return ResponseEntity.ok( new MessageResponse("It worked"));
+            }
+        }
+        return ResponseEntity
+                .badRequest()
+                .body( new MessageResponse("Error: No match"));
+
+    }
+
+    @GetMapping("/geteditors/{urlHeader}") // takes this parameter
+    @PreAuthorize("permitAll()")
+    public List<User> geteditors(@PathVariable String urlHeader){ // pass it into this method
+
+        List<User> allUsers = userRepository.findAll();
+        ERole role = ERole.ROLE_EDITOR;
+        List<User> siteEditor = new ArrayList<>();
+
+        for (int i = 0; i < allUsers.size(); i++) {
+            for (int j = 0; j < allUsers.get(i).getSiteRoles().size(); j++) {
+                if (allUsers.get(i).getSiteRoles().get(j).getUrlHeader().equals(urlHeader)
+                && allUsers.get(i).getSiteRoles().get(j).getName().equals(ERole.ROLE_EDITOR)){
+                    siteEditor.add(userRepository.findUserByUsername(allUsers.get(i).getUsername()));
+                }
+            }
+        }
+
+        return siteEditor;
+    }
+
+    @PutMapping("/addadmin")
+    @PreAuthorize("permitAll()")
+    public ResponseEntity<?> addAdmin(@RequestBody SiteRoleRequest roleRequest){
+
+        if(!userRepository.existsByUsername(roleRequest.getUsername())){
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Can't find user " + roleRequest.getUsername() + "!"));
+        }
+
+        if (!siteRepository.existsByurlHeader(roleRequest.getUrlHeader())){
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Can't find site " + roleRequest.getUrlHeader() + "!"));
+        }
+
+        User temp = userRepository.findUserByUsername(roleRequest.getUsername());
+
+        for (int i = 0; i < temp.getSiteRoles().size(); i++) {
+            if(temp.getSiteRoles().get(i).getUrlHeader().equals(roleRequest.getUrlHeader())){
+                if(temp.getSiteRoles().get(i).getName().equals(ERole.ROLE_ADMIN)) {
+                    return ResponseEntity
+                            .badRequest()
+                            .body(new MessageResponse("Error: Already a editor for this site!"));
+                }
+            }
+        }
+
+        temp.getSiteRoles().add(new SiteRoles(ERole.ROLE_ADMIN, roleRequest.getUrlHeader()));
+        userRepository.save(temp);
+
+        return ResponseEntity.ok( new MessageResponse("It worked" + temp.getSiteRoles().get(temp.getSiteRoles().size() - 1).toString()));
+
+    }
+
+    @DeleteMapping("/deleteadmin")
+    @PreAuthorize("permitAll()")
+    public ResponseEntity<?> deleteAdmin(@RequestBody SiteRoleRequest roleRequest){
+
+        if(!userRepository.existsByUsername(roleRequest.getUsername())){
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Can't find user " + roleRequest.getUsername() + "!"));
+        }
+
+        if (!siteRepository.existsByurlHeader(roleRequest.getUrlHeader())){
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Can't find site " + roleRequest.getUrlHeader() + "!"));
+        }
+
+        User temp = userRepository.findUserByUsername(roleRequest.getUsername());
+
+        for (int i = 0; i < temp.getSiteRoles().size(); i++) {
+
+            if(temp.getSiteRoles().get(i).getUrlHeader().equals(roleRequest.getUrlHeader()) &&
+                    temp.getSiteRoles().get(i).getName().equals(ERole.ROLE_ADMIN)) {
+
+                temp.getSiteRoles().remove(i);
+                userRepository.save(temp);
+                return ResponseEntity.ok( new MessageResponse("It worked"));
+            }
+        }
+        return ResponseEntity
+                .badRequest()
+                .body( new MessageResponse("Error: No match"));
+
+    }
+
+    @GetMapping("/getadmin/{urlHeader}") // takes this parameter
+    @PreAuthorize("permitAll()")
+    public List<User> getAdmin(@PathVariable String urlHeader){ // pass it into this method
+
+        List<User> allUsers = userRepository.findAll();
+        List<User> siteEditor = new ArrayList<>();
+
+        for (int i = 0; i < allUsers.size(); i++) {
+            for (int j = 0; j < allUsers.get(i).getSiteRoles().size(); j++) {
+                if (allUsers.get(i).getSiteRoles().get(j).getUrlHeader().equals(urlHeader)
+                        && allUsers.get(i).getSiteRoles().get(j).getName().equals(ERole.ROLE_ADMIN)){
+                    siteEditor.add(userRepository.findUserByUsername(allUsers.get(i).getUsername()));
+                }
+            }
+        }
+
+        return siteEditor;
+    }
+
+
 }
+
+
 
 

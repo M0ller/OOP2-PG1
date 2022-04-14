@@ -2,8 +2,11 @@
 const apiHost = 'http://localhost:8080'
 
 // user obj
-let user = null;
+let user = null
+let site = null
+let title = null
 
+/* let testFont = site.urlHeader; */
 // populate header
 const header = new Header()
 header.render('header')
@@ -14,6 +17,14 @@ let pages = {
     firstpage: Firstpage,
     signup: Signup, 
     login: Login,
+    mainAdminPage: MainAdminPage,
+    createSite: CreateSite,
+    sitefirstpage: Sitefirstpage,
+    editSite: EditSite,
+    editPage: EditPage,
+    "image-upload": ImageUpload,
+    createArticle: CreateArticle,
+    createPage: CreatePage
 }
 
 // router
@@ -21,3 +32,5 @@ let pages = {
 changeRoute()
 // watch for changes
 onhashchange = changeRoute
+
+   

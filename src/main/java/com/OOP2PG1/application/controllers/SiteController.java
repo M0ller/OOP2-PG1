@@ -1,16 +1,11 @@
 package com.OOP2PG1.application.controllers;
 
+import com.OOP2PG1.application.entities.Page;
 import com.OOP2PG1.application.entities.Site;
 import com.OOP2PG1.application.repositories.SiteRepository;
-import com.OOP2PG1.application.services.SiteDetailsImpl;
-import com.OOP2PG1.payload.response.JwtResponse;
 import com.OOP2PG1.payload.response.MessageResponse;
-import com.OOP2PG1.security.jwt.JwtUtils;
 import com.OOP2PG1.security.services.UserDetailsImpl;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.repository.Query;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -18,20 +13,17 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/site")
 public class SiteController {
 
-//    @Autowired
-//    JwtUtils jwtUtils;
-
     @Autowired
     SiteRepository siteRepository;
 
-    @Autowired
-    SiteDetailsImpl siteDetailsImpl;
+    MessageResponse messageResponse;
 
     // This method returns a UserDetailsImpl object.
     UserDetailsImpl currentUser(){
@@ -43,76 +35,94 @@ public class SiteController {
         return userDetails;
     }
 
+    @PutMapping("/edit")
+    @PreAuthorize("permitAll()") //("hasRole('ADMIN')")
+    public ResponseEntity<?> editSite(@RequestBody Site site) {
+
+        if(!siteRepository.existsByurlHeader(site.getTitle().toLowerCase() )){ // add adminId check
+            return ResponseEntity.badRequest().body(site.getTitle() + " Dosen't Exist " );
+        }
+        if(siteRepository.existsByurlHeader(site.getTitle().toLowerCase())){
+            Site temp = new Site();
+            temp.setTitle(site.getTitle());
+            temp.setUrlHeader(site.getTitle().toLowerCase() );
+            temp.setDescription(site.getDescription());
+            temp.setColorTheme(site.getColorTheme());
+            temp.setFont(site.getFont());
+            temp.setLog(site.getLog());
+            temp.setWallpaper(site.getWallpaper());
+            temp.setAdminId(site.getAdminId());
+            temp.setId( siteRepository.findByurlHeader( site.getTitle().toLowerCase() ).getId() );
+            siteRepository.save(temp);
+            return ResponseEntity.ok(new MessageResponse("You Updated your Site "+ site.getTitle() + "!" ));
+        }
+        return ResponseEntity.badRequest().body("Error Something went wrong. Sorry!");
+    }
+
+    @PostMapping("/create") // Add control's later
+    @PreAuthorize("permitAll()") // @PreAuthorize("hasRole('user')")
+    public ResponseEntity<?> create(@RequestBody Site site){ //SiteRequest siteRequest
+        if(siteRepository.existsByurlHeader(site.getTitle().toLowerCase())){
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Site Already Exist!"));
+        }
+        site.getTitle();
+        site.setUrlHeader(site.getTitle().toLowerCase());
+        site.getDescription();
+        site.getLog();
+        site.getWallpaper();
+        site.getColorTheme();
+        site.getFont();
+        site.getAdminId();
+
+        siteRepository.save(site);
+        return ResponseEntity.ok(new MessageResponse("Site Created successfully! You Created "+ site.getTitle()
+        ));
+    }
+
     @GetMapping()
     //@PreAuthorize("permitAll()")
-    public List<Site> get() {
+    public List<Site> getAllSites() {
         return siteRepository.findAll();
     }
 
-    @GetMapping("/{id}")
+//    @GetMapping("/{body}") // Get Specific
+//    @PreAuthorize("permitAll()")
+//    public ResponseEntity<?> getSiteName(@PathVariable String body){ // pass it into this method
+//        if(!siteRepository.existsByurlHeader(body.toLowerCase() )){
+//            return ResponseEntity.badRequest().body("This Site dosen't exist!");
+//        }
+//        return ResponseEntity.ok( "This Site Exist! \n"+ siteRepository.findByurlHeader(body.toLowerCase())); // .toString()
+//    }
+
+    @GetMapping("/{body}") // Get Specific
     @PreAuthorize("permitAll()")
-    public Site get(@PathVariable String id) {
-        return siteRepository.findById(id).get();
+    public Object getSiteName(@PathVariable String body){ // pass it into this method
+        if(!siteRepository.existsByurlHeader(body.toLowerCase() )){
+            return new MessageResponse("This Site dosen't exist!");
+        }
+        Site temp = siteRepository.findByurlHeader(body.toLowerCase());
+        return temp;
     }
 
-    @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public Site create(@RequestBody Site site){
-        site.setCreator(currentUser().getId());
-        site.setCreator_name(currentUser().getUsername());
-        return siteRepository.save(site);
-    }
-
-    @PutMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public String update(){
-        return "Site updated";
-    }
-
-    @PatchMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public String updateProperty(){
-        return "Single Site property updated";
-    }
-
-    @DeleteMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public String delete(){
-        return "Site deleted";
-    }
-
-
-    @GetMapping("/{site_name}")
+    @DeleteMapping("/{body}") // Delete a Site
     @PreAuthorize("permitAll()")
-    public ResponseEntity<?> getSite_name(String site_name){
-//       siteRepository.findBySiteName(currentUser().getId()).getSite_name();
-//       siteRepository.findById(currentUser().getId()).get();
+    public ResponseEntity<?> deleteSiteByTitle(@PathVariable String body){
 
-        return  ResponseEntity.ok(new MessageResponse("Found this Site: " + site_name));
+        if(siteRepository.existsByurlHeader(body.toLowerCase() ) ){
+            siteRepository.deleteByurlHeader(body.toLowerCase());
+            return ResponseEntity.ok(body + " Got Deleted!");
+        }else if(!siteRepository.existsByurlHeader(body.toLowerCase() )){
+            return ResponseEntity.badRequest().body(" Site dosen't Exist!");
+        }
+        return ResponseEntity.badRequest().body(" Site didn't get deleted!");
     }
 
-    //
-//    @GetMapping("/all")
-//    public String allAccess() {
-//        return "Public Content.";
-//    }
-//
-//    @GetMapping("/user")
-//    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-//    public String userAccess() {
-//        return "User Content.";
-//    }
-//
-//    @GetMapping("/mod")
-//    @PreAuthorize("hasRole('MODERATOR')")
-//    public String moderatorAccess() {
-//        return "Moderator Board.";
-//    }
-//
-//    @GetMapping("/admin")
-//    @PreAuthorize("hasRole('ADMIN')")
-//    public String adminAccess() {
-//        return "Admin Board.";
-//    }
+    @GetMapping("/get/{userPages}") // Get All sites this user have
+    @PreAuthorize("permitAll()")
+    public List<Site> getAdminId(@PathVariable String userPages){ // pass it into this method
+        return siteRepository.findByAdminId(userPages);
+    }
 
 }

@@ -23,34 +23,21 @@ class Signup extends Component{
 
     get template(){
         return `
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            
-            <title>Sign Up</title>
-            <link rel="stylesheet" href="style.css">
-        </head>
-        <body>
+       
             <div class="signup-box">
                 <h1>Sign Up</h1>
-                <form>
+                <form id="signup">
                     <label>Username</label>
-                    <input type="text" placeholder="">
+                    <input type="text" id="register-username" placeholder="">
                     <label>Email</label>
-                    <input type="email" placeholder="">
+                    <input type="email" id="register-email" placeholder="">
                     <label>Password</label>
-                    <input type="password" placeholder="">
-                    <label>Confirm Password</label>
-                    <input type="password" placeholder="">
-                    <button class="Submit">Submit</button>
+                    <input type="password" id="register-password" placeholder="">
+                    <input type="submit" class="Submit" value="Submit">
                 </form>
+                <p class="para-2">Already have an account? <a href="login.js">Login Here</a></p>
             </div>
-            <p class="para-2">Already have an account? <a href="login.js">Login Here</a></p>
-        </body>
-        </html>
+            
         `
     }
 
