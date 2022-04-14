@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -82,13 +83,23 @@ public class SiteController {
         return siteRepository.findAll();
     }
 
+//    @GetMapping("/{body}") // Get Specific
+//    @PreAuthorize("permitAll()")
+//    public ResponseEntity<?> getSiteName(@PathVariable String body){ // pass it into this method
+//        if(!siteRepository.existsByurlHeader(body.toLowerCase() )){
+//            return ResponseEntity.badRequest().body("This Site dosen't exist!");
+//        }
+//        return ResponseEntity.ok( "This Site Exist! \n"+ siteRepository.findByurlHeader(body.toLowerCase())); // .toString()
+//    }
+
     @GetMapping("/{body}") // Get Specific
     @PreAuthorize("permitAll()")
-    public ResponseEntity<?> getSiteName(@PathVariable String body){ // pass it into this method
+    public Object getSiteName(@PathVariable String body){ // pass it into this method
         if(!siteRepository.existsByurlHeader(body.toLowerCase() )){
-            return ResponseEntity.badRequest().body("This Site dosen't exist!");
+            return new MessageResponse("This Site dosen't exist!");
         }
-        return ResponseEntity.ok( "This Site Exist! \n"+ siteRepository.findByurlHeader(body.toLowerCase()).toString());
+        Site temp = siteRepository.findByurlHeader(body.toLowerCase());
+        return temp;
     }
 
     @DeleteMapping("/{body}") // Delete a Site

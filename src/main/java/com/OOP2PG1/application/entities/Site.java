@@ -25,8 +25,6 @@ public class Site {
     private String colorTheme;
     private String font;
 
-
-
     public Site() {}
 
     public Site(String title, String urlHeader, String description, String log, String wallpaper, String colorTheme, String font, String adminId) {

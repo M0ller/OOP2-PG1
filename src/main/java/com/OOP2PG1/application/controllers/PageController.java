@@ -130,7 +130,7 @@ public class PageController {
         if(!pageRepository.existsByUrlTitlePage(body.toLowerCase())){
             return ResponseEntity.badRequest().body("This page dosen't exist!");
         }
-        return ResponseEntity.ok("This Page Exist! \n"+ pageRepository.findByUrlTitlePage(body.toLowerCase()).toString());
+        return ResponseEntity.ok("This Page Exist! \n"+ pageRepository.findByUrlTitlePage(body.toLowerCase())); // .toString()
     }
 
     @GetMapping("/get/{userPages}") // takes this parameter

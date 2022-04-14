@@ -96,7 +96,7 @@ public class ArticleController {
         if(!articleRepository.existsByurlArticleTitle(body.toLowerCase() )){
             return ResponseEntity.badRequest().body("This Article dosen't exist!");
         }
-        return ResponseEntity.ok("This Article Exist! \n"+ articleRepository.findByurlArticleTitle(body.toLowerCase()).toString());
+        return ResponseEntity.ok("This Article Exist! \n"+ articleRepository.findByurlArticleTitle(body.toLowerCase())); // .toString()
     }
 
     @DeleteMapping("/{body}")
