@@ -23,9 +23,14 @@ let pages = {
     editSite: EditSite,
     editPage: EditPage,
     "image-upload": ImageUpload,
+<<<<<<< HEAD
 
     createArticle: CreateArticle
 
+=======
+    createArticle: CreateArticle,
+    createPage: CreatePage
+>>>>>>> 1cc377014319a5f58336423e542e252b61ee2914
 }
 
 // router
