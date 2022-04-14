@@ -9,7 +9,7 @@ events(){
 async createPage(event){
      event.preventDefault()
     // url/site/create
-     let result = await fetch(apiHost + '/site/createPage', {
+     let result = await fetch(apiHost + '/page/create', {
          method: 'post',
          headers: { 'Content-Type': 'application/json' },
          body: JSON.stringify({
@@ -19,19 +19,10 @@ async createPage(event){
      let data = await result.json()
      console.log(result, data)
      if(result.status === 200){ // goes to new site if login status is 200 (200 = successful login)
-        location.hash = "editSite"
+        location.hash = "editPage"
     }
 
  }
-
-async preview(e){
-    if(e.target.files.length > 0){
-        this.file = e.target.files[0]
-        let preview = document.getElementById("upload-preview")
-        preview.src = URL.createObjectURL(this.file)
-        preview.style.display = "block"       
-    }
-}
 
 async main(e){
     location.hash = "mainAdminPage"
@@ -59,12 +50,12 @@ return `
     </form>
     <form id="main">
     <input type="submit"class="Edit" value="Main page"/>
-    <span>Title</span>
-            <input type="text" id="title" placeholder="">
-            <input type="submit" class="Submit" value="Create page">
     </form>
-                
-                </script>
+    <span>Title</span>
+    <form id="createPage">
+            <input type="text" id="title"/>
+            <input type="submit" class="Submit" value="Create page"/>
+    </form>
 
 
     `

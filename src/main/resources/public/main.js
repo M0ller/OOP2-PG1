@@ -23,7 +23,8 @@ let pages = {
     editSite: EditSite,
     editPage: EditPage,
     "image-upload": ImageUpload,
-    createArticle: CreateArticle
+    createArticle: CreateArticle,
+    createPage: CreatePage
 }
 
 // router
