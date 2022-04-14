@@ -20,3 +20,6 @@ Daniel: Daniel Lerdin <br/>
 Jonatan: Jonatan Englund <br/>
 Sanjin: sanjin.lihovic <br/>
 Barkat: barkat alirahimi <br/>
+
+
+För att använda postman funktionerna impotera collection och enviroment från postmanTempForDB.
