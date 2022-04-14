@@ -15,4 +15,5 @@ public interface ArticleRepository extends MongoRepository<Article, String> {
 
     Optional<Article> deleteByurlArticleTitle(String urlArticleTitle);
 
+    List<Article> findByCreator(String creator);
 }

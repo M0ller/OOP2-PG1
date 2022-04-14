@@ -511,7 +511,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"adminId\": \"Simon\",\n    \"title\": \"mySiteSimon\",\n    \"description\": \"\",\n    \"log\": \"\",\n    \"icon\": \"\",\n    \"wallpaper\": \"\",\n    \"colorTheme\": \"\",\n    \"font\": \"\"\n}",
+							"raw": "{\n    \"adminId\": \"Linus\",\n    \"title\": \"myNewSite\",\n    \"description\": \"\",\n    \"log\": \"\",\n    \"icon\": \"\",\n    \"wallpaper\": \"\",\n    \"colorTheme\": \"\",\n    \"font\": \"\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -526,55 +526,6 @@
 							"path": [
 								"site",
 								"create"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Edit Site",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"SaveLastMalakiId\", function () {",
-									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id).not.to.be.empty;   ",
-									"    pm.environment.set(\"lastMalakiId\", jsonData.id);",
-									"});",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{jwtToken}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"adminId\": \"Linus\",\n    \"title\": \"mySiteasd\",\n    \"description\": \"bläääääääää\",\n    \"wallpaper\": \"\",\n    \"colorTheme\": \"\",\n    \"font\": \"\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{siteUrl}}/site/edit",
-							"host": [
-								"{{siteUrl}}"
-							],
-							"path": [
-								"site",
-								"edit"
 							]
 						}
 					},
@@ -690,6 +641,55 @@
 					"response": []
 				},
 				{
+					"name": "Edit Site",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"SaveLastMalakiId\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).not.to.be.empty;   ",
+									"    pm.environment.set(\"lastMalakiId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"adminId\": \"Linus\",\n    \"title\": \"myNewSite\",\n    \"description\": \"bläääääääää\",\n    \"wallpaper\": \"\",\n    \"colorTheme\": \"\",\n    \"font\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{siteUrl}}/site/edit",
+							"host": [
+								"{{siteUrl}}"
+							],
+							"path": [
+								"site",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Delete Site",
 					"request": {
 						"method": "DELETE",
@@ -699,13 +699,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{siteUrl}}/site/mysite",
+							"raw": "{{siteUrl}}/site/myNewSite",
 							"host": [
 								"{{siteUrl}}"
 							],
 							"path": [
 								"site",
-								"mysite"
+								"myNewSite"
 							]
 						}
 					},
@@ -766,55 +766,6 @@
 					"response": []
 				},
 				{
-					"name": "Edit Page",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"SaveLastMalakiId\", function () {",
-									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id).not.to.be.empty;   ",
-									"    pm.environment.set(\"lastMalakiId\", jsonData.id);",
-									"});",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{jwtToken}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"parentSiteTitle\": \"book\",\n    \"titlePage\": \"myTobeEdit\",\n    \"adminId\": \"Linus\",\n\n    \"description\": \"argh\",\n    \"log\": \"\",\n    \"wallpaper\": \"\",\n    \"colorTheme\": \"\",\n    \"font\": \"\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{siteUrl}}/page/edit",
-							"host": [
-								"{{siteUrl}}"
-							],
-							"path": [
-								"page",
-								"edit"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Find All Pages",
 					"request": {
 						"method": "GET",
@@ -850,13 +801,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{siteUrl}}/page/myTobeEdit",
+							"raw": "{{siteUrl}}/page/MybookPage",
 							"host": [
 								"{{siteUrl}}"
 							],
 							"path": [
 								"page",
-								"myTobeEdit"
+								"MybookPage"
 							]
 						}
 					},
@@ -924,18 +875,67 @@
 					"response": []
 				},
 				{
-					"name": "Delete Page",
+					"name": "Edit Page",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"SaveLastMalakiId\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).not.to.be.empty;   ",
+									"    pm.environment.set(\"lastMalakiId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
-						"method": "DELETE",
-						"header": [],
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"parentSiteTitle\": \"book\",\n    \"titlePage\": \"MyBookpage\",\n    \"adminId\": \"Linus\",\n\n    \"description\": \"argh Shark! waa\",\n    \"log\": \"\",\n    \"wallpaper\": \"\",\n    \"colorTheme\": \"\",\n    \"font\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{siteUrl}}/page/myTobeEdit",
+							"raw": "{{siteUrl}}/page/edit",
 							"host": [
 								"{{siteUrl}}"
 							],
 							"path": [
 								"page",
-								"myTobeEdit"
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Page",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{siteUrl}}/page/MyBookPage",
+							"host": [
+								"{{siteUrl}}"
+							],
+							"path": [
+								"page",
+								"MyBookPage"
 							]
 						}
 					},
@@ -990,55 +990,6 @@
 							"path": [
 								"article",
 								"create"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Edit Article",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"SaveLastMalakiId\", function () {",
-									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.id).not.to.be.empty;   ",
-									"    pm.environment.set(\"lastMalakiId\", jsonData.id);",
-									"});",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{jwtToken}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"articleTitle\": \"MyArticleAboutBooks\",\n    \"parentSiteTitle\": \"book\",\n    \"parentPageTitle\": \"mybookpage\",\n    \"creator\": \"Linus\",\n    \"startdate\": \"\",\n    \"enddate\": \"\",\n\n    \"headerTitle\": \"woo articles!\",\n    \"textarea\": \"\",\n    \"wallpaper\": \"\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{siteUrl}}/article/edit",
-							"host": [
-								"{{siteUrl}}"
-							],
-							"path": [
-								"article",
-								"edit"
 							]
 						}
 					},
@@ -1110,13 +1061,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{siteUrl}}/article/myarticle",
+							"raw": "{{siteUrl}}/article/get/Linus",
 							"host": [
 								"{{siteUrl}}"
 							],
 							"path": [
 								"article",
-								"myarticle"
+								"get",
+								"Linus"
 							]
 						}
 					},
@@ -1140,14 +1092,62 @@
 							}
 						},
 						"url": {
-							"raw": "{{siteUrl}}/article/get/Linus",
+							"raw": "{{siteUrl}}/article/boookkee",
 							"host": [
 								"{{siteUrl}}"
 							],
 							"path": [
 								"article",
-								"get",
-								"Linus"
+								"boookkee"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Article",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"SaveLastMalakiId\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).not.to.be.empty;   ",
+									"    pm.environment.set(\"lastMalakiId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"articleTitle\": \"MyArticleAboutBooks\",\n    \"parentSiteTitle\": \"book\",\n    \"parentPageTitle\": \"mybookpage\",\n    \"creator\": \"Linus\",\n    \"startdate\": \"\",\n    \"enddate\": \"\",\n\n    \"headerTitle\": \"woo articles!\",\n    \"textarea\": \"\",\n    \"wallpaper\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{siteUrl}}/article/edit",
+							"host": [
+								"{{siteUrl}}"
+							],
+							"path": [
+								"article",
+								"edit"
 							]
 						}
 					},

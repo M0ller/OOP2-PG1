@@ -112,4 +112,10 @@ public class ArticleController {
         return ResponseEntity.badRequest().body(" Article didn't get deleted!");
     }
 
+    @GetMapping("/get/{body}")
+    @PreAuthorize("permitAll()")
+    public List<Article> getAdminId(@PathVariable String body){ // pass it into this method
+        return articleRepository.findByCreator(body);
+    }
+
 }
