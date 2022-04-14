@@ -19,16 +19,10 @@ import java.util.List;
 @RequestMapping("/site")
 public class SiteController {
 
-//    @Autowired
-//    JwtUtils jwtUtils;
-
     @Autowired
     SiteRepository siteRepository;
 
     MessageResponse messageResponse;
-
-//    @Autowired
-//    SiteDetailsImpl siteDetailsImpl;
 
     UserDetailsImpl currentUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -36,36 +30,38 @@ public class SiteController {
         return userDetails;
     }
 
+    @PutMapping("/edit")
+    @PreAuthorize("permitAll()") //("hasRole('ADMIN')")
+    public ResponseEntity<?> editSite(@RequestBody Site site) {
 
-
-//    @GetMapping("/{id}")
-//    @PreAuthorize("permitAll()")
-//    public Site get(@PathVariable String id) {
-//        return siteRepository.findById(id).get();
-//    }
-
-    // fix control checks
-    // fix adminId in frontend
-    //
-//    @PatchMapping("site/edit")
-//    @PreAuthorize("permitAll()") //("hasRole('ADMIN')")
-//    public String updateProperty(@RequestBody ){
-//        return "Single Site property updated";
-//    }
+        if(!siteRepository.existsByurlHeader(site.getTitle().toLowerCase() )){ // add adminId check
+            return ResponseEntity.badRequest().body(site.getTitle() + " Dosen't Exist " );
+        }
+        if(siteRepository.existsByurlHeader(site.getTitle().toLowerCase())){
+            Site temp = new Site();
+            temp.setTitle(site.getTitle());
+            temp.setUrlHeader(site.getTitle().toLowerCase() );
+            temp.setDescription(site.getDescription());
+            temp.setColorTheme(site.getColorTheme());
+            temp.setFont(site.getFont());
+            temp.setLog(site.getLog());
+            temp.setWallpaper(site.getWallpaper());
+            temp.setAdminId(site.getAdminId());
+            temp.setId( siteRepository.findByurlHeader( site.getTitle().toLowerCase() ).getId() );
+            siteRepository.save(temp);
+            return ResponseEntity.ok(new MessageResponse("You Updated your Site "+ site.getTitle() + "!" ));
+        }
+        return ResponseEntity.badRequest().body("Error Something went wrong. Sorry!");
+    }
 
     @PostMapping("/create") // Add control's later
     @PreAuthorize("permitAll()") // @PreAuthorize("hasRole('user')")
     public ResponseEntity<?> create(@RequestBody Site site){ //SiteRequest siteRequest
-
         if(siteRepository.existsByurlHeader(site.getTitle().toLowerCase())){
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Site Already Exist!"));
         }
-
-        //for postman use: site.setAdminId(currentUser().getId());
-        //site.setAdminId(currentUser().getId());
-        //for front end: site.getAdminId();  // gets the current user in the browser in the createSite.js user.username
         site.getTitle();
         site.setUrlHeader(site.getTitle().toLowerCase());
         site.getDescription();
@@ -80,19 +76,6 @@ public class SiteController {
         ));
     }
 
-
-
-//    @PutMapping
-//    @PreAuthorize("hasRole('ADMIN')")
-//    public String update(){
-//        return "Site updated";
-//    }
-//    @DeleteMapping
-//    @PreAuthorize("hasRole('ADMIN')")
-//    public String delete(){
-//        return "Site deleted";
-//    }
-
     @GetMapping()
     //@PreAuthorize("permitAll()")
     public List<Site> getAllSites() {
@@ -105,7 +88,7 @@ public class SiteController {
         if(!siteRepository.existsByurlHeader(body.toLowerCase() )){
             return ResponseEntity.badRequest().body("This Site dosen't exist!");
         }
-        return ResponseEntity.ok("This Site Exist! \n"+ siteRepository.findByurlHeader(body.toLowerCase()).toString());
+        return ResponseEntity.ok( "This Site Exist! \n"+ siteRepository.findByurlHeader(body.toLowerCase()).toString());
     }
 
     @DeleteMapping("/{body}") // Delete a Site

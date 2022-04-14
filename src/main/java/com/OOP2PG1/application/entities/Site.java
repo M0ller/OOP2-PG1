@@ -1,5 +1,6 @@
 package com.OOP2PG1.application.entities;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -15,20 +16,16 @@ public class Site {
     @NotBlank
     @Size(max = 30)
     private String title;
-
     private String urlHeader;
+    private String adminId;
 
     private String description;
-
     private String log;
-
     private String wallpaper;
-
     private String colorTheme;
-
     private String font;
 
-    private String adminId;
+
 
     public Site() {}
 

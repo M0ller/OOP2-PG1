@@ -9,9 +9,11 @@ import java.util.Optional;
 
 public interface ArticleRepository extends MongoRepository<Article, String> {
 
-    Optional<Article> findByurlArticleTitle(String urlArticleTitle);
+    Article findByurlArticleTitle(String urlArticleTitle);
 
     Boolean existsByurlArticleTitle(String urlArticleTitle);
 
     Optional<Article> deleteByurlArticleTitle(String urlArticleTitle);
+
+    List<Article> findByCreator(String creator);
 }

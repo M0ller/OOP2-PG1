@@ -3,9 +3,60 @@ class EditSite extends Component{
     events(){
         $('body').on('submit', '#logout', this.logout)
         $('body').on('submit', '#main', this.main)
-        $('body').on('button', '#editSite', this.loadSite)
-        
+        $('body').on('submit', '#editSite', this.editSite)
+        $('body').on('submit', '#deleteSite', this.deleteSite)
+        $('body').on('button', '#editSite', this.loadSite) // Från Linus?
+
     }
+
+    async editSite(event){
+         event.preventDefault()
+         let result = await fetch(apiHost + '/site/edit', {
+             method: 'put',
+             headers: { 'Content-Type': 'application/json' },
+             body: JSON.stringify({
+                 "adminId": user.username,
+                 "title": document.querySelector('#title').value,
+                 "description": document.querySelector('#description').value,
+                 "colorTheme": document.querySelector('#colorInputText').value,
+                 "font": document.querySelector('#fontInput').value
+             })
+         })
+         let data = await result.json()
+         console.log(result, data)
+
+         if(result.status === 200){ // goes to new site if login status is 200 (200 = successful login)
+            alert("You Updated your Site!")
+            location.hash = "editSite"
+        }
+        if(result.status === 400){ 
+            alert("This Site Dosen't Exist!")
+            location.hash = "editSite"
+        }
+        if(!result.status === 200){
+            alert("Something went wrong!?")
+        }
+
+     }
+
+     async deleteSite(event){
+        event.preventDefault()
+            let result = await fetch(apiHost + `/site/ ${sitetitle}`, {
+            method: 'delete'
+        })
+
+        if(result.status === 200){ // goes to new site if login status is 200 (200 = successful login)
+           alert("Deleted!")
+           location.hash = "editSite"
+       }
+       if(result.status === 400){ 
+           alert("Didn't find that site!")
+           location.hash = "editSite"
+       }
+       if(!result.status === 200){
+           alert("Something went wrong!?")
+       }
+     }
 
     siteTitle = []
 

@@ -8,17 +8,13 @@ import java.util.Optional;
 
 public interface PageRepository extends MongoRepository<Page, String> {
 
-    Optional<Page> findByUrlTitlePage(String urlTitlePage);
+    Page findByUrlTitlePage(String urlTitlePage);
     Boolean existsByUrlTitlePage(String titlePage);
-
-//Optional<Page> findByurlHeader(String urlHeader);
-//    Optional<Page> findBy<?>(String <?>);
-//    Optional<Page> findBy<?>Or<?>(String <?>);
-//    Optional<Page> findBy<urlHeader>Or<AdminId>(String <?>);
-//    Optional<Page> find<?>By<?>(String <?>);
-//    Optional<Page> find<?>By<?><?>(String <?>);
 
     List<Page> findByAdminId(String urlHeader);
 
     Optional<Page> deleteByurlTitlePage(String pageTitle);
+
+    // Boolean existsByurlHeader(String urlHeader);
+    // Site findByurlHeader(String urlHeader);
 }

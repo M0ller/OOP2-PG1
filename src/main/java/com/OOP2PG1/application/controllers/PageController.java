@@ -42,11 +42,33 @@ public class PageController {
         return pageRepository.findAll();
     }
 
-//    @GetMapping("/{id}")
-//    @PreAuthorize("permitAll()")
-//    public Site get(@PathVariable String id) {
-//        return siteRepository.findById(id).get();
-//    }
+    @PutMapping("/edit")
+    @PreAuthorize("permitAll()") //("hasRole('ADMIN')")
+    public ResponseEntity<?> editPage(@RequestBody Page page) {
+
+        if(!pageRepository.existsByUrlTitlePage(page.getTitlePage().toLowerCase() )){ // add adminId check
+            return ResponseEntity.badRequest().body(page.getTitlePage() + " Dosen't Exist " );
+        }
+        if(pageRepository.existsByUrlTitlePage(page.getTitlePage().toLowerCase())){
+            Page temp = new Page();
+            temp.setTitlePage(page.getTitlePage());
+            temp.setUrlTitlePage(page.getTitlePage().toLowerCase() );
+            temp.setParentSiteTitle(page.getParentSiteTitle());
+            temp.setAdminId(page.getAdminId());
+            temp.setId( pageRepository.findByUrlTitlePage( page.getTitlePage().toLowerCase() ).getId() );
+
+            temp.setDescription(page.getDescription());
+            temp.setColorTheme(page.getColorTheme());
+            temp.setFont(page.getFont());
+            temp.setLog(page.getLog());
+            temp.setWallpaper(page.getWallpaper());
+
+            pageRepository.save(temp);
+            return ResponseEntity.ok(new MessageResponse("You Updated your Page "+ page.getTitlePage() + "!" ));
+        }
+        return ResponseEntity.badRequest().body("Error Something went wrong. Sorry!");
+    }
+
     @PostMapping("/create")
     @PreAuthorize("permitAll()") // @PreAuthorize("hasRole('user')")
     public ResponseEntity<?> create(@RequestBody Page page){
@@ -61,9 +83,15 @@ public class PageController {
         page.getTitlePage();
         page.setUrlTitlePage(page.getTitlePage().toLowerCase());
         page.setAdminId(currentUser().getUsername());
-        page.getSiteId();
-        //page.setSiteId(site.getId()); //
+        page.getParentSiteTitle();
+        //page.getSiteId();
+        //page.setSiteId(site.getId());
 
+        page.getDescription();
+        page.getLog();
+        page.getWallpaper();
+        page.getColorTheme();
+        page.getFont();
         pageRepository.save(page);
 
         return ResponseEntity.ok(new MessageResponse("Page Created successfully! You Created "+ page.getTitlePage()
@@ -111,30 +139,5 @@ public class PageController {
         return pageRepository.findByAdminId(userPages);
     }
 
-
-
-    //
-//    @GetMapping("/all")
-//    public String allAccess() {
-//        return "Public Content.";
-//    }
-//
-//    @GetMapping("/user")
-//    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-//    public String userAccess() {
-//        return "User Content.";
-//    }
-//
-//    @GetMapping("/mod")
-//    @PreAuthorize("hasRole('MODERATOR')")
-//    public String moderatorAccess() {
-//        return "Moderator Board.";
-//    }
-//
-//    @GetMapping("/admin")
-//    @PreAuthorize("hasRole('ADMIN')")
-//    public String adminAccess() {
-//        return "Admin Board.";
-//    }
 
 }

@@ -21,16 +21,10 @@ import java.util.List;
 @RequestMapping("/article")
 public class ArticleController {
 
-//    @Autowired
-//    JwtUtils jwtUtils;
-
     @Autowired
     ArticleRepository articleRepository;
 
     MessageResponse messageResponse;
-
-//    @Autowired
-//    SiteDetailsImpl siteDetailsImpl;
 
     UserDetailsImpl currentUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -44,61 +38,57 @@ public class ArticleController {
         return articleRepository.findAll();
     }
 
-//    @GetMapping("/{id}")
-//    @PreAuthorize("permitAll()")
-//    public Site get(@PathVariable String id) {
-//        return siteRepository.findById(id).get();
-//    }
+    @PutMapping("/edit")
+    @PreAuthorize("permitAll()") //("hasRole('ADMIN')")
+    public ResponseEntity<?> editArticle(@RequestBody Article article) {
 
-    // fix control checks
-    // fix adminId in frontend
-    @PostMapping("/create") // Add control's later
+        if(!articleRepository.existsByurlArticleTitle(article.getArticleTitle().toLowerCase() )){ // add adminId check
+            return ResponseEntity.badRequest().body(article.getArticleTitle() + " Dosen't Exist " );
+        }
+        if(articleRepository.existsByurlArticleTitle(article.getArticleTitle().toLowerCase())){
+            Article temp = new Article();
+            temp.setArticleTitle(article.getArticleTitle());
+            temp.setUrlArticleTitle(article.getArticleTitle().toLowerCase() );
+            temp.setParentPageTitle(article.getParentPageTitle());
+            temp.setParentSiteTitle(article.getParentSiteTitle());
+            temp.setCreator(article.getCreator()); // can change to add current().user
+
+            temp.setHeaderTitle(article.getHeaderTitle());
+            temp.setStartdate(article.getStartdate()); // Add check for publish dates
+            temp.setEnddate(article.getEnddate());    // Add check for publish dates
+            temp.setTextarea(article.getTextarea());
+            temp.setWallpaper(article.getWallpaper());
+
+            temp.setId( articleRepository.findByurlArticleTitle( article.getArticleTitle().toLowerCase() ).getId() );
+
+            articleRepository.save(temp);
+            return ResponseEntity.ok(new MessageResponse("You Updated your Article "+ article.getArticleTitle() + "!" ));
+        }
+        return ResponseEntity.badRequest().body("Error Something went wrong. Sorry!");
+    }
+
+    @PostMapping("/create")
     @PreAuthorize("permitAll()") // @PreAuthorize("hasRole('user')")
     public ResponseEntity<?> create(@RequestBody Article article){ //SiteRequest siteRequest
 
         if(articleRepository.existsByurlArticleTitle(article.getArticleTitle().toLowerCase())){
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Site Already Exist!"));
+                    .body(new MessageResponse("Article Already Exist!"));
         }
-
-        //for postman use: site.setAdminId(currentUser().getId());
-        //site.setAdminId(currentUser().getId());
-        //for front end: site.getAdminId();  // gets the current user in the browser in the createSite.js user.username
         article.getArticleTitle();
         article.setUrlArticleTitle(article.getArticleTitle().toLowerCase());
         article.getTextarea();
         article.getStartdate();
         article.getEnddate();
-        article.getParentPageId(); //page.setAdminId(currentUser().getUsername());
-        article.getParentSiteId();
+        article.getParentPageTitle(); //page.setAdminId(currentUser().getUsername());
+        article.getParentSiteTitleId();
         article.setCreator(currentUser().getUsername());
 
         articleRepository.save(article);
-        return ResponseEntity.ok(new MessageResponse("Site Created successfully! You Created "+ article.getArticleTitle()
+        return ResponseEntity.ok(new MessageResponse("Article Created successfully! You Created "+ article.getArticleTitle()
         ));
     }
-
-
-
-    @PutMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public String update(){
-        return "Site updated";
-    }
-
-    @PatchMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public String updateProperty(){
-        return "Single Site property updated";
-    }
-
-    @DeleteMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public String delete(){
-        return "Site deleted";
-    }
-
 
     @GetMapping("/{body}")
     @PreAuthorize("permitAll()")
@@ -122,36 +112,10 @@ public class ArticleController {
         return ResponseEntity.badRequest().body(" Article didn't get deleted!");
     }
 
-
-//    @GetMapping("/get/{urlHeader}") // takes this parameter
-//    @PreAuthorize("permitAll()")
-//    public List<Site> getAdminId(@PathVariable String urlHeader){ // pass it into this method
-//        return articleRepository.findByAdminId(urlHeader);
-//    }
-
-
-
-//    @GetMapping("/all")
-//    public String allAccess() {
-//        return "Public Content.";
-//    }
-//
-//    @GetMapping("/user")
-//    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-//    public String userAccess() {
-//        return "User Content.";
-//    }
-//
-//    @GetMapping("/mod")
-//    @PreAuthorize("hasRole('MODERATOR')")
-//    public String moderatorAccess() {
-//        return "Moderator Board.";
-//    }
-//
-//    @GetMapping("/admin")
-//    @PreAuthorize("hasRole('ADMIN')")
-//    public String adminAccess() {
-//        return "Admin Board.";
-//    }
+    @GetMapping("/get/{body}")
+    @PreAuthorize("permitAll()")
+    public List<Article> getAdminId(@PathVariable String body){ // pass it into this method
+        return articleRepository.findByCreator(body);
+    }
 
 }

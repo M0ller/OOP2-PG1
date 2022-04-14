@@ -8,13 +8,18 @@ import java.util.Optional;
 
 public interface SiteRepository extends MongoRepository<Site, String> {
 
-    Optional<Site> findByTitle(String title);
-
     Optional<Site> findById(String id);
 
-//   Site findByadminId(String adminId);
+    Site findByurlHeader(String urlHeader);
 
-    Optional<Site> findByurlHeader(String urlHeader);
+    List<Site> findByAdminId(String AdminId);
+
+    Boolean existsByurlHeader(String urlHeader);
+
+    Optional<Site> deleteByurlHeader(String siteName);
+
+}
+//   Site findByadminId(String adminId);
 //    Optional<Site> findBy<?>(String <?>);
 //    Optional<Site> findBy<?>Or<?>(String <?>);
 //    Optional<Site> findBy<urlHeader>Or<AdminId>(String <?>);
@@ -22,12 +27,3 @@ public interface SiteRepository extends MongoRepository<Site, String> {
 //    Optional<Site> find<?>By<?><?>(String <?>);
 
 //    List<Site> findBy<AdminId>(String <?>);
-
-    List<Site> findByAdminId(String AdminId);
-
-    Boolean existsByurlHeader(String urlHeader);
-
-    Boolean existsByTitle(String title);
-
-    Optional<Site> deleteByurlHeader(String siteName);
-}
