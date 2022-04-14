@@ -5,6 +5,8 @@ class EditSite extends Component{
         $('body').on('submit', '#main', this.main)
         $('body').on('submit', '#editSite', this.editSite)
         $('body').on('submit', '#deleteSite', this.deleteSite)
+        $('body').on('button', '#editSite', this.loadSite) // Från Linus?
+
     }
 
     async editSite(event){
@@ -65,6 +67,10 @@ class EditSite extends Component{
 
         this.data = data
 
+    }
+
+    async loadSite(e){
+        let result = await fetch(apiHost + '/site/get') 
 
     }
 
@@ -122,7 +128,7 @@ class EditSite extends Component{
                 <input type="submit" class="Edit" value="Delete site"/>
                 </form>
 
-                    <form id ="editSite">  
+                    <form id ="editSite" method="put">  
                     <div class="editing">
                     <span>Title</span>
                     <input type="text" id="title" placeholder="">

@@ -4,19 +4,17 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "roles")
-public class Role {
-    @Id
-    private String id;
+public class SiteRoles {
+        @Id
+        private String id;
 
-    private ERole name;
+        private ERole name;
 
+        private String urlHeader;
 
-    public Role() {
-
-    }
-
-    public Role(ERole name){
+    public SiteRoles(ERole name, String urlHeader) {
         this.name = name;
+        this.urlHeader = urlHeader;
     }
 
     public String getId() {
@@ -35,12 +33,20 @@ public class Role {
         this.name = name;
     }
 
+    public String getUrlHeader() {
+        return urlHeader;
+    }
+
+    public void setUrlHeader(String urlHeader) {
+        this.urlHeader = urlHeader;
+    }
 
     @Override
     public String toString() {
-        return "Role{" +
+        return "siteRoles{" +
                 "id='" + id + '\'' +
                 ", name=" + name +
+                ", urlHeader='" + urlHeader + '\'' +
                 '}';
     }
 }
