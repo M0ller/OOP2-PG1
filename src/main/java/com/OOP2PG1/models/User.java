@@ -1,7 +1,7 @@
 package com.OOP2PG1.models;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -30,7 +30,9 @@ public class User {
     private String password;
 
     @DBRef
-    private Set<Role> roles = new HashSet<>();
+    private ArrayList<Role> roles = new ArrayList<>();
+
+    private ArrayList<SiteRoles> siteRoles = new ArrayList<>();
 
     public User() {
     }
@@ -73,12 +75,20 @@ public class User {
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
+    public ArrayList<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(ArrayList<Role> roles) {
         this.roles = roles;
+    }
+
+    public ArrayList<SiteRoles> getSiteRoles() {
+        return siteRoles;
+    }
+
+    public void setSiteRoles(ArrayList<SiteRoles> siteRoles) {
+        this.siteRoles = siteRoles;
     }
 
     @Override

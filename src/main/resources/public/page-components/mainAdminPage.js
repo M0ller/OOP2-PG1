@@ -31,7 +31,7 @@ class MainAdminPage extends Component{
     siteLinks(sites) {
         let html = ""
         for (const site of sites) {
-         html += `<a href="#mainAdminPage/${site.title}/edit">${site.title}</a>`
+         html += `<a href="/#editSite">${site.title}</a>`
         }
         return html
     }
@@ -63,10 +63,6 @@ class MainAdminPage extends Component{
             <p>${this.siteLinks(this.data)}</p>
             </div>
         </div>
-            
-           
-            
-
 
         `
     }

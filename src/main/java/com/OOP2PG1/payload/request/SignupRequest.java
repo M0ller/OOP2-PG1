@@ -1,5 +1,6 @@
 package com.OOP2PG1.payload.request;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import javax.validation.constraints.*;
@@ -14,7 +15,7 @@ public class SignupRequest {
     @Email
     private String email;
 
-    private Set<String> roles;
+    private ArrayList<String> roles;
 
     @NotBlank
     @Size(min = 6, max = 40)
@@ -44,11 +45,11 @@ public class SignupRequest {
         this.password = password;
     }
 
-    public Set<String> getRoles() {
-        return this.roles;
+    public ArrayList<String> getRoles() {
+        return roles;
     }
 
-    public void setRole(Set<String> roles) {
+    public void setRoles(ArrayList<String> roles) {
         this.roles = roles;
     }
 }

@@ -3,6 +3,7 @@ class EditPage extends Component{
     events(){
         $('body').on('submit', '#logout', this.logout)
         $('body').on('submit', '#main', this.main)
+        $('body').on('submit', '#image-upload', this.uploadImage)
     }
 
     async load(){
@@ -19,6 +20,10 @@ class EditPage extends Component{
         location.hash = "mainAdminPage"
     }
 
+    async uploadImage(e){
+        location.hash = "image-upload"
+    }
+
     async logout(event){
         event.preventDefault()
         let result = await fetch(apiHost + '/api/auth/signout', {
@@ -31,13 +36,13 @@ class EditPage extends Component{
         }
     }
 
-    siteLinks(sites) {
-        let html = ""
-        for (const site of sites) {
-           html += `<a href="#editSite/${site.title}/edit">${site.title}</a>`
-        }
-        return html
-    }
+     siteLinks(sites) {
+         let html = ""
+         for (const site of sites) {
+            html += `<a href="#editSite/${site.title}/edit">${site.title}</a>`
+         }
+         return html
+     }
 
     get template(){
         return `
@@ -69,7 +74,7 @@ class EditPage extends Component{
                 </form>
                    <form id= "pages">
                    <div class="page-dropdown">
-                      <span>List of articles</span>
+                      <span>List of pages</span>
                       <div class="page-dropdown-content">
                       <p>${this.siteLinks(this.data)}</p>
                     </div>
