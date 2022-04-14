@@ -15,24 +15,74 @@ public class Page {
     @NotBlank
     @Size(max = 30)
     private String titlePage;
-
     private String urlTitlePage;
-
-    private String urlSite;
-
+    private String parentSiteTitle;
     private String siteId;
-
     private String adminId;
+
+    private String description;
+    private String log;
+    private String wallpaper;
+    private String colorTheme;
+    private String font;
+
 
     public Page() {}
 
-    public Page(String titlePage, String urlTitlePage, String urlSite, String siteId, String adminId) {
+    public Page(String titlePage, String urlTitlePage, String parentSiteTitle, String siteId, String adminId, String description, String log, String wallpaper, String colorTheme, String font) {
         this.titlePage = titlePage;
         this.urlTitlePage = urlTitlePage;
-        this.urlSite = urlSite;
+        this.parentSiteTitle = parentSiteTitle;
         this.siteId = siteId;
         this.adminId = adminId;
+
+        this.description = description;
+        this.log = log;
+        this.wallpaper = wallpaper;
+        this.colorTheme = colorTheme;
+        this.font = font;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getLog() {
+        return log;
+    }
+
+    public void setLog(String log) {
+        this.log = log;
+    }
+
+    public String getWallpaper() {
+        return wallpaper;
+    }
+
+    public void setWallpaper(String wallpaper) {
+        this.wallpaper = wallpaper;
+    }
+
+    public String getColorTheme() {
+        return colorTheme;
+    }
+
+    public void setColorTheme(String colorTheme) {
+        this.colorTheme = colorTheme;
+    }
+
+    public String getFont() {
+        return font;
+    }
+
+    public void setFont(String font) {
+        this.font = font;
+    }
+
     public String getId() {
         return id;
     }
@@ -61,11 +111,11 @@ public class Page {
         this.siteId = siteId;
     }
 
-    public String getUrlSite() {
-        return urlSite;
+    public String getParentSiteTitle() {
+        return parentSiteTitle;
     }
-    public void setUrlSite(String urlSite) {
-        this.urlSite = urlSite;
+    public void setParentSiteTitle(String parentSiteTitle) {
+        this.parentSiteTitle = parentSiteTitle;
     }
 
     public String getAdminId() {
@@ -81,9 +131,14 @@ public class Page {
                 "\nid='" + id + '\'' +
                 ", \ntitlePage='" + titlePage + '\'' +
                 ", \nurlTitlePage='" + urlTitlePage + '\'' +
-                ", \nurlSite='" + urlSite + '\'' +
+                ", \nurlSite='" + parentSiteTitle + '\'' +
                 ", \nsiteId='" + siteId + '\'' +
                 ", \nadminId='" + adminId + '\'' +
+                ", \ndescription='" + description + '\'' +
+                ", \nlog='" + log + '\'' +
+                ", \nwallpaper='" + wallpaper + '\'' +
+                ", \ncolorTheme='" + colorTheme + '\'' +
+                ", \nfont='" + font + '\'' +
                 "\n}";
     }
 }

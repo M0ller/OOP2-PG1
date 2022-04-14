@@ -30,19 +30,6 @@ public class SiteController {
         return userDetails;
     }
 
-//    @PutMapping
-//    @PreAuthorize("hasRole('ADMIN')")
-//    public String update(){
-//        return "Site updated";
-//    }
-//
-//    @PatchMapping
-//    @PreAuthorize("hasRole('ADMIN')")
-//    public String updateProperty(){
-//        return "Single Site property updated";
-//    }
-
-
     @PutMapping("/edit")
     @PreAuthorize("permitAll()") //("hasRole('ADMIN')")
     public ResponseEntity<?> editSite(@RequestBody Site site) {
@@ -50,7 +37,6 @@ public class SiteController {
         if(!siteRepository.existsByurlHeader(site.getTitle().toLowerCase() )){ // add adminId check
             return ResponseEntity.badRequest().body(site.getTitle() + " Dosen't Exist " );
         }
-
         if(siteRepository.existsByurlHeader(site.getTitle().toLowerCase())){
             Site temp = new Site();
             temp.setTitle(site.getTitle());
@@ -60,7 +46,7 @@ public class SiteController {
             temp.setFont(site.getFont());
             temp.setLog(site.getLog());
             temp.setWallpaper(site.getWallpaper());
-            temp.setAdminId(currentUser().getUsername());
+            temp.setAdminId(site.getAdminId());
             temp.setId( siteRepository.findByurlHeader( site.getTitle().toLowerCase() ).getId() );
             siteRepository.save(temp);
             return ResponseEntity.ok(new MessageResponse("You Updated your Site "+ site.getTitle() + "!" ));
@@ -76,9 +62,6 @@ public class SiteController {
                     .badRequest()
                     .body(new MessageResponse("Site Already Exist!"));
         }
-        //for postman use: site.setAdminId(currentUser().getId());
-        //site.setAdminId(currentUser().getId());
-        //for front end: site.getAdminId();  // gets the current user in the browser in the createSite.js user.username
         site.getTitle();
         site.setUrlHeader(site.getTitle().toLowerCase());
         site.getDescription();
@@ -92,19 +75,6 @@ public class SiteController {
         return ResponseEntity.ok(new MessageResponse("Site Created successfully! You Created "+ site.getTitle()
         ));
     }
-
-
-
-//    @PutMapping
-//    @PreAuthorize("hasRole('ADMIN')")
-//    public String update(){
-//        return "Site updated";
-//    }
-//    @DeleteMapping
-//    @PreAuthorize("hasRole('ADMIN')")
-//    public String delete(){
-//        return "Site deleted";
-//    }
 
     @GetMapping()
     //@PreAuthorize("permitAll()")

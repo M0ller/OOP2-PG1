@@ -16,32 +16,52 @@ public class Article {
     @NotBlank
     @Size(max = 30)
     private String articleTitle;
-
     private String urlArticleTitle;
-
-    private String parentSiteId;
-
-    private String parentPageId;
-
-    private String textarea;
-
+    private String parentSiteTitle;
+    private String parentPageTitle;
     private String creator;
+    private String startdate;
+    private String enddate;
 
-    private Date startdate;
-
-    private Date enddate;
+    private String headerTitle;
+    private String textarea;
+    private String wallpaper;
 
     public Article() {}
 
-    public Article(String articleTitle, String urlArticleTitle, String parentSiteId, String parentPageId, String textarea, String creator, Date startdate, Date enddate) {
+    public Article(String id, String articleTitle, String urlArticleTitle, String parentSiteTitle, String parentPageTitle, String creator, String startdate, String enddate, String headerTitle, String textarea, String wallpaper) {
+        this.id = id;
         this.articleTitle = articleTitle;
         this.urlArticleTitle = urlArticleTitle;
-        this.parentSiteId = parentSiteId;
-        this.parentPageId = parentPageId;
-        this.textarea = textarea;
+        this.parentSiteTitle = parentSiteTitle;
+        this.parentPageTitle = parentPageTitle;
         this.creator = creator;
         this.startdate = startdate;
         this.enddate = enddate;
+        this.headerTitle = headerTitle;
+        this.textarea = textarea;
+        this.wallpaper = wallpaper;
+    }
+
+
+    public String getParentSiteTitle() {
+        return parentSiteTitle;
+    }
+
+    public String getHeaderTitle() {
+        return headerTitle;
+    }
+
+    public void setHeaderTitle(String headerTitle) {
+        this.headerTitle = headerTitle;
+    }
+
+    public String getWallpaper() {
+        return wallpaper;
+    }
+
+    public void setWallpaper(String wallpaper) {
+        this.wallpaper = wallpaper;
     }
 
     public String getCreator() {
@@ -60,12 +80,12 @@ public class Article {
         this.urlArticleTitle = urlArticleTitle;
     }
 
-    public String getParentSiteId() {
-        return parentSiteId;
+    public String getParentSiteTitleId() {
+        return parentSiteTitle;
     }
 
-    public void setParentSiteId(String parentSiteId) {
-        this.parentSiteId = parentSiteId;
+    public void setParentSiteTitle(String parentSiteTitle) {
+        this.parentSiteTitle = parentSiteTitle;
     }
     public String getId() {
         return id;
@@ -83,12 +103,12 @@ public class Article {
         this.articleTitle = articleTitle;
     }
 
-    public String getParentPageId() {
-        return parentPageId;
+    public String getParentPageTitle() {
+        return parentPageTitle;
     }
 
-    public void setParentPageId(String parentPageId) {
-        this.parentPageId = parentPageId;
+    public void setParentPageTitle(String parentPageTitle) {
+        this.parentPageTitle = parentPageTitle;
     }
 
     public String getTextarea() {
@@ -99,19 +119,19 @@ public class Article {
         this.textarea = textarea;
     }
 
-    public Date getStartdate() {
+    public String getStartdate() {
         return startdate;
     }
 
-    public void setStartdate(Date startdate) {
+    public void setStartdate(String startdate) {
         this.startdate = startdate;
     }
 
-    public Date getEnddate() {
+    public String getEnddate() {
         return enddate;
     }
 
-    public void setEnddate(Date enddate) {
+    public void setEnddate(String enddate) {
         this.enddate = enddate;
     }
 
@@ -121,12 +141,14 @@ public class Article {
                 "\nid='" + id + '\'' +
                 ", \narticleTitle='" + articleTitle + '\'' +
                 ", \nurlArticleTitle='" + urlArticleTitle + '\'' +
-                ", \nparentSiteId='" + parentSiteId + '\'' +
-                ", \nparentPageId='" + parentPageId + '\'' +
-                ", \ntextarea='" + textarea + '\'' +
+                ", \nparentSiteTitle='" + parentSiteTitle + '\'' +
+                ", \nparentPageTitle='" + parentPageTitle + '\'' +
                 ", \ncreator='" + creator + '\'' +
-                ", \nstartdate=" + startdate +
-                ", \nenddate=" + enddate +
+                ", \nstartdate='" + startdate + '\'' +
+                ", \nenddate='" + enddate + '\'' +
+                ", \nheaderTitle='" + headerTitle + '\'' +
+                ", \ntextarea='" + textarea + '\'' +
+                ", \nwallpaper='" + wallpaper + '\'' +
                 "\n}";
     }
 }

@@ -511,7 +511,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"adminId\": \"Linus\",\n    \"title\": \"mySite\",\n    \"description\": \"\",\n    \"log\": \"\",\n    \"icon\": \"\",\n    \"wallpaper\": \"\",\n    \"colorTheme\": \"\",\n    \"font\": \"\"\n}",
+							"raw": "{\n    \"adminId\": \"Simon\",\n    \"title\": \"mySiteSimon\",\n    \"description\": \"\",\n    \"log\": \"\",\n    \"icon\": \"\",\n    \"wallpaper\": \"\",\n    \"colorTheme\": \"\",\n    \"font\": \"\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -560,7 +560,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"adminId\": \"Linus\",\n    \"title\": \"mySite\",\n    \"description\": \"bläääääääää\",\n    \"wallpaper\": \"\",\n    \"colorTheme\": \"\",\n    \"font\": \"\"\n}",
+							"raw": "{\n    \"adminId\": \"Linus\",\n    \"title\": \"mySiteasd\",\n    \"description\": \"bläääääääää\",\n    \"wallpaper\": \"\",\n    \"colorTheme\": \"\",\n    \"font\": \"\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -629,6 +629,37 @@
 					"response": []
 				},
 				{
+					"name": "Find Site by username",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{siteUrl}}/site/get/Linus",
+							"host": [
+								"{{siteUrl}}"
+							],
+							"path": [
+								"site",
+								"get",
+								"Linus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Find non-existing Site",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -663,6 +694,10 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{siteUrl}}/site/mysite",
 							"host": [
@@ -710,7 +745,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"titlePage\": \"MyPage\",\n    \"siteId\": \"6255a6ab22c88a744f5c6c9e\"\n}",
+							"raw": "{\n    \"titlePage\": \"MyBookPage\",\n    \"parentSiteTitle\": \"book\",\n\n    \"description\": \"\",\n    \"log\": \"\",\n    \"wallpaper\": \"\",\n    \"colorTheme\": \"\",\n    \"font\": \"\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -725,6 +760,55 @@
 							"path": [
 								"page",
 								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Page",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"SaveLastMalakiId\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).not.to.be.empty;   ",
+									"    pm.environment.set(\"lastMalakiId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"parentSiteTitle\": \"book\",\n    \"titlePage\": \"myTobeEdit\",\n    \"adminId\": \"Linus\",\n\n    \"description\": \"argh\",\n    \"log\": \"\",\n    \"wallpaper\": \"\",\n    \"colorTheme\": \"\",\n    \"font\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{siteUrl}}/page/edit",
+							"host": [
+								"{{siteUrl}}"
+							],
+							"path": [
+								"page",
+								"edit"
 							]
 						}
 					},
@@ -766,13 +850,44 @@
 							}
 						},
 						"url": {
-							"raw": "{{siteUrl}}/page/mypage",
+							"raw": "{{siteUrl}}/page/myTobeEdit",
 							"host": [
 								"{{siteUrl}}"
 							],
 							"path": [
 								"page",
-								"mypage"
+								"myTobeEdit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Page by username",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{siteUrl}}/page/get/Linus",
+							"host": [
+								"{{siteUrl}}"
+							],
+							"path": [
+								"page",
+								"get",
+								"Linus"
 							]
 						}
 					},
@@ -814,13 +929,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{siteUrl}}/page/MyPage",
+							"raw": "{{siteUrl}}/page/myTobeEdit",
 							"host": [
 								"{{siteUrl}}"
 							],
 							"path": [
 								"page",
-								"MyPage"
+								"myTobeEdit"
 							]
 						}
 					},
@@ -860,7 +975,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"articleTitle\": \"MyArticle\",\n    \"textarea\": \"Woot\",\n    \"parentSiteId\": \"\",\n    \"parentPageId\": \"\",\n    \"startdate\": \"\",\n    \"enddate\": \"\"\n}",
+							"raw": "{\n    \"articleTitle\": \"MyArticleAboutBooks\",\n    \"parentSiteTitle\": \"book\",\n    \"parentPageTitle\": \"mybookpage\",\n    \"creator\": \"Linus\",\n    \"startdate\": \"\",\n    \"enddate\": \"\",\n\n    \"headerTitle\": \"\",\n    \"textarea\": \"\",\n    \"wallpaper\": \"\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -875,6 +990,55 @@
 							"path": [
 								"article",
 								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Article",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"SaveLastMalakiId\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).not.to.be.empty;   ",
+									"    pm.environment.set(\"lastMalakiId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"articleTitle\": \"MyArticleAboutBooks\",\n    \"parentSiteTitle\": \"book\",\n    \"parentPageTitle\": \"mybookpage\",\n    \"creator\": \"Linus\",\n    \"startdate\": \"\",\n    \"enddate\": \"\",\n\n    \"headerTitle\": \"woo articles!\",\n    \"textarea\": \"\",\n    \"wallpaper\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{siteUrl}}/article/edit",
+							"host": [
+								"{{siteUrl}}"
+							],
+							"path": [
+								"article",
+								"edit"
 							]
 						}
 					},
@@ -900,6 +1064,36 @@
 				},
 				{
 					"name": "Find Article by title",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{siteUrl}}/article/MyArticleAboutBooks",
+							"host": [
+								"{{siteUrl}}"
+							],
+							"path": [
+								"article",
+								"MyArticleAboutBooks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Article by username",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -946,13 +1140,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{siteUrl}}/article/mybumblebee",
+							"raw": "{{siteUrl}}/article/get/Linus",
 							"host": [
 								"{{siteUrl}}"
 							],
 							"path": [
 								"article",
-								"mybumblebee"
+								"get",
+								"Linus"
 							]
 						}
 					},
@@ -964,13 +1159,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{siteUrl}}/article/myarticle",
+							"raw": "{{siteUrl}}/article/myarticleaboutbooks",
 							"host": [
 								"{{siteUrl}}"
 							],
 							"path": [
 								"article",
-								"myarticle"
+								"myarticleaboutbooks"
 							]
 						}
 					},

@@ -10,8 +10,6 @@ public interface SiteRepository extends MongoRepository<Site, String> {
 
     Optional<Site> findById(String id);
 
-    String findAllByurlHeader(String urlHeader);
-
     Site findByurlHeader(String urlHeader);
 
     List<Site> findByAdminId(String AdminId);
