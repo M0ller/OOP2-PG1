@@ -1,10 +1,6 @@
 {
 	"info": {
-<<<<<<< HEAD
 		"_postman_id": "83225590-54f3-48a8-bb61-6c9a2456de32",
-=======
-		"_postman_id": "3fc88ed8-585d-4e8d-9db3-20f5206abe9a",
->>>>>>> main
 		"name": "OOP2PG1DB",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -864,7 +860,6 @@
 							"raw": "{{siteUrl}}/page/MybookPage",
 							"host": [
 								"{{siteUrl}}"
-<<<<<<< HEAD
 							],
 							"path": [
 								"page",
@@ -929,72 +924,6 @@
 							],
 							"path": [
 								"page",
-=======
-							],
-							"path": [
-								"page",
-								"MybookPage"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Find Page by username",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{siteUrl}}/page/get/Linus",
-							"host": [
-								"{{siteUrl}}"
-							],
-							"path": [
-								"page",
-								"get",
-								"Linus"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Find non-existing Page",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{siteUrl}}/page/mypagejndsfiouafh32184fndpoidfs",
-							"host": [
-								"{{siteUrl}}"
-							],
-							"path": [
-								"page",
->>>>>>> main
 								"mypagejndsfiouafh32184fndpoidfs"
 							]
 						}
@@ -1304,11 +1233,7 @@
 			"name": "EditRole",
 			"item": [
 				{
-<<<<<<< HEAD
 					"name": "Add Editor",
-=======
-					"name": "New Request",
->>>>>>> main
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -1322,23 +1247,14 @@
 							}
 						},
 						"url": {
-<<<<<<< HEAD
 							"raw": "{{siteUrl}}/api/auth/addeditor",
 							"host": [
 								"{{siteUrl}}"
 							],
-=======
-							"raw": "localhost:8080/api/auth/addeditor",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
->>>>>>> main
 							"path": [
 								"api",
 								"auth",
 								"addeditor"
-<<<<<<< HEAD
 							]
 						}
 					},
@@ -1454,8 +1370,6 @@
 								"auth",
 								"getadmin",
 								"book"
-=======
->>>>>>> main
 							]
 						}
 					},

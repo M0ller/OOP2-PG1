@@ -67,7 +67,7 @@ class EditPage extends Component{
                 <input type="submit" class="Edit" value="Create page"/>
                 </form>
                 <form id="createArticle" method="post">
-                <input type="submit" class="Edit" value="Create article"
+                <input type="submit" class="Edit" value="Create article"/>
                 </form>
                 <form id="image-upload">
                 <input type="submit" class="Edit" value="Upload image"/>
