@@ -5,7 +5,7 @@ Länk till Trello: https://trello.com/invite/b/aoKl3q4j/e49f4bc6b6babcfc57bc7350
 
 Länk Till Github Repository: git@github.com:no92one/OOP2-PG1.git
 
-Github Usernames:
+Github Usernames:<br/>
 Simon: M0ller
 Linus: no92one
 Daniel: DPLerdin
